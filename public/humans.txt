@@ -1,0 +1,16 @@
+/* TEAM */
+De Sigaar
+Site: https://desigaar.com/
+Email: info@desigaar.com
+Location: Eindhoven, The Netherlands
+
+/* THANKS */
+Max Altena <max@maxaltena.com>
+Dylano Hartman <dylanohartman@gmail.com>
+Noël Herwig <n.herwig16@gmail.com>
+
+/* SITE */
+Last update: 2020/03/18
+Standards: React, TypeScript, Redux, Firebase
+Components: Styled Components
+Software: Visual Studio Code, GitHub

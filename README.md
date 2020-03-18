@@ -1,4 +1,5 @@
 # Stichting Ik Wil App by De Sigaar ![De Sigaar Logo](https://i.gyazo.com/2139de3348632e93be61757115a7e395.png)
+
 [![version](https://img.shields.io/github/package-json/v/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app)
 [![watchers](https://img.shields.io/github/watchers/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/watchers)
 [![stars](https://img.shields.io/github/stars/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/stargazers)
@@ -71,4 +72,3 @@ This starts the frontend on port 3000.
 - [Noël Herwig](https://github.com/Chiloz)
 
 See the whole list of [contributors](https://github.com/de-sigaar/ikwil-app/contributors) who participated in this project.
-

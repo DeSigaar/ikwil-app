@@ -1,0 +1,13 @@
+build
+
+*.ico
+*.svg
+*.map
+*.txt
+*.png
+*.jpg
+.eslintignore
+.prettierignore
+.gitignore
+.editorconfig
+.env*
