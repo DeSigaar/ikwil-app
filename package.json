@@ -1,0 +1,35 @@
+{
+	"name": "@de-sigaar/ikwil-activity-app",
+	"description": "",
+	"version": "1.0.0",
+	"author": "De Sigaar <info@desigaar.com>",
+	"browserslist": [
+		"last 1 version",
+		"> 1%",
+		"maintained node versions",
+		"not dead"
+	],
+	"bugs": "https://github.com/de-sigaar/ikwil-activity-app/issues",
+	"contributors": [
+		"Max <max@maxaltena.com>"
+  ],
+	"dependencies": {},
+	"devDependencies": {},
+	"engines": {
+		"node": ">= 8.17.0",
+		"npm": ">= 6.12.1",
+		"yarn": ">= 1.19.1"
+	},
+	"homepage": "https://github.com/de-sigaar/ikwil-activity-app",
+	"keywords": [
+    "de-sigaar",
+    "desigaar",
+    "sigaar",
+    "digiboard",
+    "dashboard"
+	],
+	"license": "UNLICENSED",
+	"private": true,
+	"repository": "github:de-sigaar/ikwil-activity-app",
+	"scripts": {}
+}
