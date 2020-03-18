@@ -1,10 +1,11 @@
 # Stichting Ik Wil App by De Sigaar ![De Sigaar Logo](https://i.gyazo.com/2139de3348632e93be61757115a7e395.png)
 
-[![version](https://img.shields.io/github/package-json/v/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app)
-[![watchers](https://img.shields.io/github/watchers/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/watchers)
-[![stars](https://img.shields.io/github/stars/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/stargazers)
-[![issues](https://img.shields.io/github/issues/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/issues)
-[![pull requests](https://img.shields.io/github/issues-pr/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/pulls)
+[![Build and Deploy](https://github.com/de-sigaar/ikwil-app/workflows/Build%20and%20Deploy/badge.svg)](https://github.com/de-sigaar/ikwil-app/actions?query=workflow%3A%22Build+and+Deploy%22)
+[![Version](https://img.shields.io/github/package-json/v/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app)
+[![Watchers](https://img.shields.io/github/watchers/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/watchers)
+[![Stars](https://img.shields.io/github/stars/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/stargazers)
+[![Issues](https://img.shields.io/github/issues/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/pulls)
 
 ## Table of Contents
 
