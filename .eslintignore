@@ -6,8 +6,11 @@ build
 *.txt
 *.png
 *.jpg
+*.cache
 .eslintignore
 .prettierignore
 .gitignore
 .editorconfig
 .env*
+.firebaserc
+firestore.rules

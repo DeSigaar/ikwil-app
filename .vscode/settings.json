@@ -27,5 +27,6 @@
 		".eslintignore": true,
 		".prettierignore": true,
 		".gitignore": true,
-		"src/react-app-env.d.ts": true,
+		"src/react-app-env.d.ts": true
+	}
 }
