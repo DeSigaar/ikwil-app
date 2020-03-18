@@ -36,14 +36,8 @@
 		}
 	},
 	"lint-staged": {
-		"*": [
-			"npm run prettier:fix",
-			"git add"
-		],
-		"*.{js,ts,tsx}": [
-			"npm run eslint:fix",
-			"git add"
-		]
+		"*": "npm run prettier:fix",
+		"*.{js,ts,tsx}": "npm run eslint:fix"
 	},
 	"browserslist": {
 		"production": [
@@ -62,7 +56,6 @@
 		"connected-react-router": "^6.8.0",
 		"firebase": "^7.11.0",
 		"history": "^4.10.1",
-		"jest": "^25.1.0",
 		"react": "^16.13.0",
 		"react-dom": "^16.13.0",
 		"react-redux": "^7.2.0",
