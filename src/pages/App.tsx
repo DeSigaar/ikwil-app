@@ -1,21 +1,14 @@
-import * as React from "react";
+import * as React from 'react'
+import { Header, Main } from '../components/index'
 
-type Props = {};
+interface Props {}
 
-type State = {
-	name: string;
-};
-
-export default class App extends React.Component<Props, State> {
-	state: State = {
-		name: "Ik Wil App",
-	};
-
-	handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		this.setState({ name: e.target.value });
-	};
-
-	render = (): React.ReactNode => {
-		return <div className="App">App - learn react</div>;
-	};
+const App: React.FC<Props> = () => {
+  return (
+    <>
+      <Header />
+      <Main />
+    </>
+  )
 }
+export default App
