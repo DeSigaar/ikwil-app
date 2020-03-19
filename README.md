@@ -16,13 +16,14 @@
   - [Setup](#setup)
   - [Running](#running)
 - [Built with](#built-with)
-  - [Most important stuff](#most-important-stuff)
-- [Creators](#creators)
+  - [Techniques](#techniques)
+  - [Packages](#packages)
+- [Contributors](#contributors)
 
 ## About
 
-This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).
-A live preview can be found on our [deployed app](https://github.com/de-sigaar/ikwil-app).
+This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).  
+A live preview can be found on our [deployed firebase app](https://ikwil-app.web.app/).
 
 ## Prerequisites
 
@@ -30,7 +31,7 @@ A live preview can be found on our [deployed app](https://github.com/de-sigaar/i
 
 ## Installation
 
-Make sure you have Node.js installed. If you are unsure if node is installed, run `node -v` within a terminal.
+Make sure you have Node.js installed. If you are unsure if node is installed, run `$ node -v` within a terminal.
 
 ### Clone
 
@@ -51,25 +52,36 @@ $ npm install
 
 ### Running
 
-```
-$ npm run dev
-```
+Start the application on port 3000.
 
-This starts the frontend on port 3000.
+```
+$ npm start
+```
 
 ## Built with
 
-### Most important stuff
+### Techniques
 
+- [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
-- [Node.js](https://nodejs.org/)
-- [styled-components](https://styled-components.com/)
+- [Firebase](https://firebase.google.com/)
+- [Styled Components](https://styled-components.com/)
+- [Jest](https://jestjs.io/)
 
-## Creators
+### Packages
+
+- [React Redux Firebase](https://react-redux-firebase.com/)
+- [Redux Firestore](https://github.com/prescottprue/redux-firestore)
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+- [React Router](https://reacttraining.com/react-router/)
+- [Connected React Router](https://github.com/supasate/connected-react-router)
+
+## Contributors
 
 - [Max Altena](https://github.com/MaxAltena)
 - [Dylano Hartman](https://github.com/DylanoH)
 - [Noël Herwig](https://github.com/Chiloz)
+- [Timo van de Laar](https://github.com/BroodBalloon)
 
 See the whole list of [contributors](https://github.com/de-sigaar/ikwil-app/contributors) who participated in this project.
