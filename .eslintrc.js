@@ -21,7 +21,8 @@ module.exports = {
   node: true,
  },
  rules: {
-  'linebreak-style': ['error', 'unix'],
+  //   'linebreak-style': ['error', 'unix'],
+  'linebreak-style': 0,
   'no-console': 'warn',
   camelcase: 'warn',
   'no-unused-vars': ['warn', { argsIgnorePattern: '^__', varsIgnorePattern: '^__' }],
@@ -40,7 +41,7 @@ module.exports = {
     trailingComma: 'all',
     arrowParens: 'avoid',
     bracketSpacing: true,
-    printWidth: 120,
+    printWidth: 80,
     semi: false,
     singleQuote: true,
     tabWidth: 2,
