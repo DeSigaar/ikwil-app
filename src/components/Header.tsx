@@ -3,18 +3,13 @@ import styled from 'styled-components'
 
 const HeaderContainer = styled.header``
 
-interface Props {
-  name: string
-}
+interface Props {}
 
-const Header: React.FC<Props> = name => {
+const Header: React.FC<Props> = () => {
   return (
     <HeaderContainer>
-      <h1>{name}</h1>
+      <h1>yo</h1>
     </HeaderContainer>
   )
-}
-Header.defaultProps = {
-  name: 'App',
 }
 export default Header

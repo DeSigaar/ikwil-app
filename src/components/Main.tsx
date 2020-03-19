@@ -10,8 +10,10 @@ const Main: React.FC<Props> = () => {
   return (
     <MainContainer>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam at dolor voluptates odio mollitia, aliquam totam
-        consequatur sunt autem eaque, minima, quis cupiditate tempore quas facilis. Quisquam alias adipisci est.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam at dolor
+        voluptates odio mollitia, aliquam totam consequatur sunt autem eaque,
+        minima, quis cupiditate tempore quas facilis. Quisquam alias adipisci
+        est.
       </p>
       <Link to="/header">to header</Link>
     </MainContainer>
