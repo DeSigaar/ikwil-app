@@ -21,7 +21,7 @@
 
 ## About
 
-This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).  
+This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).
 A live preview can be found on our [deployed app](https://github.com/de-sigaar/ikwil-app).
 
 ## Prerequisites
@@ -64,7 +64,7 @@ This starts the frontend on port 3000.
 - [React](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [Node.js](https://nodejs.org/)
-- [SASS](https://sass-lang.com/)
+- [styled-components](https://styled-components.com/)
 
 ## Creators
 
