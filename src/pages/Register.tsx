@@ -46,9 +46,8 @@ export default class Login extends React.Component<Props, State> {
 
   render = (): React.ReactNode => {
     return (
-      <form data-testid="login-form" onSubmit={this.handleSubmit}>
-        <h1>Inloggen</h1>
-
+      <form data-testid="register-form" onSubmit={this.handleSubmit}>
+        <h1>Registreren</h1>
         <label htmlFor="username">Username:</label>
         <input
           data-testid="username"

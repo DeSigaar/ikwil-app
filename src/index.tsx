@@ -2,10 +2,10 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
-import { Switch, Route } from 'react-router'
+import { Switch, Route, Redirect } from 'react-router'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
-import { App, Login, NotFound } from './pages'
+import { App, Login, Register, NotFound } from './pages'
 import * as serviceWorker from './serviceWorker'
 import history from './utils/history'
 import store from './redux/store'
@@ -29,7 +29,14 @@ ReactDOM.render(
       <ReactReduxFirebaseProvider {...rffProps}>
         <Switch>
           <Route exact path="/" component={App} />
+
           <Route exact path="/login" component={Login} />
+          <Redirect from="/inlog" to="/login" />
+          <Redirect from="/inloggen" to="/login" />
+
+          <Route exact path="/register" component={Register} />
+          <Redirect from="/registreren" to="/register" />
+
           <Route component={NotFound} />
         </Switch>
       </ReactReduxFirebaseProvider>
