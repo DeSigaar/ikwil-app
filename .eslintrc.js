@@ -21,8 +21,7 @@ module.exports = {
     node: true,
   },
   rules: {
-    //   'linebreak-style': ['error', 'unix'],
-    'linebreak-style': 0,
+    'linebreak-style': ['error', 'unix'],
     'no-console': 'warn',
     camelcase: 'warn',
     'no-unused-vars': [
