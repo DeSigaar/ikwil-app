@@ -4,9 +4,7 @@ import styled from 'styled-components'
 
 const MainContainer = styled.div``
 
-interface Props {}
-
-const Main: React.FC<Props> = () => {
+const Main: React.FC = () => {
   return (
     <MainContainer>
       <p>

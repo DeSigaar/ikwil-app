@@ -3,9 +3,7 @@ import styled from 'styled-components'
 
 const HeaderContainer = styled.header``
 
-interface Props {}
-
-const Header: React.FC<Props> = () => {
+const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <h1>yo</h1>

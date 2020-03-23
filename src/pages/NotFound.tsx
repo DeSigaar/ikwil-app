@@ -3,9 +3,7 @@ import styled from 'styled-components'
 
 const Container = styled.div``
 
-interface Props {}
-
-const NotFound: React.FC<Props> = () => {
+const NotFound: React.FC = () => {
   return (
     <Container>
       <h1>Niks gevonden!</h1>

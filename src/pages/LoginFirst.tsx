@@ -1,8 +1,6 @@
-import React from 'react'
+import * as React from 'react'
 
-interface Props {}
-
-const LoginFirst: React.FC<Props> = () => {
+const LoginFirst: React.FC = () => {
   return <div></div>
 }
 
