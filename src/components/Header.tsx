@@ -1,15 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { withRouter } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router'
 
 const HeaderContainer = styled.header``
 
-interface Props {}
-
-const Header: React.FC<Props> = () => {
+const Header: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
   return (
     <HeaderContainer>
-      <h1>yo</h1>
+      <button onClick={(): void => props.history.push('/')}>Naar home</button>
     </HeaderContainer>
   )
 }
-export default Header
+export default withRouter(Header)

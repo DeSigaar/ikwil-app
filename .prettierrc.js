@@ -1,6 +1,6 @@
 module.exports = {
   trailingComma: 'all',
-  arrowParens: 'avoid',
+  arrowParens: 'always',
   bracketSpacing: true,
   printWidth: 80,
   semi: false,
