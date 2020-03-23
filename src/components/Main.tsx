@@ -4,9 +4,7 @@ import styled from 'styled-components'
 
 const MainContainer = styled.div``
 
-interface Props {}
-
-const Main: React.FC<Props> = () => {
+const Main: React.FC = () => {
   return (
     <MainContainer>
       <p>
@@ -15,7 +13,9 @@ const Main: React.FC<Props> = () => {
         minima, quis cupiditate tempore quas facilis. Quisquam alias adipisci
         est.
       </p>
-      <Link to="/header">to header</Link>
+
+      <Link to="/privacy-policy">Privacy Policy</Link>
+      <Link to="/terms-of-service">Terms of Service</Link>
     </MainContainer>
   )
 }

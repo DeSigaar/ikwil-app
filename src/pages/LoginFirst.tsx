@@ -1,9 +1,14 @@
-import React from 'react'
+import * as React from 'react'
+import { Header } from '../components'
 
-interface Props {}
+const LoginFirst: React.FC = () => {
+  return (
+    <>
+      <Header />
 
-const LoginFirst: React.FC<Props> = () => {
-  return <div></div>
+      <div>Eerste keer ingelogd!</div>
+    </>
+  )
 }
 
 export default LoginFirst

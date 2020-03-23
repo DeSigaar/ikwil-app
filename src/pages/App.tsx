@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Header, Main } from '../components/index'
+import { Main } from '../components/index'
 import { firebaseManager } from '../utils/firebase'
 
 interface Props {
@@ -22,7 +22,7 @@ const App: React.FC<Props> = (props: Props) => {
           </Link>
         )}
       </div>
-      <Header />
+
       <Main />
     </>
   )
