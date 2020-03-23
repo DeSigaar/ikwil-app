@@ -1,6 +1,14 @@
 import * as React from 'react'
+import * as firebase from 'firebase/app'
+import 'firebaseui/dist/firebaseui.css'
+import { withRouter } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router'
+import { fireUI } from '../utils/firebase'
+import styled from 'styled-components'
 
-export type Props = {
+const LoginContainer = styled.div``
+
+export interface Props {
   shouldRemember: boolean
   onUsernameChange: (username: string) => void
   onPasswordChange: (password: string) => void
@@ -8,78 +16,58 @@ export type Props = {
   onSubmit: (username: string, password: string) => void
 }
 
-export type State = {
+export interface State {
   username: string
   password: string
   remember: boolean
 }
 
-export default class Login extends React.Component<Props, State> {
+class Login extends React.Component<Props & RouteComponentProps, State> {
   state: State = {
     username: '',
     password: '',
     remember: this.props.shouldRemember,
   }
 
-  handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { value } = e.target
-    this.setState({ username: value })
-    this.props.onUsernameChange(value)
-  }
+  componentDidMount = (): void => {
+    fireUI.start('#firebase-auth-container', {
+      signInSuccessUrl: '/',
+      signInFlow: 'redirect',
+      signInOptions: [
+        {
+          provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+          recaptchaParameters: {
+            size: 'invisible',
+          },
+          defaultCountry: 'NL',
+          loginHint: '+31612345678',
+        },
+        {
+          provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          scopes: ['public_profile', 'email'],
+        },
+        {
+          provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        },
+      ],
 
-  handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { value } = e.target
-    this.setState({ password: value })
-    this.props.onPasswordChange(value)
-  }
-
-  handleRememberChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { checked } = e.target
-    this.setState({ remember: checked })
-    this.props.onRememberChange(checked)
-  }
-
-  handleSubmit = (e: React.FormEvent): void => {
-    e.preventDefault()
-    this.props.onSubmit(this.state.username, this.state.password)
+      tosUrl: '/terms-of-service',
+      privacyPolicyUrl: '/privacy-policy',
+    })
   }
 
   render = (): React.ReactNode => {
     return (
-      <form data-testid="login-form" onSubmit={this.handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          data-testid="username"
-          type="text"
-          name="username"
-          value={this.state.username}
-          onChange={this.handleUsernameChange}
-        />
+      <>
+        <button onClick={(): void => this.props.history.goBack()}>Terug</button>
 
-        <label htmlFor="password">Password:</label>
-        <input
-          data-testid="password"
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handlePasswordChange}
-        />
+        <h1>Inloggen</h1>
 
-        <label>
-          <input
-            data-testid="remember"
-            name="remember"
-            type="checkbox"
-            checked={this.state.remember}
-            onChange={this.handleRememberChange}
-          />
-          Remember me?
-        </label>
-
-        <button type="submit" data-testid="submit">
-          Sign in
-        </button>
-      </form>
+        <LoginContainer>
+          <div id="firebase-auth-container"></div>
+        </LoginContainer>
+      </>
     )
   }
 }
+export default withRouter(Login)
