@@ -3,7 +3,8 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    // "plugin:@typescript-eslint/recommended",
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
   ],
@@ -21,8 +22,7 @@ module.exports = {
     node: true,
   },
   rules: {
-    //   'linebreak-style': ['error', 'unix'],
-    'linebreak-style': 0,
+    'linebreak-style': ['error', 'unix'],
     'no-console': 'warn',
     camelcase: 'warn',
     'no-unused-vars': [
@@ -37,12 +37,13 @@ module.exports = {
     'no-empty': 'warn',
     'no-constant-condition': 'warn',
     'no-func-assign': 'warn',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-empty-interface': 'warn',
     'prettier/prettier': [
       'error',
       {
         trailingComma: 'all',
-        arrowParens: 'avoid',
+        arrowParens: 'always',
         bracketSpacing: true,
         printWidth: 80,
         semi: false,

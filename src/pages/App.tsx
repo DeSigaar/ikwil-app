@@ -1,14 +1,41 @@
 import * as React from 'react'
-import { Header, Main } from '../components/index'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Main } from '../components/index'
+import { firebaseManager } from '../utils/firebase'
 
-interface Props {}
+interface Props {
+  isLoggedIn: boolean
+}
 
-const App: React.FC<Props> = () => {
+const App: React.FC<Props> = (props: Props) => {
   return (
     <>
-      <Header />
+      <div>
+        {props.isLoggedIn ? (
+          <button onClick={(): unknown => firebaseManager.signOut()}>
+            uitloggen
+          </button>
+        ) : (
+          <Link to="/login">
+            <button>inloggen</button>
+          </Link>
+        )}
+      </div>
+
       <Main />
     </>
   )
 }
-export default App
+
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    isLoggedIn: !state.firebase.auth.isEmpty,
+  }
+}
+
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

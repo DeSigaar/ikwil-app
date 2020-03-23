@@ -1,6 +1,7 @@
 # Stichting Ik Wil App by De Sigaar ![De Sigaar Logo](https://i.gyazo.com/2139de3348632e93be61757115a7e395.png)
 
 [![Build and Deploy](https://github.com/de-sigaar/ikwil-app/workflows/Build%20and%20Deploy/badge.svg)](https://github.com/de-sigaar/ikwil-app/actions?query=workflow%3A%22Build+and+Deploy%22)
+[![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fikwil-app.web.app%2F)](https://ikwil-app.web.app/)
 [![Version](https://img.shields.io/github/package-json/v/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app)
 [![Watchers](https://img.shields.io/github/watchers/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/watchers)
 [![Stars](https://img.shields.io/github/stars/de-sigaar/ikwil-app)](https://github.com/de-sigaar/ikwil-app/stargazers)

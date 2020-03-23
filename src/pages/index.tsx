@@ -1,3 +1,6 @@
 export { default as App } from './App'
 export { default as Login } from './Login'
+export { default as LoginFirst } from './LoginFirst'
+export { default as PrivacyPolicy } from './PrivacyPolicy'
+export { default as TermsOfService } from './TermsOfService'
 export { default as NotFound } from './NotFound'
