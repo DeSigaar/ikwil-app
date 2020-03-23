@@ -18,9 +18,27 @@ import history from './utils/history'
 import store from './redux/store'
 import { fireApp } from './utils/firebase'
 import configReactReduxFirebase from './config/reactReduxFirebase'
+import { createGlobalStyle } from 'styled-components'
+import { colors, fonts, layout } from './utils/styles'
+
+const GlobalStyle = createGlobalStyle`
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: ${colors.colors.white};
+  margin: ${layout.init.margin};
+  padding: ${layout.init.padding};
+  font-family: ${fonts.font.fontFamily};
+}
+`
 
 ReactDOM.render(
   <Provider store={store}>
+    <GlobalStyle />
     <ConnectedRouter history={history}>
       <ReactReduxFirebaseProvider
         firebase={fireApp}
