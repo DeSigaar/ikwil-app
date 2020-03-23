@@ -6,6 +6,8 @@ import { RouteComponentProps } from 'react-router'
 import { fireUI } from '../utils/firebase'
 import styled from 'styled-components'
 
+import BackButton from '../components/BackButton'
+
 const LoginContainer = styled.div``
 
 export interface Props {
@@ -56,13 +58,15 @@ class Login extends React.Component<Props & RouteComponentProps, State> {
     })
   }
 
+  goBack = (): void => {
+    this.props.history.goBack()
+  }
+
   render = (): React.ReactNode => {
     return (
       <>
-        <button onClick={(): void => this.props.history.goBack()}>Terug</button>
-
+        <BackButton back={(): void => this.goBack()}></BackButton>
         <h1>Inloggen</h1>
-
         <LoginContainer>
           <div id="firebase-auth-container"></div>
         </LoginContainer>
