@@ -52,33 +52,6 @@ ReactDOM.render(
           <Redirect from="/termsofservice" to="/terms-of-service" />
 
           {/* 404 - No route found */}
-          <Redirect from="/privacypolicy" to="/privacy-policy" />
-
-          {/* Terms of Service */}
-          <Route exact path="/terms-of-service" component={TermsOfService} />
-          <Redirect from="/tos" to="/terms-of-service" />
-          <Redirect from="/terms" to="/terms-of-service" />
-          <Redirect from="/termsofservice" to="/terms-of-service" />
-
-          {/* 404 - No route found */}
-          <Redirect from="/privacypolicy" to="/privacy-policy" />
-
-          {/* Terms of Service */}
-          <Route exact path="/terms-of-service" component={TermsOfService} />
-          <Redirect from="/tos" to="/terms-of-service" />
-          <Redirect from="/terms" to="/terms-of-service" />
-          <Redirect from="/termsofservice" to="/terms-of-service" />
-
-          {/* 404 - No route found */}
-          <Redirect from="/privacypolicy" to="/privacy-policy" />
-
-          {/* Terms of Service */}
-          <Route exact path="/terms-of-service" component={TermsOfService} />
-          <Redirect from="/tos" to="/terms-of-service" />
-          <Redirect from="/terms" to="/terms-of-service" />
-          <Redirect from="/termsofservice" to="/terms-of-service" />
-
-          {/* 404 - No route found */}
           <Route component={NotFound} />
         </Switch>
       </ReactReduxFirebaseProvider>
