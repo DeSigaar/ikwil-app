@@ -17,6 +17,23 @@ import * as serviceWorker from './serviceWorker'
 import history from './utils/history'
 import store from './redux/store'
 import { fireApp } from './utils/firebase'
+import { createGlobalStyle } from 'styled-components'
+import { colors, fonts, layout } from './utils/styles'
+
+const GlobalStyle = createGlobalStyle`
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: ${colors.colors.white};
+  margin: ${layout.init.margin};
+  padding: ${layout.init.padding};
+  font-family: ${fonts.font.fontFamily};
+}
+`
 
 const rrfConfig = {
   userProfile: 'users',
@@ -32,6 +49,7 @@ const rffProps = {
 
 ReactDOM.render(
   <Provider store={store}>
+    <GlobalStyle />
     <ConnectedRouter history={history}>
       <ReactReduxFirebaseProvider {...rffProps}>
         <Switch>
