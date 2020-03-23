@@ -17,11 +17,15 @@ import * as serviceWorker from './serviceWorker'
 import history from './utils/history'
 import store from './redux/store'
 import { fireApp } from './utils/firebase'
-import configReactReduxFirebase from './config/reactReduxFirebase'
+
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true,
+}
 
 const rffProps = {
   firebase: fireApp,
-  config: configReactReduxFirebase,
+  config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
 }
