@@ -6,6 +6,8 @@ import { fireUI } from '../utils/firebase'
 import configFirebaseUI from '../config/firebaseUI'
 import { Header } from '../components'
 
+import BackButton from '../components/BackButton'
+
 const LoginContainer = styled.div``
 
 const Login: React.FC = () => {
