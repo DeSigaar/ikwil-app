@@ -37,13 +37,13 @@ module.exports = {
     'no-empty': 'warn',
     'no-constant-condition': 'warn',
     'no-func-assign': 'warn',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-empty-interface': 'warn',
     'prettier/prettier': [
       'error',
       {
         trailingComma: 'all',
-        arrowParens: 'avoid',
+        arrowParens: 'always',
         bracketSpacing: true,
         printWidth: 80,
         semi: false,
