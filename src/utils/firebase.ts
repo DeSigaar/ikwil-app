@@ -2,6 +2,7 @@
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import * as firebaseui from 'firebaseui'
 
 export const fireApp = firebase.initializeApp({
   apiKey: process.env.REACT_APP_firebase_apiKey,
@@ -15,41 +16,14 @@ export const fireApp = firebase.initializeApp({
 })
 export const fireAuth = fireApp.auth()
 export const fireStore = fireApp.firestore()
+export const fireUI = new firebaseui.auth.AuthUI(fireAuth)
 
 export const firebaseManager = {
-  getAuthReference: (): unknown => fireAuth,
-  getStoreReference: (path: string): unknown => fireStore.collection(path),
-  signInWithEmailAndPassword(email: string, password: string): boolean {
+  getStore: (path: string): unknown => fireStore.collection(path),
+  isLoggedIn: (): boolean => fireAuth.currentUser !== null,
+  signOut: (): unknown =>
     fireAuth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        return true
-      })
-      .catch(error => {
-        console.error(error)
-        return false
-      })
-    return true
-  },
-  createUserWithEmailAndPassword(email: string, password: string): boolean {
-    fireAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        return true
-      })
-      .catch(error => {
-        console.error(error)
-        return false
-      })
-    return true
-  },
-  isLoggedIn(): boolean {
-    return fireAuth.currentUser !== null
-  },
-  signOut(): unknown {
-    return fireAuth
       .signOut()
       .then(() => console.log('Firebase Auth: ', 'Succesfully signed out.'))
-      .catch(error => console.error('Firebase Auth: ', error))
-  },
+      .catch(error => console.error('Firebase Auth: ', error)),
 }
