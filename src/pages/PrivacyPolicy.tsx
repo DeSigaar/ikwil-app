@@ -1,13 +1,12 @@
 import * as React from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import { RouteComponentProps } from 'react-router'
+import { Link } from 'react-router-dom'
+import { Header } from '../components'
 
-const PrivacyPolicy: React.FC<RouteComponentProps> = (
-  props: RouteComponentProps,
-) => {
+const PrivacyPolicy: React.FC = () => {
   return (
     <>
-      <button onClick={(): void => props.history.push('/')}>Naar home</button>
+      <Header />
+
       <div>
         <h1>Privacy Policy</h1>
         <small>Version 1.0.0</small>
@@ -222,4 +221,4 @@ const PrivacyPolicy: React.FC<RouteComponentProps> = (
   )
 }
 
-export default withRouter(PrivacyPolicy)
+export default PrivacyPolicy

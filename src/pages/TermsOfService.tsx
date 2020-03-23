@@ -1,13 +1,12 @@
 import * as React from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import { RouteComponentProps } from 'react-router'
+import { Link } from 'react-router-dom'
+import { Header } from '../components'
 
-const TermsOfService: React.FC<RouteComponentProps> = (
-  props: RouteComponentProps,
-) => {
+const TermsOfService: React.FunctionComponent = () => {
   return (
     <>
-      <button onClick={(): void => props.history.push('/')}>Naar home</button>
+      <Header />
+
       <div>
         <h1>Terms of Service</h1>
         <small>Version 1.0.0</small>
@@ -534,4 +533,4 @@ const TermsOfService: React.FC<RouteComponentProps> = (
   )
 }
 
-export default withRouter(TermsOfService)
+export default TermsOfService

@@ -10,7 +10,7 @@ export default {
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
       requireDisplayName: true,
       signInMethod:
-        firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD, // "<firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD|firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD>"
+        firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD,
     },
     {
       provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,

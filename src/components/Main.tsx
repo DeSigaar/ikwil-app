@@ -13,7 +13,9 @@ const Main: React.FC = () => {
         minima, quis cupiditate tempore quas facilis. Quisquam alias adipisci
         est.
       </p>
-      <Link to="/header">to header</Link>
+
+      <Link to="/privacy-policy">Privacy Policy</Link>
+      <Link to="/terms-of-service">Terms of Service</Link>
     </MainContainer>
   )
 }
