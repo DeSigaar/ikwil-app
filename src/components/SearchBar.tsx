@@ -20,7 +20,7 @@ interface BackgroundProps {
 }
 
 const StyledSearchIcon = styled.label<BackgroundProps>`
-  position: fixed;
+  position: absolute;
   margin: 10px 0px 0px 13px;
   width: 18px;
   height: 18px;
@@ -30,7 +30,7 @@ const StyledSearchIcon = styled.label<BackgroundProps>`
 `
 
 const StyledFilterIcon = styled.label<BackgroundProps>`
-  position: fixed;
+  position: absolute;
   margin: 11px 27px 0px 0px;
   right: 0;
   width: 18px;
@@ -44,7 +44,7 @@ const SearchBar: React.FC<Props> = (props: Props) => {
   return (
     <form>
       <StyledSearchIcon background={SearchIcon} />
-      <StyledInput type="text" placeholder="Zoeken..." />
+      <StyledInput type="search" placeholder="Zoeken..." />
       <StyledFilterIcon background={FilterIcon} />
     </form>
   )
