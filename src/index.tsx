@@ -5,14 +5,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import { Switch, Route, Redirect } from 'react-router'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
-import {
-  App,
-  Login,
-  LoginFirst,
-  PrivacyPolicy,
-  TermsOfService,
-  NotFound,
-} from './pages'
+import { App, Login, PrivacyPolicy, TermsOfService, NotFound } from './pages'
 import * as serviceWorker from './serviceWorker'
 import history from './utils/history'
 import store from './redux/store'
@@ -52,7 +45,6 @@ ReactDOM.render(
 
           {/* Login */}
           <Route exact path="/login" component={Login} />
-          <Route exact path="/loginfirst" component={LoginFirst} />
           <Redirect from="/inlog" to="/login" />
           <Redirect from="/inloggen" to="/login" />
           <Redirect from="/register" to="/login" />
