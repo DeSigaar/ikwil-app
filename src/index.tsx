@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
 body {
   background-color: ${colors.colors.white};
   margin: ${layout.init.margin};
-  padding: ${layout.init.padding};
+  padding-top: ${layout.init.padding};
   font-family: ${fonts.font.fontFamily};
 }
 `

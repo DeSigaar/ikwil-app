@@ -6,7 +6,7 @@ import { fireUI } from '../utils/firebase'
 import configFirebaseUI from '../config/firebaseUI'
 import { Header } from '../components'
 import { RouteComponentProps } from 'react-router'
-import BackButton from '../components/BackButton'
+import { BackButton } from '../components'
 
 const LoginContainer = styled.div``
 

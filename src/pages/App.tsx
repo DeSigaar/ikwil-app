@@ -1,12 +1,10 @@
 import * as React from 'react'
 
-import { Main } from '../components/index'
+import { Main } from '../components'
 
 const App: React.FC = () => {
   return (
     <>
-      {/* headertje */}
-
       <Main />
     </>
   )

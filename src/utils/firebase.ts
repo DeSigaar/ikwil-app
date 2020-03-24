@@ -23,4 +23,13 @@ export const firebaseManager = {
         console.error('Firebase Auth: ', error)
       }),
   getCollection: (path: string): unknown => fireStore.collection(path),
+  getEntireCollection: (path: string): unknown =>
+    fireStore
+      .collection(path)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.data())
+        })
+      }),
 }

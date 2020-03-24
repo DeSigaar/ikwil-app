@@ -14,3 +14,7 @@ export const colors = {
   pink: '#ED64A6',
   white: '#ffffff',
 }
+
+export const shadows = {
+  default: '0 3px 6px rgba(0,0,0,0.16)',
+}
