@@ -23,7 +23,7 @@
 
 ## About
 
-This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).  
+This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).
 A live preview can be found on our [deployed firebase app](https://ikwil-app.web.app/).
 
 ## Prerequisites

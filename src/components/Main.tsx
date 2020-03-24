@@ -8,11 +8,11 @@ interface Props {
   isLoggedIn: boolean
 }
 
-const MainContainer = styled.div``
+const ContentContainer = styled.div``
 
-const Main: React.FC<Props> = (props: Props) => {
+const Content: React.FC<Props> = (props: Props) => {
   return (
-    <MainContainer>
+    <ContentContainer>
       <div>
         {props.isLoggedIn ? (
           <button onClick={(): unknown => firebaseManager.signOut()}>
@@ -30,7 +30,7 @@ const Main: React.FC<Props> = (props: Props) => {
         minima, quis cupiditate tempore quas facilis. Quisquam alias adipisci
         est.
       </p>
-    </MainContainer>
+    </ContentContainer>
   )
 }
 const mapStateToProps = (state: any, ownProps: any) => {
@@ -43,4 +43,4 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
   return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Content)

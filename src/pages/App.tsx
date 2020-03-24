@@ -1,12 +1,10 @@
 import * as React from 'react'
-
-import { Main } from '../components/index'
+import { Header, Main } from '../components'
 
 const App: React.FC = () => {
   return (
     <>
-      {/* headertje */}
-
+      <Header title={'Activiteiten'} />
       <Main />
     </>
   )
