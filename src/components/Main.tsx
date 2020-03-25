@@ -7,23 +7,48 @@ import { Link } from 'react-router-dom'
 import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
 
 import { Activity } from '../components'
-
 interface Props {
   firestore: any
-  activities: any
+  activities: Activities[]
+  categories: Categories[]
   isLoggedIn: boolean
 }
-// interface IActivity {
-//   name: string
-//   id: string
-// }
+
+interface Categories {
+  id: string
+  __deleted: boolean
+  bio: string
+  color: string
+  icon: string
+  name: string
+}
+export interface Activities {
+  id: string
+  category: string
+  name: string
+  organisers: string[]
+  repeats: boolean
+  room: string
+  when: When
+}
+
+interface When {
+  date: string
+  endTime: string
+  startTime: string
+}
 
 const MainContainer = styled.div``
 
 const Main: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
     props.firestore.get('activities')
+    props.firestore.get('categories')
   }, [])
+
+  const getSecondPart = (str: string, divider: string): string => {
+    return str.split(divider)[1]
+  }
 
   return (
     <MainContainer>
@@ -38,7 +63,6 @@ const Main: React.FC<Props> = (props: Props) => {
           </Link>
         )}
       </div>
-
       {!isLoaded(props.activities) ? (
         'Loading'
       ) : isEmpty(props.activities) ? (
@@ -48,9 +72,27 @@ const Main: React.FC<Props> = (props: Props) => {
           {props.activities.map(
             (activity: any): React.ReactNode => (
               <React.Fragment key={activity.id}>
-                {console.log(activity)}
+                {console.log(props)}
 
-                <Activity name={activity.name}></Activity>
+                {!isLoaded(props.categories)
+                  ? 'Loading'
+                  : isEmpty(props.categories)
+                  ? 'Categories are empty'
+                  : props.categories.map((category) => (
+                      <React.Fragment key={category.id}>
+                        {category.id ===
+                          getSecondPart(activity.category, '/') && (
+                          <Activity
+                            name={activity.name}
+                            categoryName={category.name}
+                            repeats={activity.repeats}
+                            room={activity.room}
+                            organisers={activity.organisers}
+                            when={activity.when}
+                          ></Activity>
+                        )}
+                      </React.Fragment>
+                    ))}
               </React.Fragment>
             ),
           )}
@@ -59,10 +101,12 @@ const Main: React.FC<Props> = (props: Props) => {
     </MainContainer>
   )
 }
+
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
     isLoggedIn: !state.firebase.auth.isEmpty,
     activities: state.firestore.ordered.activities,
+    categories: state.firestore.ordered.categories,
   }
 }
 

@@ -9,7 +9,7 @@ const ActivityContainer = styled.div`
 `
 
 const ActivityItem = styled.div`
-  width: 60%;
+  width: 80%;
   height: 40px;
   box-shadow: ${colors.shadows.default};
   display: flex;
@@ -27,14 +27,23 @@ interface Props {
   // aanmelden: void
   // misschien: void
   // Afmelden: void
+  organisers: string[]
+  repeats: boolean
+  room: string
+  categoryName: string
+  when: any //TODO any veranderen
 }
 
 const Activity = (props: Props) => {
+  {
+    console.log(props.when)
+  }
   return (
     <ActivityContainer>
       <span>11</span>
       <ActivityItem>
-        <span>{props.name}</span>
+        <p>{props.categoryName}</p>
+        <p>{props.name}</p>
         <button>v</button>
       </ActivityItem>
     </ActivityContainer>
