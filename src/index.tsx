@@ -7,6 +7,7 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import { App, Login, PrivacyPolicy, TermsOfService, NotFound } from './pages'
 import * as serviceWorker from './serviceWorker'
+import * as setupEvents from './setupEvents'
 import history from './utils/history'
 import store from './redux/store'
 import { fireApp } from './utils/firebase'
@@ -70,4 +71,7 @@ ReactDOM.render(
   document.getElementById('root'),
 )
 
-serviceWorker.register()
+serviceWorker.register({
+  updateDownloadStatus: setupEvents.changeDownloadStatus,
+})
+setupEvents.init()

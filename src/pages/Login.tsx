@@ -17,6 +17,7 @@ const Login: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
   return (
     <>
       <Header title={'Inloggen'} />
+
       <BackButton back={(): void => props.history.push('/')}></BackButton>
 
       <LoginContainer>

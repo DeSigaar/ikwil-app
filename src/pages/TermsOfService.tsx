@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-const TermsOfService: React.FunctionComponent = () => {
+const TermsOfService: React.FC = () => {
   return (
     <>
       <Link to="/">Naar home</Link>
