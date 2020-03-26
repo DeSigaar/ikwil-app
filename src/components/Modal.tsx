@@ -57,6 +57,8 @@ const StyledCloseIcon = styled.div<BackgroundProps>`
   right: 0;
   margin: 17px 13px 0 0;
   background-image: url(${(props): string => props.background});
+  background-position: center;
+  background-repeat: no-repeat;
 `
 
 const Modal: React.FC<Props> = (props: Props) => {
