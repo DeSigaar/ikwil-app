@@ -1,11 +1,11 @@
 import * as React from 'react'
 import 'firebaseui/dist/firebaseui.css'
 import { withRouter } from 'react-router-dom'
-import styled from 'styled-components'
-import { fireUI } from '../utils/firebase'
-import configFirebaseUI from '../config/firebaseUI'
-import { Header, BackButton } from '../components'
 import { RouteComponentProps } from 'react-router'
+import styled from 'styled-components'
+import { fireUI } from 'src/utils/firebase'
+import configFirebaseUI from 'src/config/firebaseUI'
+import { Header, BackButton } from 'src/components'
 
 const LoginContainer = styled.div``
 

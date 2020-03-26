@@ -1,9 +1,30 @@
-import { applyMiddleware, compose, createStore, Store } from 'redux'
+import {
+  applyMiddleware,
+  compose,
+  createStore,
+  Store,
+  combineReducers,
+} from 'redux'
 import thunk from 'redux-thunk'
-import { routerMiddleware } from 'connected-react-router'
-import { getFirebase } from 'react-redux-firebase'
-import { rootReducer } from './rootReducer'
-import history from '../../utils/history'
+import { routerMiddleware, connectRouter } from 'connected-react-router'
+import { getFirebase, firebaseReducer } from 'react-redux-firebase'
+import { firestoreReducer } from 'redux-firestore'
+import history from 'src/utils/history'
+
+// Import all reducers
+import appReducer from 'src/redux/app/reducers'
+
+const rootReducer = combineReducers({
+  // Combine all reducers
+  app: appReducer,
+
+  // Below are other reducers
+  router: connectRouter(history),
+  firebase: firebaseReducer,
+  firestore: firestoreReducer,
+})
+
+export type RootState = ReturnType<typeof rootReducer>
 
 const configureStore = (initialState: object): Store => {
   const composeEnhancer: typeof compose =

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import store from './redux/store'
-import { changeOnline, changeDownload } from './redux/app/actions'
-import { ONLINE_STATUS, DOWNLOAD_STATUS } from './redux/app/types'
+import store from 'src/redux/store'
+import { changeOnline, changeDownload } from 'src/redux/app/actions'
+import { ONLINE_STATUS, DOWNLOAD_STATUS } from 'src/redux/app/types'
 
 export const changeOnlineStatus = (onlineStatus: ONLINE_STATUS): void => {
   store.dispatch(changeOnline(onlineStatus))

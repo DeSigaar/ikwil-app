@@ -1,8 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { firebaseManager } from '../utils/firebase'
 import { Link } from 'react-router-dom'
+import { fireAuth } from 'src/utils/firebase'
+import { RootState } from 'src/redux/store'
 
 interface Props {
   isLoggedIn: boolean
@@ -15,9 +16,7 @@ const Content: React.FC<Props> = (props: Props) => {
     <ContentContainer>
       <div>
         {props.isLoggedIn ? (
-          <button onClick={(): unknown => firebaseManager.signOut()}>
-            uitloggen
-          </button>
+          <button onClick={(): unknown => fireAuth.signOut()}>uitloggen</button>
         ) : (
           <Link to="/login">
             <button>inloggen</button>
@@ -33,13 +32,13 @@ const Content: React.FC<Props> = (props: Props) => {
     </ContentContainer>
   )
 }
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: RootState, __ownProps: any): Props => {
   return {
     isLoggedIn: !state.firebase.auth.isEmpty,
   }
 }
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+const mapDispatchToProps = (__dispatch: any, __ownProps: any) => {
   return {}
 }
 

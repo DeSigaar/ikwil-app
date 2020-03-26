@@ -1,8 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import TopBarWave from '../assets/general/top_bar_wave.svg'
-import SettingsIcon from '../assets/general/icon_settings_white.svg'
-import { layout } from '../utils/styles'
+import TopBarWave from 'src/assets/general/top_bar_wave.svg'
+import SettingsIcon from 'src/assets/general/icon_settings_white.svg'
+import { layout, colors } from 'src/styles'
+import { Icon } from 'src/components'
 
 interface Props {
   title: string
@@ -17,15 +18,13 @@ const Container = styled.div<BackgroundProps>`
   top: 0;
   left: 0;
   right: 0;
-  margin: 0;
-  padding: 0;
   height: ${layout.sizes.headerHeight + 1}px;
-  background: #f38c00;
+  background: ${colors.colors.ikWilOrange};
   z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 5vw 40px;
+  padding: ${layout.unit * 1.5}px 5vw ${layout.unit * 2}px;
 
   &::after {
     content: '';
@@ -45,17 +44,7 @@ const Container = styled.div<BackgroundProps>`
 
 const Title = styled.h1`
   font-size: 28px;
-  color: white;
-  padding: 0;
-  margin: 0;
-`
-
-const StyledSettingsIcon = styled.div<BackgroundProps>`
-  width: 24px;
-  height: 24px;
-  background-image: url(${(props): string => props.background});
-  background-repeat: no-repeat;
-  background-position: center;
+  color: ${colors.colors.white};
 `
 
 const Header: React.FC<Props> = (props: Props) => {
@@ -63,7 +52,7 @@ const Header: React.FC<Props> = (props: Props) => {
     <Container background={TopBarWave}>
       <Title>{props.title}</Title>
 
-      <StyledSettingsIcon background={SettingsIcon} />
+      <Icon icon={SettingsIcon}></Icon>
     </Container>
   )
 }
