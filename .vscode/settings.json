@@ -23,11 +23,13 @@
     "LICENSE": true,
     "CONTRIBUTING.md": true,
     "CODE_OF_CONDUCT.md": true,
+    "SECURITY.md": true,
     ".editorconfig": true,
     ".eslintignore": true,
     ".prettierignore": true,
     ".gitignore": true,
-    "src/react-app-env.d.ts": true
+    "src/react-app-env.d.ts": true,
+    "src/globals.d.ts": true
   },
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": true,
@@ -37,5 +39,6 @@
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "all",
-  "prettier.useTabs": false
+  "prettier.useTabs": false,
+  "files.eol": "\n"
 }

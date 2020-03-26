@@ -10,7 +10,7 @@ Dylano Hartman <dylanohartman@gmail.com>
 Noël Herwig <n.herwig16@gmail.com>
 
 /* SITE */
-Last update: 2020/03/18
+Last update: 2020/03/25
 Standards: React, TypeScript, Redux, Firebase
 Components: Styled Components
 Software: Visual Studio Code, GitHub

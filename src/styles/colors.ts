@@ -1,5 +1,3 @@
-// Colors
-
 export const colors = {
   darkgrey: '#727272',
   lightgrey: '#A0AEC0',
@@ -13,6 +11,8 @@ export const colors = {
   purple: '#9F7AEA',
   pink: '#ED64A6',
   white: '#ffffff',
+  ikWilOrange: '#F38C00',
+  modalOverlayBackground: 'rgba(0, 0, 0, 0.3)',
 }
 
 export const shadows = {

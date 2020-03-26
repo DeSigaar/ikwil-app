@@ -5,26 +5,22 @@ import { ConnectedRouter } from 'connected-react-router'
 import { Switch, Route, Redirect } from 'react-router'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
-import {
-  App,
-  Login,
-  LoginFirst,
-  PrivacyPolicy,
-  TermsOfService,
-  NotFound,
-} from './pages'
-import * as serviceWorker from './serviceWorker'
-import history from './utils/history'
-import store from './redux/store'
-import { fireApp } from './utils/firebase'
-import configReactReduxFirebase from './config/reactReduxFirebase'
+import { App, Login, PrivacyPolicy, TermsOfService, NotFound } from 'src/pages'
+import * as serviceWorker from 'src/serviceWorker'
+import * as setupEvents from 'src/setupEvents'
+import history from 'src/utils/history'
+import store from 'src/redux/store'
+import { fireApp } from 'src/utils/firebase'
+import configReactReduxFirebase from 'src/config/reactReduxFirebase'
 import { createGlobalStyle } from 'styled-components'
-import { colors, fonts, layout } from './utils/styles'
+import { colors, fonts, layout } from 'src/styles'
 
 const GlobalStyle = createGlobalStyle`
 *,
 *:before,
 *:after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -52,7 +48,6 @@ ReactDOM.render(
 
           {/* Login */}
           <Route exact path="/login" component={Login} />
-          <Route exact path="/loginfirst" component={LoginFirst} />
           <Redirect from="/inlog" to="/login" />
           <Redirect from="/inloggen" to="/login" />
           <Redirect from="/register" to="/login" />
@@ -78,4 +73,7 @@ ReactDOM.render(
   document.getElementById('root'),
 )
 
-serviceWorker.register()
+serviceWorker.register({
+  updateDownloadStatus: setupEvents.changeDownloadStatus,
+})
+setupEvents.init()

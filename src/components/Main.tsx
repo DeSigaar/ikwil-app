@@ -2,9 +2,10 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { firebaseManager } from '../utils/firebase'
 import { Link } from 'react-router-dom'
 import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
+import { fireAuth } from 'src/utils/firebase'
+import { RootState } from 'src/redux/store'
 
 import { Activity } from '../components'
 interface Props {
@@ -62,9 +63,7 @@ const Main: React.FC<Props> = (props: Props) => {
     <MainContainer>
       <div>
         {props.isLoggedIn ? (
-          <button onClick={(): unknown => firebaseManager.signOut()}>
-            uitloggen
-          </button>
+          <button onClick={(): unknown => fireAuth.signOut()}>uitloggen</button>
         ) : (
           <Link to="/login">
             <button>inloggen</button>
@@ -119,7 +118,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+const mapDispatchToProps = (__dispatch: any, __ownProps: any) => {
   return {}
 }
 

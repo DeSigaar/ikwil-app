@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import styled from 'styled-components'
-import { colors, layout, fonts } from '../utils/styles'
+import { colors, layout, fonts } from 'src/styles'
 import { Header } from '../components'
 
 const ActivityContainer = styled.div`
@@ -21,7 +21,7 @@ const ActivityItem = styled.div<StyleProps>`
   align-items: flex-start;
   flex-direction: column;
   background-color: ${({ color }) => color};
-  border-radius: ${layout.borderRadius.activity};
+  border-radius: ${layout.borderRadius};
   color: ${colors.colors.white};
   margin-top: 10px;
   margin-bottom: 10px;
@@ -89,7 +89,7 @@ interface Props {
   days: any //TODO any veranderen
 }
 
-const Activity = (props: Props) => {
+const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
 
   {
@@ -98,7 +98,7 @@ const Activity = (props: Props) => {
   }
   return (
     <ActivityContainer>
-      <Header />
+      <Header title={'Activiteiten'} />
       <ActivityItem toggle={toggle} color={props.categoryColor}>
         <ActivityBar>
           {/* <span> |{props.categoryName}| </span> */}

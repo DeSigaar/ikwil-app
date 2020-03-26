@@ -1,1 +1,4 @@
-export default { userProfile: 'users', useFirestoreForProfile: true }
+export default {
+  userProfile: 'users', // "<string>"
+  useFirestoreForProfile: true, // <boolean>
+}
