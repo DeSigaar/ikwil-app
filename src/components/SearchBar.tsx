@@ -1,10 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import Modal from './Modal'
-import SearchIcon from '../assets/general/icon_search_grey.svg'
-import FilterIcon from '../assets/general/icon_filter_grey.svg'
-
-interface Props {}
+import { Modal } from 'src/components'
+import SearchIcon from 'src/assets/general/icon_search_grey.svg'
+import FilterIcon from 'src/assets/general/icon_filter_grey.svg'
 
 const StyledInput = styled.input`
   height: 37px;
@@ -41,7 +39,7 @@ const StyledFilterIcon = styled.label<BackgroundProps>`
   background-image: url(${(props): string => props.background});
 `
 
-const SearchBar: React.FC<Props> = (props: Props) => {
+const SearchBar: React.FC = () => {
   const [modalShowing, setModalShowing] = React.useState(false)
 
   return (
@@ -54,7 +52,12 @@ const SearchBar: React.FC<Props> = (props: Props) => {
       />
       {modalShowing ? (
         <Modal title={'Filters'} closeModal={setModalShowing}>
-          <h1>Ik ben een modal</h1>
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+            vero quas ducimus, facilis deleniti odit officia voluptas excepturi,
+            debitis, sint id ab. Debitis praesentium saepe officia cum incidunt
+            quo adipisci?
+          </p>
         </Modal>
       ) : (
         <></>

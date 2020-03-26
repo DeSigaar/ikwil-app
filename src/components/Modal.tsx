@@ -1,78 +1,87 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import ReactDOM from 'react-dom'
-import CloseIcon from '../assets/general/icon_close_white.svg'
+import CloseIcon from 'src/assets/general/icon_close_white.svg'
+import { layout, colors } from 'src/styles'
+import { Icon } from 'src/components'
 
 interface Props {
   title: string
-  children: any
+  children: React.ReactNode
   closeModal: Function
 }
 
-interface BackgroundProps {
-  readonly background: string
-}
-
-const StyledBackground = styled.div`
+const StyledOverlay = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  display: grid;
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 998;
+  background-color: ${colors.colors.modalOverlayBackground};
+  z-index: ${layout.modalZindex - 1};
 `
 
-const StyledContainer = styled.div`
+const StyledModal = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  max-height: 520px;
-  margin: auto 15px;
-  border-radius: 6px;
-  background-color: #fff;
-  z-index: 999;
+  min-height: ${layout.unit * 10}px;
+  height: fit-content;
+  max-height: 90vh;
+  margin: auto ${layout.unit}px;
+  border-radius: ${layout.borderRadius}px;
+  background-color: ${colors.colors.white};
+  z-index: ${layout.modalZindex};
+  display: flex;
+  flex-direction: column;
+`
+
+const StyledHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${layout.unit}px;
+  background-color: ${colors.colors.ikWilOrange};
+  width: 100%;
+  height: ${layout.unit * 4}px;
+  border-top-right-radius: ${layout.borderRadius}px;
+  border-top-left-radius: ${layout.borderRadius}px;
 `
 
 const StyledTitle = styled.h2`
   font-size: 24px;
-  color: white;
-  background-color: #f38c00;
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
-  padding: 15px;
-  margin: 0;
+  color: ${colors.colors.white};
 `
 
-const StyledCloseIcon = styled.div<BackgroundProps>`
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  top: 0;
-  right: 0;
-  margin: 17px 13px 0 0;
-  background-image: url(${(props): string => props.background});
-  background-position: center;
-  background-repeat: no-repeat;
+const StyledContent = styled.div`
+  width: 100%;
+  height: auto;
+  padding: ${layout.unit}px;
+  border-bottom-right-radius: ${layout.borderRadius}px;
+  border-bottom-left-radius: ${layout.borderRadius}px;
 `
 
 const Modal: React.FC<Props> = (props: Props) => {
   return ReactDOM.createPortal(
     <div>
-      <StyledBackground />
-      <StyledContainer>
-        <StyledTitle>{props.title}</StyledTitle>
-        <StyledCloseIcon
-          background={CloseIcon}
-          onClick={(): void => props.closeModal(false)}
-        />
-        <div>{props.children}</div>
-      </StyledContainer>
+      <StyledOverlay />
+      <StyledModal>
+        <StyledHeader>
+          <StyledTitle>{props.title}</StyledTitle>
+          <Icon
+            icon={CloseIcon}
+            size={32}
+            onClick={(): void => props.closeModal(false)}
+          />
+        </StyledHeader>
+
+        <StyledContent>{props.children}</StyledContent>
+      </StyledModal>
     </div>,
     document.getElementById('portal-root') as HTMLElement,
   )
