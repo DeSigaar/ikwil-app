@@ -1,14 +1,15 @@
+require('dotenv').config()
+
 module.exports = {
-  verbose: true,
-  roots: ['<rootDir>/src'],
+  preset: 'ts-jest',
+  roots: ['<rootDir>'],
+  modulePaths: ['<rootDir>'],
+  moduleDirectories: ['node_modules', 'src'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.svg$': '<rootDir>/src/__tests__/__utils__/svgTransform.js',
   },
-  setupFilesAfterEnv: [
-    '@testing-library/react/cleanup-after-each',
-    '@testing-library/jest-dom/extend-expect',
-    '<rootDir>/jest.setup.js',
-  ],
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 }
