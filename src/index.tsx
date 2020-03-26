@@ -74,6 +74,6 @@ ReactDOM.render(
 )
 
 serviceWorker.register({
-  updateDownloadStatus: setupEvents.changeDownloadStatus,
+  updateCacheStatus: setupEvents.changeCacheStatus,
 })
 setupEvents.init()
