@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import Modal from './Modal'
 import SearchIcon from '../assets/general/icon_search_grey.svg'
 import FilterIcon from '../assets/general/icon_filter_grey.svg'
 
@@ -41,12 +42,24 @@ const StyledFilterIcon = styled.label<BackgroundProps>`
 `
 
 const SearchBar: React.FC<Props> = (props: Props) => {
+  const [modalShowing, setModalShowing] = React.useState(false)
+
   return (
-    <form>
+    <div>
       <StyledSearchIcon background={SearchIcon} />
       <StyledInput type="search" placeholder="Zoeken..." />
-      <StyledFilterIcon background={FilterIcon} />
-    </form>
+      <StyledFilterIcon
+        background={FilterIcon}
+        onClick={(): void => setModalShowing(!modalShowing)}
+      />
+      {modalShowing ? (
+        <Modal title={'Filters'} closeModal={setModalShowing}>
+          <h1>Ik ben een modal</h1>
+        </Modal>
+      ) : (
+        <></>
+      )}
+    </div>
   )
 }
 

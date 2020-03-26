@@ -25,7 +25,7 @@ const Container = styled.div<BackgroundProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 5vw;
+  padding: 25px 5vw 40px;
 
   &::after {
     content: '';
