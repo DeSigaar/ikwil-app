@@ -2,8 +2,6 @@ import * as React from 'react'
 
 import styled from 'styled-components'
 import { colors, layout, fonts } from 'src/styles'
-import { Header } from '../components'
-
 import ChevronGrey from 'src/assets/general/chevron_grey.svg'
 
 const ActivityContainer = styled.div`
@@ -121,7 +119,6 @@ const Activity: React.FC<Props> = (props: Props) => {
   }
   return (
     <ActivityContainer>
-      <Header title={'Activiteiten'} />
       <ActivityItem toggle={toggle} color={props.categoryColor}>
         <ActivityBar>
           {/* <span> |{props.categoryName}| </span> */}
