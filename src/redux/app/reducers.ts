@@ -1,13 +1,15 @@
 import {
   AppState,
   AppActionsTypes,
-  CHANGE_ONLINE,
-  CHANGE_DOWNLOAD,
+  ONLINE_CHANGED,
+  CACHE_CHANGED,
+  INSTALL_CHANGED,
 } from './types'
 
 const initialState: AppState = {
   onlineStatus: 'UNKNOWN',
-  downloadStatus: 'UNKNOWN',
+  cacheStatus: 'UNKNOWN',
+  installStatus: 'UNKNOWN',
 }
 
 const appReducer = (
@@ -15,15 +17,20 @@ const appReducer = (
   action: AppActionsTypes,
 ): AppState => {
   switch (action.type) {
-    case CHANGE_ONLINE:
+    case ONLINE_CHANGED:
       return {
         ...state,
         onlineStatus: action.onlineStatus,
       }
-    case CHANGE_DOWNLOAD:
+    case CACHE_CHANGED:
       return {
         ...state,
-        downloadStatus: action.downloadStatus,
+        cacheStatus: action.cacheStatus,
+      }
+    case INSTALL_CHANGED:
+      return {
+        ...state,
+        installStatus: action.installStatus,
       }
     default:
       return state

@@ -1,23 +1,42 @@
 import {
-  CHANGE_ONLINE,
-  CHANGE_DOWNLOAD,
   ONLINE_STATUS,
-  DOWNLOAD_STATUS,
+  CACHE_STATUS,
+  INSTALL_STATUS,
+  ONLINE_CHANGED,
+  CACHE_CHANGED,
+  INSTALL_CHANGED,
+  SET_INSTALL_PROMPT,
   AppActionsTypes,
 } from './types'
 
 export const changeOnline = (onlineStatus: ONLINE_STATUS): AppActionsTypes => {
   return {
-    type: CHANGE_ONLINE,
+    type: ONLINE_CHANGED,
     onlineStatus,
   }
 }
 
-export const changeDownload = (
-  downloadStatus: DOWNLOAD_STATUS,
+export const changeCache = (cacheStatus: CACHE_STATUS): AppActionsTypes => {
+  return {
+    type: CACHE_CHANGED,
+    cacheStatus,
+  }
+}
+
+export const changeInstall = (
+  installStatus: INSTALL_STATUS,
 ): AppActionsTypes => {
   return {
-    type: CHANGE_DOWNLOAD,
-    downloadStatus,
+    type: INSTALL_CHANGED,
+    installStatus,
+  }
+}
+
+export const setInstallPrompt = (
+  installPrompt: BeforeInstallPromptEvent,
+): AppActionsTypes => {
+  return {
+    type: SET_INSTALL_PROMPT,
+    installPrompt,
   }
 }

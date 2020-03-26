@@ -2,10 +2,10 @@
 // This optional code is used to register a service worker. register() is not called by default.
 // This lets the app load faster on subsequent visits in production, and gives it offline capabilities. However, it also means that developers (and users) will only see deployed updates on subsequent visits to a page, after all the existing tabs open on the page have been closed, since previously cached resources are updated in the background.
 // To learn more about the benefits of this model and instructions on how to opt-in, read https://bit.ly/CRA-PWA
-import { DOWNLOAD_STATUS } from 'src/redux/app/types'
+import { CACHE_STATUS } from 'src/redux/app/types'
 
 type Config = {
-  updateDownloadStatus?: (downloadStatus: DOWNLOAD_STATUS) => void
+  updateCacheStatus?: (cacheStatus: CACHE_STATUS) => void
   onUpdate?: (registration: ServiceWorkerRegistration) => void
   onSuccess?: (registration: ServiceWorkerRegistration) => void
 }
@@ -26,8 +26,8 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
     .then((registration) => {
       registration.onupdatefound = (): void => {
         // Saving assets for offline caching
-        if (config && config.updateDownloadStatus)
-          config.updateDownloadStatus('DOWNLOADING')
+        if (config && config.updateCacheStatus)
+          config.updateCacheStatus('DOWNLOADING')
 
         const installingWorker = registration.installing
         if (installingWorker == null) {
@@ -45,8 +45,8 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
               // Execute callback
               if (config && config.onUpdate) config.onUpdate(registration)
 
-              if (config && config.updateDownloadStatus)
-                config.updateDownloadStatus('SHOULD_DOWNLOAD')
+              if (config && config.updateCacheStatus)
+                config.updateCacheStatus('SHOULD_DOWNLOAD')
             } else {
               // At this point, everything has been precached. It's the perfect time to display a "Content is cached for offline use." message.
               console.log(
@@ -57,8 +57,8 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
               // Execute callback
               if (config && config.onSuccess) config.onSuccess(registration)
 
-              if (config && config.updateDownloadStatus)
-                config.updateDownloadStatus('DOWNLOADED')
+              if (config && config.updateCacheStatus)
+                config.updateCacheStatus('DOWNLOADED')
             }
           }
         }
@@ -123,15 +123,15 @@ export const register = (config?: Config): void => {
             'This web app is being served cache-first by a service worker.',
           )
 
-          if (config && config.updateDownloadStatus)
-            config.updateDownloadStatus('CACHED')
+          if (config && config.updateCacheStatus)
+            config.updateCacheStatus('CACHED')
         })
       } else {
         // Is not localhost. Just register service worker
         registerValidServiceWorker(swUrl, config)
 
-        if (config && config.updateDownloadStatus)
-          config.updateDownloadStatus('CACHED')
+        if (config && config.updateCacheStatus)
+          config.updateCacheStatus('CACHED')
       }
     })
   }

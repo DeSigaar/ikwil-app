@@ -3,7 +3,7 @@
   "categories": ["stichting", "ik wil", "activiteiten"],
   "description": "Applicatie om de activiteiten van Stichting Ik Wil in te zien.",
   "dir": "ltr",
-  "display": "minimal-ui",
+  "display": "standalone",
   "icons": [
     {
       "src": "favicon.ico",
