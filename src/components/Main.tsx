@@ -29,14 +29,22 @@ export interface Activities {
   organisers: string[]
   repeats: boolean
   room: string
-  when: When
+  days: Days[]
 }
 
-interface When {
-  date: string
-  endTime: string
-  startTime: string
+interface Days {
+  name: string
+  days: Array<{
+    endTime: string
+    name: string
+    startTime: string
+  }>
 }
+// interface Day {
+//   endTime: string
+//   name: string
+//   startTime: string
+// }
 
 const MainContainer = styled.div``
 
@@ -85,10 +93,11 @@ const Main: React.FC<Props> = (props: Props) => {
                           <Activity
                             name={activity.name}
                             categoryName={category.name}
+                            categoryColor={category.color}
                             repeats={activity.repeats}
                             room={activity.room}
                             organisers={activity.organisers}
-                            when={activity.when}
+                            days={activity.days}
                           ></Activity>
                         )}
                       </React.Fragment>

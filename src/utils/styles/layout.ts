@@ -12,3 +12,7 @@ export const screenSizes = {
   medium: '768px',
   big: '1200px',
 }
+
+export const borderRadius = {
+  activity: '6px',
+}

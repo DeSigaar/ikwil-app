@@ -1,21 +1,33 @@
 import * as React from 'react'
 
 import styled from 'styled-components'
-import { colors } from '../utils/styles'
+import { colors, layout, fonts } from '../utils/styles'
+import { Header } from '../components'
 
 const ActivityContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
 `
 
 const ActivityItem = styled.div<StyleProps>`
-  width: 80%;
-  height: ${({ toggle }) => (toggle ? '200px' : '40px')};
+  width: 75%;
+  max-height: ${({ toggle }) => (toggle ? '300px' : '40px')};
+  min-height: ${({ toggle }) => (toggle ? '200px' : '40px')};
   transition: 0.2s;
   box-shadow: ${colors.shadows.default};
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  background-color: ${({ color }) => color};
+  border-radius: ${layout.borderRadius.activity};
+  color: ${colors.colors.white};
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: ${fonts.size.normal};
+  font-weight: ${fonts.fontWeights.bold};
 `
 
 const ActivityBar = styled.div`
@@ -26,6 +38,8 @@ const Details = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style: unset;
+  font-size: ${fonts.size.small};
+  font-weight: ${fonts.fontWeights.normal};
 `
 const Line = styled.hr`
   margin-top: 10px;
@@ -35,11 +49,21 @@ const Line = styled.hr`
   border-width: 1px;
   width: 70%;
 `
+
+const Meedoen = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  font-size: ${fonts.size.small};
+  font-weight: ${fonts.fontWeights.normal};
+`
 const Buttons = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
   width: 100%;
+  margin: 5px;
 `
 
 const Detail = styled.li`
@@ -54,12 +78,6 @@ interface StyleProps {
 
 interface Props {
   name: string
-  // startTime: string
-  // endTime: string
-  // createdBy: string
-  // organisers: object
-  // room: string
-  // deelnemers: number
   // aanmelden: void
   // misschien: void
   // Afmelden: void
@@ -67,7 +85,8 @@ interface Props {
   repeats: boolean
   room: string
   categoryName: string
-  when: any //TODO any veranderen
+  categoryColor: string
+  days: any //TODO any veranderen
 }
 
 const Activity = (props: Props) => {
@@ -79,10 +98,11 @@ const Activity = (props: Props) => {
   }
   return (
     <ActivityContainer>
-      <span></span>
-      <ActivityItem toggle={toggle}>
+      <Header />
+      <ActivityItem toggle={toggle} color={props.categoryColor}>
         <ActivityBar>
-          <span>{props.categoryName}</span>
+          {/* <span> |{props.categoryName}| </span> */}
+          <span> |icon| </span>
           <span>{props.name}</span>
           <button onClick={(): void => setToggle(!toggle)}>v</button>
         </ActivityBar>
@@ -91,24 +111,27 @@ const Activity = (props: Props) => {
           <>
             <Details>
               <Detail>
-                <span>i</span> {props.room}
+                <span> |icon| </span> {props.room}
               </Detail>
               <Detail>
-                <span>i</span> {props.room}
+                <span> |icon| </span> {props.room}
               </Detail>
               <Detail>
-                <span>i</span> {props.room}
+                <span> |icon| </span> {props.room}
               </Detail>
               <Detail>
-                <span>i</span> {props.room}
+                <span> |icon| </span> {props.room}
               </Detail>
             </Details>
             <Line />
-            <Buttons>
-              <button>Ja</button>
-              <button>Misschien</button>
-              <button>Nee</button>
-            </Buttons>
+            <Meedoen>
+              <span>Meedoen met {props.name}?</span>
+              <Buttons>
+                <button>Ja</button>
+                <button>Misschien</button>
+                <button>Nee</button>
+              </Buttons>
+            </Meedoen>
           </>
         )}
       </ActivityItem>
