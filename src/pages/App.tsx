@@ -5,6 +5,7 @@ const App: React.FC = () => {
   return (
     <>
       <Header title={'Activiteiten'} />
+
       <SearchBar />
       <Main />
     </>
