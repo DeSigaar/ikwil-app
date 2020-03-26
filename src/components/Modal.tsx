@@ -61,6 +61,10 @@ const StyledCloseIcon = styled.div<BackgroundProps>`
   background-repeat: no-repeat;
 `
 
+const StyledDiv = styled.div`
+  padding: 20px 28px;
+`
+
 const Modal: React.FC<Props> = (props: Props) => {
   return ReactDOM.createPortal(
     <div>
@@ -71,7 +75,7 @@ const Modal: React.FC<Props> = (props: Props) => {
           background={CloseIcon}
           onClick={(): void => props.closeModal(false)}
         />
-        <div>{props.children}</div>
+        <StyledDiv>{props.children}</StyledDiv>
       </StyledContainer>
     </div>,
     document.getElementById('portal-root') as HTMLElement,

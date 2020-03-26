@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Modal from './Modal'
 import SearchIcon from '../assets/general/icon_search_grey.svg'
 import FilterIcon from '../assets/general/icon_filter_grey.svg'
+import Filter from './Filter'
 
 interface Props {}
 
@@ -54,7 +55,7 @@ const SearchBar: React.FC<Props> = (props: Props) => {
       />
       {modalShowing ? (
         <Modal title={'Filters'} closeModal={setModalShowing}>
-          <h1>Ik ben een modal</h1>
+          <Filter />
         </Modal>
       ) : (
         <></>

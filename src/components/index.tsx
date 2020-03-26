@@ -1,5 +1,6 @@
 export { default as Header } from './Header'
 export { default as SearchBar } from './SearchBar'
 export { default as Modal } from './Modal'
+export { default as Filter } from './Filter'
 export { default as BackButton } from './BackButton'
 export { default as Main } from './Main'
