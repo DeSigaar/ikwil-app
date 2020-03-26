@@ -1,11 +1,10 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Header } from '../components'
 
-const TermsOfService: React.FunctionComponent = () => {
+const TermsOfService: React.FC = () => {
   return (
     <>
-      <Header />
+      <Link to="/">Naar home</Link>
 
       <div>
         <h1>Terms of Service</h1>

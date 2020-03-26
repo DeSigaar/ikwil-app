@@ -39,6 +39,10 @@ module.exports = {
     'no-func-assign': 'warn',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-empty-interface': 'warn',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      { argsIgnorePattern: '^__', varsIgnorePattern: '^__' },
+    ],
     'prettier/prettier': [
       'error',
       {
