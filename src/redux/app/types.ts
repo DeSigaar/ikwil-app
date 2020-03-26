@@ -6,9 +6,8 @@ export type DOWNLOAD_STATUS =
   | 'UNKNOWN'
   | 'DOWNLOADED'
   | 'DOWNLOADING'
-  | 'WAITING'
-  | 'NOT_DOWNLOADING'
-  | 'NOT_DOWNLOADED'
+  | 'SHOULD_DOWNLOAD'
+  | 'CACHED'
 
 export interface AppState {
   onlineStatus: ONLINE_STATUS

@@ -24,17 +24,10 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
-      if (config && config.updateDownloadStatus) {
-        config.updateDownloadStatus('UNKNOWN')
-        console.log('UNKNOWN')
-      }
-
       registration.onupdatefound = (): void => {
         // Saving assets for offline caching
-        if (config && config.updateDownloadStatus) {
+        if (config && config.updateDownloadStatus)
           config.updateDownloadStatus('DOWNLOADING')
-          console.log('DOWNLOADING')
-        }
 
         const installingWorker = registration.installing
         if (installingWorker == null) {
@@ -42,8 +35,6 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
         }
         installingWorker.onstatechange = (): void => {
           if (installingWorker.state === 'installed') {
-            console.log('this is installed')
-
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched, but the previous service worker will still serve the older content until all client tabs are closed.
               console.log(
@@ -52,13 +43,10 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
               )
 
               // Execute callback
-              if (config && config.onUpdate) {
-                config.onUpdate(registration)
-              }
-              if (config && config.updateDownloadStatus) {
-                config.updateDownloadStatus('DOWNLOADING')
-                console.log('DOWNLOADING')
-              }
+              if (config && config.onUpdate) config.onUpdate(registration)
+
+              if (config && config.updateDownloadStatus)
+                config.updateDownloadStatus('SHOULD_DOWNLOAD')
             } else {
               // At this point, everything has been precached. It's the perfect time to display a "Content is cached for offline use." message.
               console.log(
@@ -67,13 +55,10 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
               )
 
               // Execute callback
-              if (config && config.onSuccess) {
-                config.onSuccess(registration)
-              }
-              if (config && config.updateDownloadStatus) {
+              if (config && config.onSuccess) config.onSuccess(registration)
+
+              if (config && config.updateDownloadStatus)
                 config.updateDownloadStatus('DOWNLOADED')
-                console.log('DOWNLOADED')
-              }
             }
           }
         }
@@ -116,7 +101,7 @@ const checkValidServiceWorker = (swUrl: string, config?: Config): void => {
 }
 
 export const register = (config?: Config): void => {
-  if (process.env.NODE_ENV === 'development' && 'serviceWorker' in navigator) {
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href)
     if (publicUrl.origin !== window.location.origin) {
@@ -125,7 +110,7 @@ export const register = (config?: Config): void => {
     }
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/serviceworker.js`
+      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
@@ -137,10 +122,16 @@ export const register = (config?: Config): void => {
             'Service Worker:',
             'This web app is being served cache-first by a service worker.',
           )
+
+          if (config && config.updateDownloadStatus)
+            config.updateDownloadStatus('CACHED')
         })
       } else {
         // Is not localhost. Just register service worker
         registerValidServiceWorker(swUrl, config)
+
+        if (config && config.updateDownloadStatus)
+          config.updateDownloadStatus('CACHED')
       }
     })
   }
