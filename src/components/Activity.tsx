@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { colors, layout, fonts } from 'src/styles'
 import { Header } from '../components'
 
+import ChevronGrey from 'src/assets/general/chevron_grey.svg'
+
 const ActivityContainer = styled.div`
   display: flex;
   align-items: center;
@@ -19,19 +21,43 @@ const ActivityItem = styled.div<StyleProps>`
   box-shadow: ${colors.shadows.default};
   display: flex;
   align-items: flex-start;
+  justify-items: center;
   flex-direction: column;
-  background-color: ${({ color }) => color};
+  /* background-color: ${({ color }) => color}; */
   border-radius: ${layout.borderRadius};
-  color: ${colors.colors.white};
+  color: ${colors.colors.darkgrey};
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 10px;
   font-size: ${fonts.size.normal};
   font-weight: ${fonts.fontWeights.bold};
-`
 
+`
 const ActivityBar = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+`
+
+const LogoAndTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const Toggle = styled.button<StyleProps>`
+  width: 40px;
+  height: 40px;
+  border: 0;
+  padding: 0;
+  background: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: ${({ toggle }) => toggle && 'rotate(180deg)'};
+  transition: 0.3s;
+
+  &:focus {
+    outline: unset;
+  }
 `
 
 const Details = styled.ul`
@@ -78,9 +104,6 @@ interface StyleProps {
 
 interface Props {
   name: string
-  // aanmelden: void
-  // misschien: void
-  // Afmelden: void
   organisers: string[]
   repeats: boolean
   room: string
@@ -102,9 +125,14 @@ const Activity: React.FC<Props> = (props: Props) => {
       <ActivityItem toggle={toggle} color={props.categoryColor}>
         <ActivityBar>
           {/* <span> |{props.categoryName}| </span> */}
-          <span> |icon| </span>
-          <span>{props.name}</span>
-          <button onClick={(): void => setToggle(!toggle)}>v</button>
+          <LogoAndTitle>
+            <span> |icon| </span>
+            <span>{props.name}</span>
+          </LogoAndTitle>
+
+          <Toggle toggle={toggle} onClick={(): void => setToggle(!toggle)}>
+            <img width="20px" height="20px" src={ChevronGrey} />
+          </Toggle>
         </ActivityBar>
 
         {toggle && (

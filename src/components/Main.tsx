@@ -41,11 +41,6 @@ interface Days {
     startTime: string
   }>
 }
-// interface Day {
-//   endTime: string
-//   name: string
-//   startTime: string
-// }
 
 const MainContainer = styled.div``
 
@@ -110,7 +105,7 @@ const Main: React.FC<Props> = (props: Props) => {
   )
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: RootState, ownProps: any) => {
   return {
     isLoggedIn: !state.firebase.auth.isEmpty,
     activities: state.firestore.ordered.activities,
