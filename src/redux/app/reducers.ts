@@ -4,15 +4,17 @@ import {
   ONLINE_CHANGED,
   CACHE_CHANGED,
   INSTALL_CHANGED,
+  SET_INSTALL_PROMPT,
 } from './types'
 
-const initialState: AppState = {
+export const initialState: AppState = {
   onlineStatus: 'UNKNOWN',
   cacheStatus: 'UNKNOWN',
   installStatus: 'UNKNOWN',
+  installPrompt: undefined,
 }
 
-const appReducer = (
+export const appReducer = (
   state = initialState,
   action: AppActionsTypes,
 ): AppState => {
@@ -32,9 +34,12 @@ const appReducer = (
         ...state,
         installStatus: action.installStatus,
       }
+    case SET_INSTALL_PROMPT:
+      return {
+        ...state,
+        installPrompt: action.installPrompt,
+      }
     default:
       return state
   }
 }
-
-export default appReducer

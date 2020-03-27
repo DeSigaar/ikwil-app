@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
 import { fireAuth } from 'src/utils/firebase'
-import { RootState } from 'src/redux/store'
+import { store, RootState } from 'src/redux/store'
+import { AppActionsTypes } from 'src/redux/app/types'
+import { askForInstall } from 'src/redux/app/actions'
 
 import { Activity } from '../components'
 interface Props {
@@ -65,6 +67,14 @@ const Main: React.FC<Props> = (props: Props) => {
           </Link>
         )}
       </div>
+      <div>
+        <button
+          onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
+        >
+          Get the app!
+        </button>
+      </div>
+
       {!isLoaded(props.activities) ? (
         'Loading'
       ) : isEmpty(props.activities) ? (
@@ -74,8 +84,6 @@ const Main: React.FC<Props> = (props: Props) => {
           {props.activities.map(
             (activity: any): React.ReactNode => (
               <React.Fragment key={activity.id}>
-                {console.log(props)}
-
                 {!isLoaded(props.categories)
                   ? 'Loading'
                   : isEmpty(props.categories)
@@ -105,7 +113,7 @@ const Main: React.FC<Props> = (props: Props) => {
   )
 }
 
-const mapStateToProps = (state: RootState, ownProps: any) => {
+const mapStateToProps = (state: RootState, ownProps: any): any => {
   return {
     isLoggedIn: !state.firebase.auth.isEmpty,
     activities: state.firestore.ordered.activities,
@@ -113,7 +121,7 @@ const mapStateToProps = (state: RootState, ownProps: any) => {
   }
 }
 
-const mapDispatchToProps = (__dispatch: any, __ownProps: any) => {
+const mapDispatchToProps = (dispatch: any, __ownProps: any): any => {
   return {}
 }
 

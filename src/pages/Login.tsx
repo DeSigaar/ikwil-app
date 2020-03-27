@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router'
 import styled from 'styled-components'
 import { fireUI } from 'src/utils/firebase'
 import configFirebaseUI from 'src/config/firebaseUI'
-import { Header, BackButton } from 'src/components'
+import { Header } from 'src/components'
 
 const LoginContainer = styled.div``
 
@@ -18,7 +18,7 @@ const Login: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
     <>
       <Header title={'Inloggen'} />
 
-      <BackButton back={(): void => props.history.push('/')}></BackButton>
+      <button onClick={(): void => props.history.push('/')}>Terug</button>
 
       <LoginContainer>
         <div id="firebase-auth-container"></div>
