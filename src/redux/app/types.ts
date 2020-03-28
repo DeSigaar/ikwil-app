@@ -4,19 +4,15 @@ export const INSTALL_CHANGED = `@APP/INSTALL_CHANGED`
 export const SET_INSTALL_PROMPT = '@APP/SET_INSTALL_PROMPT'
 export const ASK_FOR_INSTALL = '@APP/ASK_FOR_INSTALL'
 
-export type ONLINE_STATUS = 'UNKNOWN' | 'ONLINE' | 'OFFLINE'
-export type CACHE_STATUS =
-  | 'UNKNOWN'
-  | 'DOWNLOADED'
-  | 'DOWNLOADING'
-  | 'SHOULD_DOWNLOAD'
-  | 'CACHED'
+export type ONLINE_STATUS = 'UNKNOWN' | 'OFFLINE' | 'ONLINE'
+export type CACHE_STATUS = 'UNKNOWN' | 'SHOULD_CACHE' | 'CACHING' | 'CACHED'
 export type INSTALL_STATUS =
   | 'UNKNOWN'
-  | 'INSTALLED'
+  | 'PROMPT_SET'
+  | 'PROMPT_NOT_SET'
   | 'PROMPTED'
   | 'NOT_INSTALLED'
-  | 'PROMPT_NOT_SET'
+  | 'INSTALLED'
 
 export interface AppState {
   onlineStatus: ONLINE_STATUS

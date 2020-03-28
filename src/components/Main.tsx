@@ -15,6 +15,7 @@ interface Props {
   activities: Activities[]
   categories: Categories[]
   isLoggedIn: boolean
+  isInstallPromptSet: boolean
 }
 
 interface Categories {
@@ -67,13 +68,15 @@ const Main: React.FC<Props> = (props: Props) => {
           </Link>
         )}
       </div>
-      <div>
-        <button
-          onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
-        >
-          Get the app!
-        </button>
-      </div>
+      {props.isInstallPromptSet && (
+        <div>
+          <button
+            onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
+          >
+            Get the app!
+          </button>
+        </div>
+      )}
 
       {!isLoaded(props.activities) ? (
         'Loading'
@@ -118,6 +121,7 @@ const mapStateToProps = (state: RootState, ownProps: any): any => {
     isLoggedIn: !state.firebase.auth.isEmpty,
     activities: state.firestore.ordered.activities,
     categories: state.firestore.ordered.categories,
+    isInstallPromptSet: !!state.app.installPrompt,
   }
 }
 

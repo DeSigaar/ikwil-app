@@ -27,7 +27,7 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
       registration.onupdatefound = (): void => {
         // Saving assets for offline caching
         if (config && config.updateCacheStatus)
-          config.updateCacheStatus('DOWNLOADING')
+          config.updateCacheStatus('CACHING')
 
         const installingWorker = registration.installing
         if (installingWorker == null) {
@@ -46,7 +46,7 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
               if (config && config.onUpdate) config.onUpdate(registration)
 
               if (config && config.updateCacheStatus)
-                config.updateCacheStatus('SHOULD_DOWNLOAD')
+                config.updateCacheStatus('SHOULD_CACHE')
             } else {
               // At this point, everything has been precached. It's the perfect time to display a "Content is cached for offline use." message.
               console.log(
@@ -58,7 +58,7 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
               if (config && config.onSuccess) config.onSuccess(registration)
 
               if (config && config.updateCacheStatus)
-                config.updateCacheStatus('DOWNLOADED')
+                config.updateCacheStatus('CACHED')
             }
           }
         }

@@ -37,6 +37,7 @@ export const appReducer = (
     case SET_INSTALL_PROMPT:
       return {
         ...state,
+        installStatus: 'PROMPT_SET',
         installPrompt: action.installPrompt,
       }
     default:

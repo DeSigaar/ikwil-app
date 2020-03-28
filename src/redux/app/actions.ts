@@ -52,8 +52,6 @@ export const askForInstall = (): AppActionsTypes => {
       installStatus: 'PROMPT_NOT_SET',
     }
 
-  changeInstall('PROMPTED')
-
   installPrompt.prompt()
   installPrompt.userChoice.then((choiceResult) => {
     if (choiceResult.outcome === 'accepted') {
@@ -71,6 +69,6 @@ export const askForInstall = (): AppActionsTypes => {
 
   return {
     type: INSTALL_CHANGED,
-    installStatus: 'UNKNOWN',
+    installStatus: 'PROMPTED',
   }
 }

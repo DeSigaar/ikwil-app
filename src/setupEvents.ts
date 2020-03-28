@@ -34,7 +34,7 @@ export const onlineStatus = (): void => {
     changeOnlineStatus(navigator.onLine ? 'ONLINE' : 'OFFLINE')
   }
 
-  // updateOnlineStatus()
+  updateOnlineStatus()
   window.addEventListener('online', updateOnlineStatus)
   window.addEventListener('offline', updateOnlineStatus)
 }

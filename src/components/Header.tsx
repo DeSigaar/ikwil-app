@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { Helmet } from 'react-helmet'
 import TopBarWave from 'src/assets/general/top_bar_wave.svg'
 import SettingsIcon from 'src/assets/general/icon_settings_white.svg'
 import { layout, colors } from 'src/styles'
@@ -24,7 +25,7 @@ const Container = styled.div<BackgroundProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${layout.unit * 1.5}px 5vw ${layout.unit * 2}px;
+  padding: ${layout.unit * 1.5}px ${layout.unit * 2}px ${layout.unit * 2}px;
 
   &::after {
     content: '';
@@ -50,6 +51,7 @@ const Title = styled.h1`
 const Header: React.FC<Props> = (props: Props) => {
   return (
     <Container background={TopBarWave}>
+      <Helmet title={props.title} />
       <Title>{props.title}</Title>
 
       <Icon icon={SettingsIcon}></Icon>

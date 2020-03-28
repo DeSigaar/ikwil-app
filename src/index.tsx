@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from 'react-router'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import { PersistGate } from 'redux-persist/integration/react'
+import { Helmet } from 'react-helmet'
 import { App, Login, PrivacyPolicy, TermsOfService, NotFound } from 'src/pages'
 import * as serviceWorker from 'src/serviceWorker'
 import * as setupEvents from 'src/setupEvents'
@@ -36,7 +37,6 @@ body {
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <GlobalStyle />
       <ConnectedRouter history={history}>
         <ReactReduxFirebaseProvider
           firebase={fireApp}
@@ -44,6 +44,14 @@ ReactDOM.render(
           dispatch={store.dispatch}
           createFirestoreInstance={createFirestoreInstance}
         >
+          <GlobalStyle />
+          <Helmet defaultTitle="Ik Wil App" titleTemplate="%s - Ik Wil App">
+            <meta
+              name="description"
+              content="Applicatie om de activiteiten van Stichting Ik Wil in te zien"
+            />
+          </Helmet>
+
           <Switch>
             {/* App */}
             <Route exact path="/" component={App} />
