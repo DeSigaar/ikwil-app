@@ -3,13 +3,13 @@ import renderer from 'react-test-renderer'
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from 'src/redux/store'
-import { App } from 'src/pages'
+import { Login } from 'src/pages'
 
-it('renders App page', () => {
+it('renders Login page', () => {
   const component = renderer.create(
     <Provider store={store}>
       <MemoryRouter>
-        <App />
+        <Login />
       </MemoryRouter>
     </Provider>,
   )

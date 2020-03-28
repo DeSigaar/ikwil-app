@@ -12,7 +12,6 @@ export const fireUI = new firebaseui.auth.AuthUI(fireAuth)
 switch (process.env.NODE_ENV) {
   case 'test':
     fireAuth.setPersistence(firebase.auth.Auth.Persistence.NONE)
-
     break
   default:
     fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
