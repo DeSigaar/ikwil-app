@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "connected-react-router": "^6.8.0",
-    "firebase": "^7.13.0",
+    "firebase": "^7.13.1",
     "firebaseui": "^4.5.0",
     "history": "^4.10.1",
     "react": "^16.13.1",
