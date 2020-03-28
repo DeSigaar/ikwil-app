@@ -1,9 +1,18 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import renderer from 'react-test-renderer'
 import { TermsOfService } from 'src/pages'
+import { MemoryRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from 'src/redux/store'
 
-test('renders TermsOfService', () => {
-  const { getByText } = render(<TermsOfService />)
-  const title = getByText(/Terms of Service/i)
-  expect(title).toBeInTheDocument()
+test('Should render App', () => {
+  const component = renderer.create(
+    <Provider store={store}>
+      <MemoryRouter>
+        <TermsOfService />
+      </MemoryRouter>
+    </Provider>,
+  )
+  const tree = component.toJSON()
+  expect(tree).toMatchSnapshot()
 })
