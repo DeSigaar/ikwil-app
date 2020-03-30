@@ -1,14 +1,10 @@
 import * as React from 'react'
 import 'firebaseui/dist/firebaseui.css'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
-import styled from 'styled-components'
 import { fireUI } from 'src/utils/firebase'
 import configFirebaseUI from 'src/config/firebaseUI'
 import { Header } from 'src/components'
 
-const LoginContainer = styled.div``
-
-const Login: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
+const Login: React.FC = () => {
   React.useEffect(() => {
     fireUI.start('#firebase-auth-container', configFirebaseUI)
   }, [])
@@ -17,12 +13,9 @@ const Login: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
     <>
       <Header title="Inloggen" />
 
-      <button onClick={(): void => props.history.push('/')}>Terug</button>
-      <LoginContainer>
-        <div id="firebase-auth-container"></div>
-      </LoginContainer>
+      <div id="firebase-auth-container"></div>
     </>
   )
 }
 
-export default withRouter(Login)
+export default Login

@@ -12,10 +12,6 @@ const PrivacyPolicy: React.FC = () => {
           <small>Version 1.0.0</small>
         </div>
 
-        <Link to="/">
-          <button>Naar home</button>
-        </Link>
-
         <p>
           At Ik Wil App, accessible from{' '}
           <Link to="https://ikwil-app.web.app/">
