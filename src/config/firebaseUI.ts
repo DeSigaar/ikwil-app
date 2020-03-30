@@ -1,8 +1,5 @@
 import * as firebase from 'firebase/app'
-import * as firebaseui from 'firebaseui'
-
 export default {
-  credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM,
   signInSuccessUrl: '/',
   signInFlow: 'redirect',
   signInOptions: [

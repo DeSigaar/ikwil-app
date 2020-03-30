@@ -32,7 +32,7 @@
     "prettier:fix": "prettier --check --write **/*.*",
     "serve": "serve build",
     "start": "react-scripts start",
-    "test": "react-scripts test --testPathIgnorePatterns=__tests__/__utils__"
+    "test": "react-scripts test --testPathIgnorePatterns=__tests__/__utils__ --transformIgnorePatterns \"node_modules/(?!redux-persist)/\""
   },
   "husky": {
     "hooks": {
