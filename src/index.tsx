@@ -7,14 +7,21 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Helmet } from 'react-helmet'
-import { App, Login, PrivacyPolicy, TermsOfService, NotFound } from 'src/pages'
+import styled, { createGlobalStyle } from 'styled-components'
+import {
+  App,
+  Login,
+  Settings,
+  PrivacyPolicy,
+  TermsOfService,
+  NotFound,
+} from 'src/pages'
 import * as serviceWorker from 'src/serviceWorker'
 import * as setupEvents from 'src/setupEvents'
 import history from 'src/utils/history'
 import { store, persistor } from 'src/redux/store'
 import { fireApp } from 'src/utils/firebase'
 import configReactReduxFirebase from 'src/config/reactReduxFirebase'
-import { createGlobalStyle } from 'styled-components'
 import { colors, fonts, layout } from 'src/styles'
 
 const GlobalStyle = createGlobalStyle`
@@ -29,14 +36,59 @@ const GlobalStyle = createGlobalStyle`
 body {
   background-color: ${colors.colors.white};
   margin: ${layout.init.margin};
-  padding-top: ${layout.init.padding};
+  padding: ${layout.init.padding};
   font-family: ${fonts.font.fontFamily};
 }
 `
 
+const StyledLoading = styled.div`
+  display: block;
+  box-sizing: border-box;
+  height: 4px;
+  border-radius: 4px;
+  position: relative;
+  transform: scale(var(--ggs, 1));
+  width: 18px;
+
+  &::before,
+  &::after {
+    display: block;
+    box-sizing: border-box;
+    height: 4px;
+    border-radius: 4px;
+    background: ${colors.colors.black};
+    content: '';
+    position: absolute;
+  }
+  &::before {
+    animation: loadbar 2s cubic-bezier(0, 0, 0.58, 1) infinite;
+  }
+  &::after {
+    width: 18px;
+    opacity: 0.3;
+  }
+
+  @keyframes loadbar {
+    0%,
+    to {
+      left: 0;
+      right: 80%;
+    }
+    25%,
+    75% {
+      left: 0;
+      right: 0;
+    }
+    50% {
+      left: 80%;
+      right: 0;
+    }
+  }
+`
+
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    <PersistGate loading={<StyledLoading />} persistor={persistor}>
       <ConnectedRouter history={history}>
         <ReactReduxFirebaseProvider
           firebase={fireApp}
@@ -62,6 +114,10 @@ ReactDOM.render(
             <Redirect from="/inloggen" to="/login" />
             <Redirect from="/register" to="/login" />
             <Redirect from="/registreren" to="/login" />
+
+            {/* Settings */}
+            <Route exact path="/instellingen" component={Settings} />
+            <Redirect from="/settings" to="/instellingen" />
 
             {/* Privacy Policy */}
             <Route exact path="/privacy-policy" component={PrivacyPolicy} />

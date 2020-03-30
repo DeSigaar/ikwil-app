@@ -51,9 +51,15 @@ export const addBeforeInstallPrompt = (): void => {
   )
 }
 
+export const checkIfInstalled = (): void => {
+  if (window.matchMedia('(display-mode: standalone)').matches)
+    changeInstallStatus('INSTALLED')
+}
+
 export const init = (): void => {
   window.addEventListener('load', () => {
     onlineStatus()
     addBeforeInstallPrompt()
+    checkIfInstalled()
   })
 }
