@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html>
   <head>
     <!-- General -->
     <meta charset="utf-8" />
@@ -34,6 +34,7 @@
       href="%PUBLIC_URL%/icons/safari-pinned-tab.svg"
       color="#f38c00"
     />
+
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="apple-mobile-web-app-title" content="Ik Wil App" />
     <meta name="application-name" content="Ik Wil App" />
@@ -44,21 +45,17 @@
     />
     <meta
       name="msapplication-config"
-      content="%PUBLIC_URL%/icons/browserconfig.xml"
+      content="%PUBLIC_URL%/browserconfig.xml"
     />
     <meta name="theme-color" content="#f38c00" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link type="text/plain" rel="author" href="%PUBLIC_URL%/humans.txt" />
 
     <title>Ik Wil App</title>
-    <meta
-      name="description"
-      content="Applicatie om de activiteiten van Stichting Ik Wil in te zien"
-    />
-    <link type="text/plain" rel="author" href="%PUBLIC_URL%/humans.txt" />
   </head>
   <body>
     <noscript>Je hebt JavaScript nodig om deze applicatie te openen.</noscript>
     <div id="root" role="application"></div>
-    <div id="portal-root"></div>
+    <div id="portal-root" role="presentation"></div>
   </body>
 </html>

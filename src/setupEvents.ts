@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import store from 'src/redux/store'
+import { store } from 'src/redux/store'
 import {
   changeOnline,
   changeCache,
@@ -48,18 +47,6 @@ export const addBeforeInstallPrompt = (): void => {
       e.preventDefault()
       // Stash the event so it can be triggered later.
       setInstallPromptEvent(e)
-      // Update UI notify the user they can install the PWA
-      e.prompt()
-      changeInstallStatus('PROMPTED')
-      e.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          changeInstallStatus('INSTALLED')
-          console.log('User accepted the install prompt')
-        } else {
-          changeInstallStatus('NOT_INSTALLED')
-          console.log('User dismissed the install prompt')
-        }
-      })
     },
   )
 }

@@ -113,10 +113,10 @@ interface Props {
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
 
-  {
-    console.log(props)
-    console.log(toggle)
-  }
+  // {
+  //   console.log(props)
+  //   console.log(toggle)
+  // }
   return (
     <ActivityContainer>
       <ActivityItem toggle={toggle} color={props.categoryColor}>
@@ -128,7 +128,7 @@ const Activity: React.FC<Props> = (props: Props) => {
           </LogoAndTitle>
 
           <Toggle toggle={toggle} onClick={(): void => setToggle(!toggle)}>
-            <img width="20px" height="20px" src={ChevronGrey} />
+            <img width="20px" height="20px" src={ChevronGrey} alt="" />
           </Toggle>
         </ActivityBar>
 

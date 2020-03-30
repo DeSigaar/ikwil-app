@@ -8,6 +8,7 @@ import {
   SET_INSTALL_PROMPT,
   AppActionsTypes,
 } from './types'
+import { store } from 'src/redux/store'
 
 export const changeOnline = (onlineStatus: ONLINE_STATUS): AppActionsTypes => {
   return {
@@ -38,5 +39,36 @@ export const setInstallPrompt = (
   return {
     type: SET_INSTALL_PROMPT,
     installPrompt,
+  }
+}
+
+export const askForInstall = (): AppActionsTypes => {
+  const installPrompt: BeforeInstallPromptEvent = store.getState().app
+    .installPrompt
+
+  if (!installPrompt)
+    return {
+      type: INSTALL_CHANGED,
+      installStatus: 'PROMPT_NOT_SET',
+    }
+
+  installPrompt.prompt()
+  installPrompt.userChoice.then((choiceResult) => {
+    if (choiceResult.outcome === 'accepted') {
+      return {
+        type: INSTALL_CHANGED,
+        installStatus: 'INSTALLED',
+      }
+    } else {
+      return {
+        type: INSTALL_CHANGED,
+        installStatus: 'NOT_INSTALLED',
+      }
+    }
+  })
+
+  return {
+    type: INSTALL_CHANGED,
+    installStatus: 'PROMPTED',
   }
 }
