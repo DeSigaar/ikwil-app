@@ -2,12 +2,14 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { colors, layout } from 'src/styles'
 import { FilterItem } from 'src/components'
-import BewegingIcon from 'src/assets/activity_type/activity_type_beweging.svg'
-import CreatiefIcon from 'src/assets/activity_type/activity_type_creatief.svg'
-import KinderenIcon from 'src/assets/activity_type/activity_type_kinderen.svg'
-import SociaalIcon from 'src/assets/activity_type/activity_type_sociaal.svg'
-import SpiritueelIcon from 'src/assets/activity_type/activity_type_spiritueel.svg'
-import TaalIcon from 'src/assets/activity_type/activity_type_taal.svg'
+import {
+  BewegingIcon,
+  CreatiefIcon,
+  KinderenIcon,
+  SociaalIcon,
+  SpiritueelIcon,
+  TaalIcon,
+} from 'src/assets/activity_type'
 
 const StyledHorizontalRule = styled.hr`
   background-color: #d3d3d3;
