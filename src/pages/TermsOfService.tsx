@@ -12,10 +12,6 @@ const TermsOfService: React.FC = () => {
           <small>Version 1.0.0</small>
         </div>
 
-        <Link to="/">
-          <button>Naar home</button>
-        </Link>
-
         <p>
           The Ik Wil App website located at{' '}
           <Link to=";https://ikwil-app.web.app/">

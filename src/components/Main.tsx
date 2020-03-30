@@ -2,14 +2,11 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
-import { fireAuth } from 'src/utils/firebase'
-import { store, RootState } from 'src/redux/store'
-import { AppActionsTypes } from 'src/redux/app/types'
-import { askForInstall } from 'src/redux/app/actions'
+import { RootState } from 'src/redux/store'
+import { colors } from 'src/styles'
+import { Activity } from 'src/components'
 
-import { Activity } from '../components'
 interface Props {
   firestore: any
   activities: Activities[]
@@ -47,6 +44,51 @@ interface Days {
 
 const MainContainer = styled.div``
 
+const StyledLoading = styled.div`
+  display: block;
+  box-sizing: border-box;
+  height: 4px;
+  border-radius: 4px;
+  position: relative;
+  transform: scale(var(--ggs, 1));
+  width: 18px;
+
+  &::before,
+  &::after {
+    display: block;
+    box-sizing: border-box;
+    height: 4px;
+    border-radius: 4px;
+    background: ${colors.colors.black};
+    content: '';
+    position: absolute;
+  }
+  &::before {
+    animation: loadbar 2s cubic-bezier(0, 0, 0.58, 1) infinite;
+  }
+  &::after {
+    width: 18px;
+    opacity: 0.3;
+  }
+
+  @keyframes loadbar {
+    0%,
+    to {
+      left: 0;
+      right: 80%;
+    }
+    25%,
+    75% {
+      left: 0;
+      right: 0;
+    }
+    50% {
+      left: 80%;
+      right: 0;
+    }
+  }
+`
+
 const Main: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
     props.firestore.get('activities')
@@ -59,27 +101,8 @@ const Main: React.FC<Props> = (props: Props) => {
 
   return (
     <MainContainer>
-      <div>
-        {props.isLoggedIn ? (
-          <button onClick={(): unknown => fireAuth.signOut()}>uitloggen</button>
-        ) : (
-          <Link to="/login">
-            <button>inloggen</button>
-          </Link>
-        )}
-      </div>
-      {props.isInstallPromptSet && (
-        <div>
-          <button
-            onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
-          >
-            Get the app!
-          </button>
-        </div>
-      )}
-
       {!isLoaded(props.activities) ? (
-        'Loading'
+        <StyledLoading />
       ) : isEmpty(props.activities) ? (
         'Activity list is empty'
       ) : (
@@ -87,26 +110,28 @@ const Main: React.FC<Props> = (props: Props) => {
           {props.activities.map(
             (activity: any): React.ReactNode => (
               <React.Fragment key={activity.id}>
-                {!isLoaded(props.categories)
-                  ? 'Loading'
-                  : isEmpty(props.categories)
-                  ? 'Categories are empty'
-                  : props.categories.map((category) => (
-                      <React.Fragment key={category.id}>
-                        {category.id ===
-                          getSecondPart(activity.category, '/') && (
-                          <Activity
-                            name={activity.name}
-                            categoryName={category.name}
-                            categoryColor={category.color}
-                            repeats={activity.repeats}
-                            room={activity.room}
-                            organisers={activity.organisers}
-                            days={activity.days}
-                          ></Activity>
-                        )}
-                      </React.Fragment>
-                    ))}
+                {!isLoaded(props.categories) ? (
+                  <StyledLoading />
+                ) : isEmpty(props.categories) ? (
+                  'Categories are empty'
+                ) : (
+                  props.categories.map((category) => (
+                    <React.Fragment key={category.id}>
+                      {category.id ===
+                        getSecondPart(activity.category, '/') && (
+                        <Activity
+                          name={activity.name}
+                          categoryName={category.name}
+                          categoryColor={category.color}
+                          repeats={activity.repeats}
+                          room={activity.room}
+                          organisers={activity.organisers}
+                          days={activity.days}
+                        ></Activity>
+                      )}
+                    </React.Fragment>
+                  ))
+                )}
               </React.Fragment>
             ),
           )}

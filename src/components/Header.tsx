@@ -1,14 +1,33 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 import TopBarWave from 'src/assets/general/top_bar_wave.svg'
-import SettingsIcon from 'src/assets/general/icon_settings_white.svg'
 import { layout, colors } from 'src/styles'
-import { Icon } from 'src/components'
+import { RootState, store } from 'src/redux/store'
+import {
+  IconContainer,
+  LogIn as LogInIcon,
+  LogOut as LogOutIcon,
+  SoftwareDownload as SoftwareDownloadIcon,
+  Options as OptionsIcon,
+  ArrowLeft as ArrowLeftIcon,
+} from 'src/icons'
+import { fireAuth } from 'src/utils/firebase'
+import { AppActionsTypes, askForInstall } from 'src/redux/app'
 
-interface Props {
+interface OwnProps {
   title: string
 }
+
+interface StateProps {
+  isHome?: boolean
+  isLoggedIn?: boolean
+  isInstallPromptSet?: boolean
+}
+
+type Props = StateProps & OwnProps & RouteComponentProps
 
 interface BackgroundProps {
   readonly background: string
@@ -20,7 +39,7 @@ const Container = styled.div<BackgroundProps>`
   left: 0;
   right: 0;
   height: ${layout.sizes.headerHeight + 1}px;
-  background: ${colors.colors.ikWilOrange};
+  background: ${colors.colors.orange};
   z-index: 10;
   display: flex;
   justify-content: space-between;
@@ -43,20 +62,238 @@ const Container = styled.div<BackgroundProps>`
   }
 `
 
+const StyledLeft = styled.div`
+  display: flex;
+  align-items: center;
+
+  color: ${colors.colors.white};
+  transition: all 0.2s ease-in-out;
+
+  > * {
+    margin-left: 10px;
+  }
+  > *:first-child {
+    margin-left: 0;
+  }
+
+  > div {
+    margin-left: 0;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: ${colors.colors.hoverWhite};
+    }
+  }
+`
+
 const Title = styled.h1`
   font-size: 28px;
   color: ${colors.colors.white};
 `
 
-const Header: React.FC<Props> = (props: Props) => {
-  return (
-    <Container background={TopBarWave}>
-      <Helmet title={props.title} />
-      <Title>{props.title}</Title>
+const StyledIconContainer = styled.div`
+  width: 26px;
+  height: 26px;
+  padding: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: ${colors.colors.white};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-      <Icon icon={SettingsIcon}></Icon>
-    </Container>
+  &:hover,
+  &:active {
+    color: ${colors.colors.hoverWhite};
+  }
+`
+
+const StyledMoreIcon = styled.div`
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 100%;
+  transform: scale(1.2);
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: currentColor;
+    border-radius: 100%;
+  }
+  &::after {
+    left: 0;
+    top: 6px;
+  }
+  &::before {
+    top: -6px;
+    right: 0;
+  }
+  &:hover,
+  &:active {
+    color: ${colors.colors.hoverWhite};
+  }
+`
+
+interface DropdownProps {
+  open: boolean
+}
+
+const StyledDropdown = styled.div<DropdownProps>`
+  cursor: auto;
+  position: fixed;
+  right: 15px;
+  top: 55px;
+  background: ${colors.colors.white};
+  color: ${colors.colors.black};
+  opacity: ${(props): number => (props.open ? 1 : 0)};
+  pointer-events: ${(props): string => (props.open ? 'all' : 'none')};
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+  box-shadow: ${colors.shadows.default};
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: 22px;
+    width: 12px;
+    height: 12px;
+    background: ${colors.colors.white};
+    box-shadow: ${colors.shadows.default};
+    transform: rotate(45deg);
+  }
+`
+
+const StyledDropdownItem = styled.div`
+  --ggs: 0.9;
+
+  cursor: pointer;
+  position: relative;
+  font-size: 14px;
+  color: ${colors.colors.black};
+  padding: ${layout.unit * 0.65}px ${layout.unit}px;
+  background: ${colors.colors.white};
+  transition: all 0.2s ease-in-out;
+  min-width: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover,
+  &:active {
+    background: ${colors.colors.hoverWhite};
+  }
+
+  &:first-of-type {
+    border-top-left-radius: ${layout.borderRadius}px;
+    border-top-right-radius: ${layout.borderRadius}px;
+  }
+  &:last-of-type {
+    border-bottom-right-radius: ${layout.borderRadius}px;
+    border-bottom-left-radius: ${layout.borderRadius}px;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5px;
+    width: 85%;
+    margin: 0 7.5%;
+    border-bottom: 1px solid ${colors.colors.black};
+    opacity: 0.2;
+    z-index: 1;
+  }
+  &:last-of-type:after {
+    border-bottom: none;
+  }
+
+  > div {
+    margin-left: 25px;
+    color: ${colors.colors.black};
+    opacity: 0.75;
+  }
+`
+
+const Header: React.FC<Props> = (props: Props) => {
+  const [open, setOpen] = React.useState(false)
+
+  return (
+    <>
+      <Helmet title={props.title} />
+      <Container background={TopBarWave}>
+        <StyledLeft>
+          {!props.isHome && (
+            <IconContainer onClick={(): void => props.history.push('/')}>
+              <ArrowLeftIcon />
+            </IconContainer>
+          )}
+          <Title>{props.title}</Title>
+        </StyledLeft>
+
+        <StyledIconContainer onClick={(): void => setOpen(!open)}>
+          <StyledMoreIcon />
+
+          <StyledDropdown open={open}>
+            {props.isInstallPromptSet && (
+              <StyledDropdownItem
+                onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
+              >
+                Installeer de app
+                <IconContainer>
+                  <SoftwareDownloadIcon />
+                </IconContainer>
+              </StyledDropdownItem>
+            )}
+            <StyledDropdownItem
+              onClick={(): void => props.history.push('/instellingen')}
+            >
+              Instellingen
+              <IconContainer>
+                <OptionsIcon />
+              </IconContainer>
+            </StyledDropdownItem>
+            <StyledDropdownItem
+              onClick={(): void => {
+                props.isLoggedIn
+                  ? fireAuth.signOut()
+                  : props.history.push('/login')
+              }}
+            >
+              {props.isLoggedIn ? 'Uitloggen' : 'Inloggen'}
+              {props.isLoggedIn ? (
+                <IconContainer>
+                  <LogOutIcon />
+                </IconContainer>
+              ) : (
+                <IconContainer>
+                  <LogInIcon />
+                </IconContainer>
+              )}
+            </StyledDropdownItem>
+          </StyledDropdown>
+        </StyledIconContainer>
+      </Container>
+    </>
   )
 }
 
-export default Header
+const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
+  return {
+    ...ownProps,
+    isHome: state.router.location.pathname === '/',
+    isLoggedIn: !state.firebase.auth.isEmpty,
+    isInstallPromptSet: !!state.app.installPrompt,
+  }
+}
+
+export default withRouter(connect(mapStateToProps, null)(Header))
