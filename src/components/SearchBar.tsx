@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Modal } from 'src/components'
+import { Modal, Filter } from 'src/components'
 import SearchIcon from 'src/assets/general/icon_search_grey.svg'
 import FilterIcon from 'src/assets/general/icon_filter_grey.svg'
 
@@ -52,12 +52,7 @@ const SearchBar: React.FC = () => {
       />
       {modalShowing ? (
         <Modal title={'Filters'} closeModal={setModalShowing}>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-            vero quas ducimus, facilis deleniti odit officia voluptas excepturi,
-            debitis, sint id ab. Debitis praesentium saepe officia cum incidunt
-            quo adipisci?
-          </p>
+          <Filter />
         </Modal>
       ) : (
         <></>

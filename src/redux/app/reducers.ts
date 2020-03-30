@@ -1,33 +1,46 @@
 import {
   AppState,
   AppActionsTypes,
-  CHANGE_ONLINE,
-  CHANGE_DOWNLOAD,
+  ONLINE_CHANGED,
+  CACHE_CHANGED,
+  INSTALL_CHANGED,
+  SET_INSTALL_PROMPT,
 } from './types'
 
-const initialState: AppState = {
+export const initialState: AppState = {
   onlineStatus: 'UNKNOWN',
-  downloadStatus: 'UNKNOWN',
+  cacheStatus: 'UNKNOWN',
+  installStatus: 'UNKNOWN',
+  installPrompt: undefined,
 }
 
-const appReducer = (
+export const appReducer = (
   state = initialState,
   action: AppActionsTypes,
 ): AppState => {
   switch (action.type) {
-    case CHANGE_ONLINE:
+    case ONLINE_CHANGED:
       return {
         ...state,
         onlineStatus: action.onlineStatus,
       }
-    case CHANGE_DOWNLOAD:
+    case CACHE_CHANGED:
       return {
         ...state,
-        downloadStatus: action.downloadStatus,
+        cacheStatus: action.cacheStatus,
+      }
+    case INSTALL_CHANGED:
+      return {
+        ...state,
+        installStatus: action.installStatus,
+      }
+    case SET_INSTALL_PROMPT:
+      return {
+        ...state,
+        installStatus: 'PROMPT_SET',
+        installPrompt: action.installPrompt,
       }
     default:
       return state
   }
 }
-
-export default appReducer

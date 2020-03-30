@@ -1,19 +1,64 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
 import { fireAuth } from 'src/utils/firebase'
-import { RootState } from 'src/redux/store'
+import { store, RootState } from 'src/redux/store'
+import { AppActionsTypes } from 'src/redux/app/types'
+import { askForInstall } from 'src/redux/app/actions'
 
+import { Activity } from '../components'
 interface Props {
+  firestore: any
+  activities: Activities[]
+  categories: Categories[]
   isLoggedIn: boolean
+  isInstallPromptSet: boolean
 }
 
-const ContentContainer = styled.div``
+interface Categories {
+  id: string
+  __deleted: boolean
+  bio: string
+  color: string
+  icon: string
+  name: string
+}
+export interface Activities {
+  id: string
+  category: string
+  name: string
+  organisers: string[]
+  repeats: boolean
+  room: string
+  days: Days[]
+}
 
-const Content: React.FC<Props> = (props: Props) => {
+interface Days {
+  name: string
+  days: Array<{
+    endTime: string
+    name: string
+    startTime: string
+  }>
+}
+
+const MainContainer = styled.div``
+
+const Main: React.FC<Props> = (props: Props) => {
+  React.useEffect(() => {
+    props.firestore.get('activities')
+    props.firestore.get('categories')
+  }, [])
+
+  const getSecondPart = (str: string, divider: string): string => {
+    return str.split(divider)[1]
+  }
+
   return (
-    <ContentContainer>
+    <MainContainer>
       <div>
         {props.isLoggedIn ? (
           <button onClick={(): unknown => fireAuth.signOut()}>uitloggen</button>
@@ -23,23 +68,68 @@ const Content: React.FC<Props> = (props: Props) => {
           </Link>
         )}
       </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam at dolor
-        voluptates odio mollitia, aliquam totam consequatur sunt autem eaque,
-        minima, quis cupiditate tempore quas facilis. Quisquam alias adipisci
-        est.
-      </p>
-    </ContentContainer>
+      {props.isInstallPromptSet && (
+        <div>
+          <button
+            onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
+          >
+            Get the app!
+          </button>
+        </div>
+      )}
+
+      {!isLoaded(props.activities) ? (
+        'Loading'
+      ) : isEmpty(props.activities) ? (
+        'Activity list is empty'
+      ) : (
+        <div>
+          {props.activities.map(
+            (activity: any): React.ReactNode => (
+              <React.Fragment key={activity.id}>
+                {!isLoaded(props.categories)
+                  ? 'Loading'
+                  : isEmpty(props.categories)
+                  ? 'Categories are empty'
+                  : props.categories.map((category) => (
+                      <React.Fragment key={category.id}>
+                        {category.id ===
+                          getSecondPart(activity.category, '/') && (
+                          <Activity
+                            name={activity.name}
+                            categoryName={category.name}
+                            categoryColor={category.color}
+                            repeats={activity.repeats}
+                            room={activity.room}
+                            organisers={activity.organisers}
+                            days={activity.days}
+                          ></Activity>
+                        )}
+                      </React.Fragment>
+                    ))}
+              </React.Fragment>
+            ),
+          )}
+        </div>
+      )}
+    </MainContainer>
   )
 }
-const mapStateToProps = (state: RootState, __ownProps: any): Props => {
+
+const mapStateToProps = (state: RootState, ownProps: any): any => {
   return {
     isLoggedIn: !state.firebase.auth.isEmpty,
+    activities: state.firestore.ordered.activities,
+    categories: state.firestore.ordered.categories,
+    isInstallPromptSet: !!state.app.installPrompt,
   }
 }
 
-const mapDispatchToProps = (__dispatch: any, __ownProps: any) => {
+const mapDispatchToProps = (dispatch: any, __ownProps: any): any => {
   return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Content)
+export default compose(
+  withFirestore,
+  connect(mapStateToProps, mapDispatchToProps),
+)(Main) as React.ComponentType
