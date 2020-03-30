@@ -9,6 +9,15 @@ export const fireAuth = fireApp.auth()
 export const fireStore = fireApp.firestore()
 export const fireUI = new firebaseui.auth.AuthUI(fireAuth)
 
-fireStore.enablePersistence({
-  synchronizeTabs: true,
-})
+switch (process.env.NODE_ENV) {
+  case 'test':
+    fireAuth.setPersistence(firebase.auth.Auth.Persistence.NONE)
+    break
+  default:
+    fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+
+    fireStore.enablePersistence({
+      synchronizeTabs: true,
+    })
+    break
+}
