@@ -18,7 +18,6 @@ const Login: React.FC<RouteComponentProps> = (props: RouteComponentProps) => {
       <Header title="Inloggen" />
 
       <button onClick={(): void => props.history.push('/')}>Terug</button>
-
       <LoginContainer>
         <div id="firebase-auth-container"></div>
       </LoginContainer>

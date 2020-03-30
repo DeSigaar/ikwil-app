@@ -1,0 +1,113 @@
+{
+  "name": "@de-sigaar/ikwil-app",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Applicatie om de activiteiten van Stichting Ik Wil in te zien.",
+  "keywords": [
+    "de-sigaar",
+    "desigaar",
+    "sigaar",
+    "ikwil",
+    "app",
+    "ikwil-app"
+  ],
+  "homepage": "./",
+  "bugs": "https://github.com/de-sigaar/ikwil-app/issues",
+  "repository": "github:de-sigaar/ikwil-app",
+  "license": "UNLICENSED",
+  "author": "De Sigaar <info@desigaar.com>",
+  "contributors": [
+    "Max <max@maxaltena.com>"
+  ],
+  "scripts": {
+    "build": "react-scripts build && npm run build-sw",
+    "build-sw": "node ./src/sw-build.js",
+    "build:serve": "npm run build && npm run serve",
+    "eject": "react-scripts eject",
+    "eslint": "eslint */**/*.{js,jsx,ts,tsx}",
+    "eslint:fix": "eslint --fix */**/*.{js,jsx,ts,tsx}",
+    "lint": "npm run prettier && npm run eslint && tsc --noEmit",
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix && tsc --noEmit",
+    "prettier": "prettier --check **/*.*",
+    "prettier:fix": "prettier --check --write **/*.*",
+    "serve": "serve build",
+    "start": "react-scripts start",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*": "npm run prettier:fix",
+    "*.{js,jsx,ts,tsx}": "npm run eslint:fix"
+  },
+  "browserslist": {
+    "production": [
+      "last 1 version",
+      "> 1%",
+      "maintained node versions",
+      "not dead"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "connected-react-router": "^6.8.0",
+    "firebase": "^7.13.1",
+    "firebaseui": "^4.5.0",
+    "history": "^4.10.1",
+    "localforage": "^1.7.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^5.2.1",
+    "react-redux": "^7.2.0",
+    "react-redux-firebase": "^3.3.0",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-firestore": "^0.13.0",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.0.1",
+    "ts-jest": "^25.2.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.3.0",
+    "@testing-library/react": "^10.0.1",
+    "@testing-library/user-event": "^10.0.1",
+    "@types/history": "^4.7.5",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.5",
+    "@types/react": "^16.9.27",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-helmet": "^5.0.15",
+    "@types/react-redux": "^7.1.7",
+    "@types/react-router": "^5.1.4",
+    "@types/react-router-dom": "^5.1.3",
+    "@types/styled-components": "^5.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.10",
+    "prettier": "^2.0.2",
+    "serve": "^11.3.0",
+    "typescript": "^3.8.3",
+    "workbox-build": "^5.1.2"
+  },
+  "engines": {
+    "node": ">= 8.17.0",
+    "npm": ">= 6.12.1",
+    "yarn": ">= 1.19.1"
+  }
+}
