@@ -44,7 +44,7 @@ const Container = styled.div<BackgroundProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${layout.unit * 1.5}px ${layout.unit * 2}px ${layout.unit * 2}px;
+  padding: ${layout.unit * 1.5}px ${layout.unit}px ${layout.unit * 2}px;
 
   &::after {
     content: '';

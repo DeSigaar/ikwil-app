@@ -36,7 +36,8 @@ const StyledModal = styled.div`
   background-color: ${colors.colors.white};
   z-index: ${layout.modalZindex};
   display: table;
-  width: 80%;
+  width: 90%;
+  max-width: 400px;
   transform: translateY(-50%);
 `
 
