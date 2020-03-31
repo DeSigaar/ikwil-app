@@ -16,6 +16,7 @@ import {
 import { fireAuth } from 'src/utils/firebase'
 import { AppActionsTypes, askForInstall } from 'src/redux/app'
 import { Backbutton } from 'src/components'
+import { Dropdown } from 'src/components/header'
 
 interface OwnProps {
   title: string
@@ -143,36 +144,6 @@ const StyledMoreIcon = styled.div`
   }
 `
 
-interface DropdownProps {
-  open: boolean
-}
-
-const StyledDropdown = styled.div<DropdownProps>`
-  cursor: auto;
-  position: fixed;
-  right: 15px;
-  top: 55px;
-  background: ${colors.colors.white};
-  color: ${colors.colors.black};
-  opacity: ${(props): number => (props.open ? 1 : 0)};
-  pointer-events: ${(props): string => (props.open ? 'all' : 'none')};
-  transition: all 0.2s ease-in-out;
-  border-radius: 5px;
-  box-shadow: ${colors.shadows.default};
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    right: 22px;
-    width: 12px;
-    height: 12px;
-    background: ${colors.colors.white};
-    box-shadow: ${colors.shadows.default};
-    transform: rotate(45deg);
-  }
-`
-
 const StyledDropdownItem = styled.div`
   --ggs: 0.9;
 
@@ -238,7 +209,7 @@ const Header: React.FC<Props> = (props: Props) => {
         <StyledIconContainer onClick={(): void => setOpen(!open)}>
           <StyledMoreIcon />
 
-          <StyledDropdown open={open}>
+          <Dropdown closeDropdown={setOpen} open={open}>
             {props.isInstallPromptSet && (
               <StyledDropdownItem
                 onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
@@ -275,7 +246,7 @@ const Header: React.FC<Props> = (props: Props) => {
                 </IconContainer>
               )}
             </StyledDropdownItem>
-          </StyledDropdown>
+          </Dropdown>
         </StyledIconContainer>
       </Container>
       {!props.isHome && <Backbutton />}

@@ -1,6 +1,6 @@
 {
   "name": "@de-sigaar/ikwil-app",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Applicatie om de activiteiten van Stichting Ik Wil in te zien.",
   "keywords": [
@@ -70,6 +70,7 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-toastify": "^5.5.0",
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
     "redux-persist": "^6.0.0",

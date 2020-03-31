@@ -1,5 +1,6 @@
 export const unit = 15
 export const borderRadius = 6
+export const borderRadiusBig = 18
 export const headerHeight = 75
 export const modalZindex = 1000
 export const screenSizeSmall = 320
