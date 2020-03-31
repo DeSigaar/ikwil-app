@@ -12,7 +12,7 @@ export const ToastStyle = createGlobalStyle`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: ${colors.shadows.default};
+  box-shadow: ${colors.shadows.md};
   color: ${colors.colors.black};
 }
 

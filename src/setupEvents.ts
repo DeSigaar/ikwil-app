@@ -35,7 +35,7 @@ export const setInstallPromptEvent = (
 export const onlineStatus = (): void => {
   const updateOnlineStatus = (toast?: boolean): void => {
     const status = navigator.onLine ? 'ONLINE' : 'OFFLINE'
-    changeOnlineStatus(status, toast || true)
+    changeOnlineStatus(status, toast)
   }
 
   updateOnlineStatus(false)
