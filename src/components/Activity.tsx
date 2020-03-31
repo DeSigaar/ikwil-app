@@ -107,9 +107,11 @@ const Detail = styled.li`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  margin: 3px 0;
 
   span {
     margin-left: 10px;
+    max-width: 50%;
   }
 `
 const DetailIcon = styled.img<DetailStyleProps>`
@@ -125,6 +127,7 @@ const Line = styled.hr`
   border-width: 1px;
   opacity: 0.6;
   width: 90%;
+  border-style: solid;
 `
 const Meedoen = styled.div`
   display: flex;
