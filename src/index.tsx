@@ -28,7 +28,7 @@ import {
   reactToastify as configReactToastify,
 } from 'src/config'
 import { colors, fonts, layout } from 'src/styles'
-import { CloseButton } from 'src/components/toast'
+import { CloseButton, ToastStyle } from 'src/components/toast'
 
 const GlobalStyle = createGlobalStyle`
 *,
@@ -44,14 +44,6 @@ body {
   margin: ${layout.init.margin};
   padding: ${layout.init.padding};
   font-family: ${fonts.font.fontFamily};
-}
-
-.toast {
-  border-radius: ${layout.borderRadius}px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: ${colors.shadows.default};
 }
 `
 
@@ -117,6 +109,7 @@ ReactDOM.render(
               content="Applicatie om de activiteiten van Stichting Ik Wil in te zien"
             />
           </Helmet>
+          <ToastStyle />
           <ToastContainer
             {...configReactToastify}
             closeButton={<CloseButton />}

@@ -3,8 +3,7 @@ import { colors } from 'src/styles'
 
 export default {
   position: toast.POSITION.BOTTOM_RIGHT, // <toast.POSITION.BOTTOM_RIGHT|toast.POSITION.BOTTOM_CENTER|toast.POSITION.BOTTOM_LEFT|toast.POSITION.TOP_LEFT|toast.POSITION.TOP_CENTER|toast.POSITION.TOP_RIGHT>
-  // autoClose: 5000, // <false|number>
-  autoClose: 0, // <false|number>
+  autoClose: 5000, // <false|number>
   // closeButton: false, // <React.ReactNode|false>
   transition: Bounce, // <Function>
   hideProgressBar: false, // <boolean>

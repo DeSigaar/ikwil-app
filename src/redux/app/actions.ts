@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import {
   ONLINE_STATUS,
   CACHE_STATUS,
@@ -10,7 +11,33 @@ import {
 } from './types'
 import { store } from 'src/redux/store'
 
-export const changeOnline = (onlineStatus: ONLINE_STATUS): AppActionsTypes => {
+export const changeOnline = (
+  onlineStatus: ONLINE_STATUS,
+  showToast?: boolean,
+): AppActionsTypes => {
+  if (showToast)
+    switch (onlineStatus) {
+      case 'ONLINE':
+        toast.dismiss('OFFLINE')
+        toast('Je bent nu online!', {
+          type: toast.TYPE.SUCCESS,
+          toastId: 'ONLINE',
+        })
+        break
+      case 'OFFLINE':
+        toast.dismiss('ONLINE')
+        toast('Je bent nu offline!', {
+          type: toast.TYPE.ERROR,
+          toastId: 'OFFLINE',
+        })
+        break
+      case 'UNKNOWN':
+      default:
+        toast.dismiss('OFFLINE')
+        toast.dismiss('ONLINE')
+        break
+    }
+
   return {
     type: ONLINE_CHANGED,
     onlineStatus,
@@ -18,6 +45,21 @@ export const changeOnline = (onlineStatus: ONLINE_STATUS): AppActionsTypes => {
 }
 
 export const changeCache = (cacheStatus: CACHE_STATUS): AppActionsTypes => {
+  switch (cacheStatus) {
+    case 'CACHED':
+      toast('App kan nu offline gebruikt worden.', {
+        type: toast.TYPE.INFO,
+        toastId: 'CACHED',
+      })
+      break
+    case 'CACHING':
+    case 'SHOULD_CACHE':
+    case 'UNKNOWN':
+    default:
+      toast.dismiss('CACHED')
+      break
+  }
+
   return {
     type: CACHE_CHANGED,
     cacheStatus,

@@ -11,6 +11,13 @@ const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
 `
 
 const CloseButton: React.FC<Props> = (props: Props) => {

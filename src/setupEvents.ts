@@ -11,8 +11,11 @@ import {
   INSTALL_STATUS,
 } from 'src/redux/app/types'
 
-export const changeOnlineStatus = (onlineStatus: ONLINE_STATUS): void => {
-  store.dispatch(changeOnline(onlineStatus))
+export const changeOnlineStatus = (
+  onlineStatus: ONLINE_STATUS,
+  toast?: boolean,
+): void => {
+  store.dispatch(changeOnline(onlineStatus, toast))
 }
 
 export const changeCacheStatus = (cacheStatus: CACHE_STATUS): void => {
@@ -30,13 +33,14 @@ export const setInstallPromptEvent = (
 }
 
 export const onlineStatus = (): void => {
-  const updateOnlineStatus = (): void => {
-    changeOnlineStatus(navigator.onLine ? 'ONLINE' : 'OFFLINE')
+  const updateOnlineStatus = (toast?: boolean): void => {
+    const status = navigator.onLine ? 'ONLINE' : 'OFFLINE'
+    changeOnlineStatus(status, toast || true)
   }
 
-  updateOnlineStatus()
-  window.addEventListener('online', updateOnlineStatus)
-  window.addEventListener('offline', updateOnlineStatus)
+  updateOnlineStatus(false)
+  window.addEventListener('online', (): void => updateOnlineStatus(true))
+  window.addEventListener('offline', (): void => updateOnlineStatus(true))
 }
 
 export const addBeforeInstallPrompt = (): void => {
