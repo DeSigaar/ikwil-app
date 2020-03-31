@@ -27,12 +27,15 @@ import {
   TimeIcon,
 } from 'src/assets/activity_details'
 
+import { Days, Organisers } from 'src/components/Main'
+
 const ActivityContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   /* padding: 10px; */
   margin-right: 10px;
+  margin-top: 10px;
 `
 
 const ActivityItem = styled.div<ActivityStyleProps>`
@@ -120,14 +123,15 @@ const Line = styled.hr`
   margin-left: auto;
   margin-right: auto;
   border-width: 1px;
-  width: 85%;
+  opacity: 0.6;
+  width: 90%;
 `
 const Meedoen = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   flex-direction: column;
-  font-size: ${fonts.size.small};
+  font-size: ${fonts.size.small + 3}px;
   font-weight: ${fonts.fontWeights.normal};
 `
 const Buttons = styled.div`
@@ -135,11 +139,31 @@ const Buttons = styled.div`
   justify-content: center;
   flex-direction: row;
   width: 100%;
-  margin: 5px;
+  margin: 10px;
+`
+
+const ActivityButton = styled.button<ActiveStyleProps>`
+  border: 0;
+  margin: 0 2px;
+  padding: 3px 9px;
+  min-width: 60px;
+  height: 25px;
+  color: ${({ backgroundColor }) => backgroundColor};
+  background: unset;
+  background-color: white;
+  /* background-color: ${({ backgroundColor }) => backgroundColor}; */
+  font-weight: ${fonts.fontWeights.bold};
+  border-radius: ${layout.borderRadiusBig}px;
 `
 
 interface ToggleStyleProps {
   toggle: boolean
+}
+interface ActiveStyleProps {
+  yes?: boolean
+  maybe?: boolean
+  no?: boolean
+  backgroundColor: string
 }
 interface ActivityStyleProps {
   toggle: boolean
@@ -152,25 +176,24 @@ interface DetailStyleProps {
 }
 interface Props {
   name: string
-  organisers: string[]
+  organisers: string
+  allOrganisers: Organisers[]
   repeats: boolean
   room: string
   categoryName: string
   categoryColor: string
-  days: any //TODO any veranderen
+  days: Days[]
 }
 
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
   const [inverted, setInverted] = React.useState(false)
+  // const [yes, setYes] = React.useState(false)
+  // const [maybe, setMaybe] = React.useState(false)
+  // const [no, setNo] = React.useState(false)
 
   const activityIconSize = 36
   const detailIconSize = 17
-
-  // {
-  //   console.log(props)
-  //   console.log(toggle)
-  // }
 
   React.useEffect(() => {
     console.log(props)
@@ -265,7 +288,18 @@ const Activity: React.FC<Props> = (props: Props) => {
               </Detail>
               <Detail>
                 <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
-                <span>{props.room} </span>
+                <span>
+                  {/* {
+                      props.allOrganisers.map(organisers => {
+                        if (organisers.name == ) {
+
+                        }
+                        props.organisers.map(organiser => {
+
+                        })
+                      })
+                    } */}
+                </span>
               </Detail>
               <Detail>
                 <DetailIcon src={LocationIcon} size={detailIconSize} alt="" />
@@ -284,9 +318,15 @@ const Activity: React.FC<Props> = (props: Props) => {
             <Meedoen>
               <span>Meedoen met {props.name}?</span>
               <Buttons>
-                <button>Ja</button>
-                <button>Misschien</button>
-                <button>Nee</button>
+                <ActivityButton backgroundColor={props.categoryColor}>
+                  Ja
+                </ActivityButton>
+                <ActivityButton backgroundColor={props.categoryColor}>
+                  Misschien
+                </ActivityButton>
+                <ActivityButton backgroundColor={props.categoryColor}>
+                  Nee
+                </ActivityButton>
               </Buttons>
             </Meedoen>
           </>

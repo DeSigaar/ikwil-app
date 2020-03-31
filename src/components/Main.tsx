@@ -11,6 +11,7 @@ interface Props {
   firestore: any
   activities: Activities[]
   categories: Categories[]
+  organisers: Organisers[]
   isLoggedIn: boolean
   isInstallPromptSet: boolean
 }
@@ -23,6 +24,14 @@ interface Categories {
   icon: string
   name: string
 }
+export interface Organisers {
+  createdBy: string
+  creatorID: string
+  description: string
+  isAvaible: boolean
+  name: string
+  place: string
+}
 export interface Activities {
   id: string
   category: string
@@ -33,7 +42,7 @@ export interface Activities {
   days: Days[]
 }
 
-interface Days {
+export interface Days {
   name: string
   days: Array<{
     endTime: string
@@ -93,6 +102,7 @@ const Main: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
     props.firestore.get('activities')
     props.firestore.get('categories')
+    props.firestore.get('organisers')
   }, [])
 
   const getSecondPart = (str: string, divider: string): string => {
@@ -125,7 +135,11 @@ const Main: React.FC<Props> = (props: Props) => {
                           categoryColor={category.color}
                           repeats={activity.repeats}
                           room={activity.room}
-                          organisers={activity.organisers}
+                          organisers={activity.organisers.map(
+                            (organiser: string) =>
+                              getSecondPart(organiser, '/'),
+                          )}
+                          allOrganisers={props.organisers}
                           days={activity.days}
                         ></Activity>
                       )}
@@ -146,6 +160,7 @@ const mapStateToProps = (state: RootState, ownProps: any): any => {
     isLoggedIn: !state.firebase.auth.isEmpty,
     activities: state.firestore.ordered.activities,
     categories: state.firestore.ordered.categories,
+    organisers: state.firestore.ordered.organisers,
     isInstallPromptSet: !!state.app.installPrompt,
   }
 }
