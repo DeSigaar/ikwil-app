@@ -27,12 +27,15 @@ import {
   TimeIcon,
 } from 'src/assets/activity_details'
 
+import { Days, Organisers } from 'src/components/Main'
+
 const ActivityContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   /* padding: 10px; */
   margin-right: 10px;
+  margin-top: 10px;
 `
 
 const ActivityItem = styled.div<ActivityStyleProps>`
@@ -120,7 +123,8 @@ const Line = styled.hr`
   margin-left: auto;
   margin-right: auto;
   border-width: 1px;
-  width: 85%;
+  opacity: 0.6;
+  width: 90%;
 `
 const Meedoen = styled.div`
   display: flex;
@@ -135,11 +139,29 @@ const Buttons = styled.div`
   justify-content: center;
   flex-direction: row;
   width: 100%;
-  margin: 5px;
+  margin: 10px;
+`
+
+const ActivityButton = styled.button<ActiveStyleProps>`
+  border: 0;
+  margin: 0 2px;
+  padding: 3px 9px;
+  min-width: 60px;
+  height: 25px;
+  color: ${colors.colors.green};
+  background: unset;
+  background-color: ${colors.colors.lightGreen};
+  font-weight: ${fonts.fontWeights.bold};
+  border-radius: ${layout.borderRadiusBig}px;
 `
 
 interface ToggleStyleProps {
   toggle: boolean
+}
+interface ActiveStyleProps {
+  yes?: boolean
+  maybe?: boolean
+  no?: boolean
 }
 interface ActivityStyleProps {
   toggle: boolean
@@ -152,25 +174,24 @@ interface DetailStyleProps {
 }
 interface Props {
   name: string
-  organisers: string[]
+  organisers: string
+  allOrganisers: Organisers[]
   repeats: boolean
   room: string
   categoryName: string
   categoryColor: string
-  days: any //TODO any veranderen
+  days: Days[]
 }
 
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
   const [inverted, setInverted] = React.useState(false)
+  // const [yes, setYes] = React.useState(false)
+  // const [maybe, setMaybe] = React.useState(false)
+  // const [no, setNo] = React.useState(false)
 
   const activityIconSize = 36
   const detailIconSize = 17
-
-  // {
-  //   console.log(props)
-  //   console.log(toggle)
-  // }
 
   React.useEffect(() => {
     console.log(props)
@@ -284,9 +305,9 @@ const Activity: React.FC<Props> = (props: Props) => {
             <Meedoen>
               <span>Meedoen met {props.name}?</span>
               <Buttons>
-                <button>Ja</button>
-                <button>Misschien</button>
-                <button>Nee</button>
+                <ActivityButton>Ja</ActivityButton>
+                <ActivityButton>Misschien</ActivityButton>
+                <ActivityButton>Nee</ActivityButton>
               </Buttons>
             </Meedoen>
           </>
