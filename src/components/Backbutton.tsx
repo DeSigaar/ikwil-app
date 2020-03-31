@@ -5,6 +5,7 @@ import { RootState } from 'src/redux/store'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import BackArrowIcon from 'src/assets/general/icon_back_orange.svg'
 import { colors } from 'src/styles'
+import { Icon } from 'src/components'
 
 interface OwnProps {}
 
@@ -16,33 +17,22 @@ interface StateProps {
 
 type Props = StateProps & OwnProps & RouteComponentProps
 
-interface BackgroundProps {
-  readonly background: string
-}
-
 const StyledContainer = styled.div`
-  display: flex;
+  display: inline-flex;
+  align-items: center;
   margin-bottom: 10px;
-`
-
-const StyledBackgroundIcon = styled.div<BackgroundProps>`
-  width: 15px;
-  height: 15px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(${(props): string => props.background});
 `
 
 const StyledBackText = styled.p`
   font-size: 16px;
-  margin: -2px 0px 0px 5px;
+  margin-left: 5px;
   color: ${colors.colors.orange};
 `
 
 const Backbutton: React.FC<Props> = (props: Props) => {
   return (
     <StyledContainer onClick={(): void => props.history.push('/')}>
-      <StyledBackgroundIcon background={BackArrowIcon} />
+      <Icon icon={BackArrowIcon} size={16} />
       <StyledBackText>Terug</StyledBackText>
     </StyledContainer>
   )
