@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
+import { toast } from 'react-toastify'
 import { RootState } from 'src/redux/store'
 import { colors } from 'src/styles'
-import { Activity } from 'src/components'
+import { Activity, Toast } from 'src/components'
 
 interface Props {
   firestore: any
@@ -101,6 +102,10 @@ const Main: React.FC<Props> = (props: Props) => {
 
   return (
     <MainContainer>
+      <button onClick={(): unknown => toast(<Toast />)}>
+        Click me for a toast
+      </button>
+
       {!isLoaded(props.activities) ? (
         <StyledLoading />
       ) : isEmpty(props.activities) ? (

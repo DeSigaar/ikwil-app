@@ -8,6 +8,8 @@ import { createFirestoreInstance } from 'redux-firestore'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Helmet } from 'react-helmet'
 import styled, { createGlobalStyle } from 'styled-components'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
 import {
   App,
   Login,
@@ -21,8 +23,12 @@ import * as setupEvents from 'src/setupEvents'
 import history from 'src/utils/history'
 import { store, persistor } from 'src/redux/store'
 import { fireApp } from 'src/utils/firebase'
-import configReactReduxFirebase from 'src/config/reactReduxFirebase'
+import {
+  reactReduxFirebase as configReactReduxFirebase,
+  reactToastify as configReactToastify,
+} from 'src/config'
 import { colors, fonts, layout } from 'src/styles'
+import { CloseButton } from 'src/components/toast'
 
 const GlobalStyle = createGlobalStyle`
 *,
@@ -38,6 +44,14 @@ body {
   margin: ${layout.init.margin};
   padding: ${layout.init.padding};
   font-family: ${fonts.font.fontFamily};
+}
+
+.toast {
+  border-radius: ${layout.borderRadius}px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: ${colors.shadows.default};
 }
 `
 
@@ -103,6 +117,10 @@ ReactDOM.render(
               content="Applicatie om de activiteiten van Stichting Ik Wil in te zien"
             />
           </Helmet>
+          <ToastContainer
+            {...configReactToastify}
+            closeButton={<CloseButton />}
+          />
 
           <Switch>
             {/* App */}
