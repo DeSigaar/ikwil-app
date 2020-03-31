@@ -1,0 +1,13 @@
+export { default as BewegingIcon } from './activity_type_beweging.svg'
+export { default as CreatiefIcon } from './activity_type_creatief.svg'
+export { default as KinderenIcon } from './activity_type_kinderen.svg'
+export { default as SociaalIcon } from './activity_type_sociaal.svg'
+export { default as SpiritueelIcon } from './activity_type_spiritueel.svg'
+export { default as TaalIcon } from './activity_type_taal.svg'
+
+export { default as BewegingInvertedIcon } from './activity_type_beweging_inverted.svg'
+export { default as CreatiefInvertedIcon } from './activity_type_creatief_inverted.svg'
+export { default as KinderenInvertedIcon } from './activity_type_kinderen_inverted.svg'
+export { default as SociaalInvertedIcon } from './activity_type_sociaal_inverted.svg'
+export { default as SpiritueelInvertedIcon } from './activity_type_spiritueel_inverted.svg'
+export { default as TaalInvertedIcon } from './activity_type_taal_inverted.svg'

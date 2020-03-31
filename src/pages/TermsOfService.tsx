@@ -1,14 +1,16 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { Header } from 'src/components'
 
 const TermsOfService: React.FC = () => {
   return (
     <>
-      <Link to="/">Naar home</Link>
+      <Header title="Terms of Service" />
 
       <div>
-        <h1>Terms of Service</h1>
-        <small>Version 1.0.0</small>
+        <div>
+          <small>Version 1.0.0</small>
+        </div>
 
         <p>
           The Ik Wil App website located at{' '}

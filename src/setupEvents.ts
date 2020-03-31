@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import store from 'src/redux/store'
+import { store } from 'src/redux/store'
 import {
   changeOnline,
   changeCache,
@@ -12,8 +11,11 @@ import {
   INSTALL_STATUS,
 } from 'src/redux/app/types'
 
-export const changeOnlineStatus = (onlineStatus: ONLINE_STATUS): void => {
-  store.dispatch(changeOnline(onlineStatus))
+export const changeOnlineStatus = (
+  onlineStatus: ONLINE_STATUS,
+  toast?: boolean,
+): void => {
+  store.dispatch(changeOnline(onlineStatus, toast))
 }
 
 export const changeCacheStatus = (cacheStatus: CACHE_STATUS): void => {
@@ -31,13 +33,14 @@ export const setInstallPromptEvent = (
 }
 
 export const onlineStatus = (): void => {
-  const updateOnlineStatus = (): void => {
-    changeOnlineStatus(navigator.onLine ? 'ONLINE' : 'OFFLINE')
+  const updateOnlineStatus = (toast?: boolean): void => {
+    const status = navigator.onLine ? 'ONLINE' : 'OFFLINE'
+    changeOnlineStatus(status, toast)
   }
 
-  updateOnlineStatus()
-  window.addEventListener('online', updateOnlineStatus)
-  window.addEventListener('offline', updateOnlineStatus)
+  updateOnlineStatus(false)
+  window.addEventListener('online', (): void => updateOnlineStatus(true))
+  window.addEventListener('offline', (): void => updateOnlineStatus(true))
 }
 
 export const addBeforeInstallPrompt = (): void => {
@@ -48,25 +51,19 @@ export const addBeforeInstallPrompt = (): void => {
       e.preventDefault()
       // Stash the event so it can be triggered later.
       setInstallPromptEvent(e)
-      // Update UI notify the user they can install the PWA
-      e.prompt()
-      changeInstallStatus('PROMPTED')
-      e.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          changeInstallStatus('INSTALLED')
-          console.log('User accepted the install prompt')
-        } else {
-          changeInstallStatus('NOT_INSTALLED')
-          console.log('User dismissed the install prompt')
-        }
-      })
     },
   )
+}
+
+export const checkIfInstalled = (): void => {
+  if (window.matchMedia('(display-mode: standalone)').matches)
+    changeInstallStatus('INSTALLED')
 }
 
 export const init = (): void => {
   window.addEventListener('load', () => {
     onlineStatus()
     addBeforeInstallPrompt()
+    checkIfInstalled()
   })
 }

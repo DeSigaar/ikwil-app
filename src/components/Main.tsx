@@ -2,17 +2,18 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
-import { fireAuth } from 'src/utils/firebase'
 import { RootState } from 'src/redux/store'
+import { colors } from 'src/styles'
+import { Activity } from 'src/components'
 
-import { Activity } from '../components'
 interface Props {
   firestore: any
   activities: Activities[]
   categories: Categories[]
+  organisers: Organisers[]
   isLoggedIn: boolean
+  isInstallPromptSet: boolean
 }
 
 interface Categories {
@@ -22,6 +23,14 @@ interface Categories {
   color: string
   icon: string
   name: string
+}
+export interface Organisers {
+  createdBy: string
+  creatorID: string
+  description: string
+  isAvaible: boolean
+  name: string
+  place: string
 }
 export interface Activities {
   id: string
@@ -33,7 +42,7 @@ export interface Activities {
   days: Days[]
 }
 
-interface Days {
+export interface Days {
   name: string
   days: Array<{
     endTime: string
@@ -44,10 +53,56 @@ interface Days {
 
 const MainContainer = styled.div``
 
+const StyledLoading = styled.div`
+  display: block;
+  box-sizing: border-box;
+  height: 4px;
+  border-radius: 4px;
+  position: relative;
+  transform: scale(var(--ggs, 1));
+  width: 18px;
+
+  &::before,
+  &::after {
+    display: block;
+    box-sizing: border-box;
+    height: 4px;
+    border-radius: 4px;
+    background: ${colors.colors.black};
+    content: '';
+    position: absolute;
+  }
+  &::before {
+    animation: loadbar 2s cubic-bezier(0, 0, 0.58, 1) infinite;
+  }
+  &::after {
+    width: 18px;
+    opacity: 0.3;
+  }
+
+  @keyframes loadbar {
+    0%,
+    to {
+      left: 0;
+      right: 80%;
+    }
+    25%,
+    75% {
+      left: 0;
+      right: 0;
+    }
+    50% {
+      left: 80%;
+      right: 0;
+    }
+  }
+`
+
 const Main: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
     props.firestore.get('activities')
     props.firestore.get('categories')
+    props.firestore.get('organisers')
   }, [])
 
   const getSecondPart = (str: string, divider: string): string => {
@@ -56,17 +111,8 @@ const Main: React.FC<Props> = (props: Props) => {
 
   return (
     <MainContainer>
-      <div>
-        {props.isLoggedIn ? (
-          <button onClick={(): unknown => fireAuth.signOut()}>uitloggen</button>
-        ) : (
-          <Link to="/login">
-            <button>inloggen</button>
-          </Link>
-        )}
-      </div>
       {!isLoaded(props.activities) ? (
-        'Loading'
+        <StyledLoading />
       ) : isEmpty(props.activities) ? (
         'Activity list is empty'
       ) : (
@@ -74,28 +120,32 @@ const Main: React.FC<Props> = (props: Props) => {
           {props.activities.map(
             (activity: any): React.ReactNode => (
               <React.Fragment key={activity.id}>
-                {console.log(props)}
-
-                {!isLoaded(props.categories)
-                  ? 'Loading'
-                  : isEmpty(props.categories)
-                  ? 'Categories are empty'
-                  : props.categories.map((category) => (
-                      <React.Fragment key={category.id}>
-                        {category.id ===
-                          getSecondPart(activity.category, '/') && (
-                          <Activity
-                            name={activity.name}
-                            categoryName={category.name}
-                            categoryColor={category.color}
-                            repeats={activity.repeats}
-                            room={activity.room}
-                            organisers={activity.organisers}
-                            days={activity.days}
-                          ></Activity>
-                        )}
-                      </React.Fragment>
-                    ))}
+                {!isLoaded(props.categories) ? (
+                  <StyledLoading />
+                ) : isEmpty(props.categories) ? (
+                  'Categories are empty'
+                ) : (
+                  props.categories.map((category) => (
+                    <React.Fragment key={category.id}>
+                      {category.id ===
+                        getSecondPart(activity.category, '/') && (
+                        <Activity
+                          name={activity.name}
+                          categoryName={category.name}
+                          categoryColor={category.color}
+                          repeats={activity.repeats}
+                          room={activity.room}
+                          organisers={activity.organisers.map(
+                            (organiser: string) =>
+                              getSecondPart(organiser, '/'),
+                          )}
+                          allOrganisers={props.organisers}
+                          days={activity.days}
+                        ></Activity>
+                      )}
+                    </React.Fragment>
+                  ))
+                )}
               </React.Fragment>
             ),
           )}
@@ -105,15 +155,17 @@ const Main: React.FC<Props> = (props: Props) => {
   )
 }
 
-const mapStateToProps = (state: RootState, ownProps: any) => {
+const mapStateToProps = (state: RootState, ownProps: any): any => {
   return {
     isLoggedIn: !state.firebase.auth.isEmpty,
     activities: state.firestore.ordered.activities,
     categories: state.firestore.ordered.categories,
+    organisers: state.firestore.ordered.organisers,
+    isInstallPromptSet: !!state.app.installPrompt,
   }
 }
 
-const mapDispatchToProps = (__dispatch: any, __ownProps: any) => {
+const mapDispatchToProps = (dispatch: any, __ownProps: any): any => {
   return {}
 }
 

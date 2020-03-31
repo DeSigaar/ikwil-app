@@ -1,14 +1,16 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { Header } from 'src/components'
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <>
-      <Link to="/">Naar home</Link>
+      <Header title="Privacy Policy" />
 
       <div>
-        <h1>Privacy Policy</h1>
-        <small>Version 1.0.0</small>
+        <div>
+          <small>Version 1.0.0</small>
+        </div>
 
         <p>
           At Ik Wil App, accessible from{' '}
