@@ -210,46 +210,39 @@ const Activity: React.FC<Props> = (props: Props) => {
         ) : (
           <Icon icon={TaalInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Spiritueel':
         return !inverted ? (
           <Icon icon={SpiritueelIcon} size={activityIconSize} />
         ) : (
           <Icon icon={SpiritueelInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Beweging':
         return !inverted ? (
           <Icon icon={BewegingIcon} size={activityIconSize} />
         ) : (
           <Icon icon={BewegingInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Kinderen':
         return !inverted ? (
           <Icon icon={KinderenIcon} size={activityIconSize} />
         ) : (
           <Icon icon={KinderenInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Sociaal':
         return !inverted ? (
           <Icon icon={SociaalIcon} size={activityIconSize} />
         ) : (
           <Icon icon={SociaalInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Creatief':
         return !inverted ? (
           <Icon icon={CreatiefIcon} size={activityIconSize} />
         ) : (
           <Icon icon={CreatiefInvertedIcon} size={activityIconSize} />
         )
-        break
 
       default:
         return <span>none</span>
-        break
     }
   }
 
