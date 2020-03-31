@@ -24,19 +24,20 @@ const StyledOverlay = styled.div`
 
 const StyledModal = styled.div`
   position: fixed;
-  top: 0;
+  top: 50%;
   bottom: 0;
   left: 0;
   right: 0;
   min-height: ${layout.unit * 10}px;
   height: fit-content;
   max-height: 90vh;
-  margin: auto ${layout.unit}px;
+  margin: auto;
   border-radius: ${layout.borderRadius}px;
   background-color: ${colors.colors.white};
   z-index: ${layout.modalZindex};
-  display: flex;
-  flex-direction: column;
+  display: table;
+  width: 80%;
+  transform: translateY(-50%);
 `
 
 const StyledHeader = styled.div`
@@ -114,7 +115,7 @@ const StyledContent = styled.div`
 const Modal: React.FC<Props> = (props: Props) => {
   return ReactDOM.createPortal(
     <div>
-      <StyledOverlay />
+      <StyledOverlay onClick={(): void => props.closeModal(false)} />
       <StyledModal>
         <StyledHeader>
           <StyledTitle>{props.title}</StyledTitle>
