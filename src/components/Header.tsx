@@ -12,10 +12,10 @@ import {
   LogOut as LogOutIcon,
   SoftwareDownload as SoftwareDownloadIcon,
   Options as OptionsIcon,
-  ArrowLeft as ArrowLeftIcon,
 } from 'src/icons'
 import { fireAuth } from 'src/utils/firebase'
 import { AppActionsTypes, askForInstall } from 'src/redux/app'
+import { Backbutton } from 'src/components'
 
 interface OwnProps {
   title: string
@@ -232,11 +232,6 @@ const Header: React.FC<Props> = (props: Props) => {
       <Helmet title={props.title} />
       <Container background={TopBarWave}>
         <StyledLeft>
-          {!props.isHome && (
-            <IconContainer onClick={(): void => props.history.push('/')}>
-              <ArrowLeftIcon />
-            </IconContainer>
-          )}
           <Title>{props.title}</Title>
         </StyledLeft>
 
@@ -283,6 +278,7 @@ const Header: React.FC<Props> = (props: Props) => {
           </StyledDropdown>
         </StyledIconContainer>
       </Container>
+      {!props.isHome && <Backbutton />}
     </>
   )
 }
