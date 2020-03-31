@@ -131,7 +131,7 @@ const Meedoen = styled.div`
   align-items: center;
   width: 100%;
   flex-direction: column;
-  font-size: ${fonts.size.small};
+  font-size: ${fonts.size.small + 3}px;
   font-weight: ${fonts.fontWeights.normal};
 `
 const Buttons = styled.div`
@@ -148,9 +148,10 @@ const ActivityButton = styled.button<ActiveStyleProps>`
   padding: 3px 9px;
   min-width: 60px;
   height: 25px;
-  color: ${colors.colors.green};
+  color: ${({ backgroundColor }) => backgroundColor};
   background: unset;
-  background-color: ${colors.colors.lightGreen};
+  background-color: white;
+  /* background-color: ${({ backgroundColor }) => backgroundColor}; */
   font-weight: ${fonts.fontWeights.bold};
   border-radius: ${layout.borderRadiusBig}px;
 `
@@ -162,6 +163,7 @@ interface ActiveStyleProps {
   yes?: boolean
   maybe?: boolean
   no?: boolean
+  backgroundColor: string
 }
 interface ActivityStyleProps {
   toggle: boolean
@@ -286,7 +288,18 @@ const Activity: React.FC<Props> = (props: Props) => {
               </Detail>
               <Detail>
                 <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
-                <span>{props.room} </span>
+                <span>
+                  {/* {
+                      props.allOrganisers.map(organisers => {
+                        if (organisers.name == ) {
+
+                        }
+                        props.organisers.map(organiser => {
+
+                        })
+                      })
+                    } */}
+                </span>
               </Detail>
               <Detail>
                 <DetailIcon src={LocationIcon} size={detailIconSize} alt="" />
@@ -305,9 +318,15 @@ const Activity: React.FC<Props> = (props: Props) => {
             <Meedoen>
               <span>Meedoen met {props.name}?</span>
               <Buttons>
-                <ActivityButton>Ja</ActivityButton>
-                <ActivityButton>Misschien</ActivityButton>
-                <ActivityButton>Nee</ActivityButton>
+                <ActivityButton backgroundColor={props.categoryColor}>
+                  Ja
+                </ActivityButton>
+                <ActivityButton backgroundColor={props.categoryColor}>
+                  Misschien
+                </ActivityButton>
+                <ActivityButton backgroundColor={props.categoryColor}>
+                  Nee
+                </ActivityButton>
               </Buttons>
             </Meedoen>
           </>
