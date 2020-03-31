@@ -38,7 +38,7 @@ const StyledModal = styled.div`
   display: table;
   width: 90%;
   max-width: 400px;
-  transform: translateY(-50%);
+  transform: translateY(-25%);
 `
 
 const StyledHeader = styled.div`

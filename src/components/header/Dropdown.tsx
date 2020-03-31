@@ -29,7 +29,7 @@ const StyledOverlay = styled.div<DropdownProps>`
 const StyledDropdown = styled.div<DropdownProps>`
   cursor: auto;
   position: fixed;
-  right: 15px;
+  right: 7.5px;
   top: 55px;
   background: ${colors.colors.white};
   color: ${colors.colors.black};
@@ -44,7 +44,7 @@ const StyledDropdown = styled.div<DropdownProps>`
     content: '';
     position: absolute;
     top: -4px;
-    right: 22px;
+    right: 15px;
     width: 12px;
     height: 12px;
     background: ${colors.colors.white};
