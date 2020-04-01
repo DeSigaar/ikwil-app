@@ -5,7 +5,6 @@ const Settings: React.FC = () => {
   return (
     <>
       <Header title="Instellingen" />
-
       <h2>Instellingen hierzo</h2>
     </>
   )
