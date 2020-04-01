@@ -50,6 +50,7 @@ export const changeCache = (cacheStatus: CACHE_STATUS): AppActionsTypes => {
       toast('App kan nu offline gebruikt worden.', {
         type: toast.TYPE.INFO,
         toastId: 'CACHED',
+        delay: 1000,
       })
       break
     case 'CACHING':
