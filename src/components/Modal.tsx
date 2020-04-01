@@ -25,7 +25,7 @@ const StyledOverlay = styled.div`
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
-  bottom: 0;
+  transform: translateY(-50%);
   left: 0;
   right: 0;
   min-height: ${layout.unit * 10}px;
@@ -38,7 +38,6 @@ const StyledModal = styled.div`
   display: table;
   width: 90%;
   max-width: 400px;
-  transform: translateY(-25%);
 `
 
 const StyledHeader = styled.div`
@@ -115,7 +114,7 @@ const StyledContent = styled.div`
 
 const Modal: React.FC<Props> = (props: Props) => {
   return ReactDOM.createPortal(
-    <div>
+    <>
       <StyledOverlay onClick={(): void => props.closeModal(false)} />
       <StyledModal>
         <StyledHeader>
@@ -128,7 +127,7 @@ const Modal: React.FC<Props> = (props: Props) => {
 
         <StyledContent>{props.children}</StyledContent>
       </StyledModal>
-    </div>,
+    </>,
     document.getElementById('portal-root') as HTMLElement,
   )
 }

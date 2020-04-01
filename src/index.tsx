@@ -7,7 +7,7 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { createFirestoreInstance } from 'redux-firestore'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Helmet } from 'react-helmet'
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import {
@@ -29,6 +29,7 @@ import {
 } from 'src/config'
 import { colors, fonts, layout } from 'src/styles'
 import { CloseButton, ToastStyle } from 'src/components/toast'
+import { Loader } from 'src/components'
 
 const GlobalStyle = createGlobalStyle`
 *,
@@ -43,58 +44,24 @@ body {
   background-color: ${colors.colors.white};
   margin: ${layout.init.margin};
   padding: ${layout.init.padding};
+  min-height: ${layout.init.minHeight};
   font-family: ${fonts.font.fontFamily};
 }
 `
 
-const StyledLoading = styled.div`
-  display: block;
-  box-sizing: border-box;
-  height: 4px;
-  border-radius: 4px;
-  position: relative;
-  transform: scale(var(--ggs, 1));
-  width: 18px;
-
-  &::before,
-  &::after {
-    display: block;
-    box-sizing: border-box;
-    height: 4px;
-    border-radius: 4px;
-    background: ${colors.colors.black};
-    content: '';
-    position: absolute;
-  }
-  &::before {
-    animation: loadbar 2s cubic-bezier(0, 0, 0.58, 1) infinite;
-  }
-  &::after {
-    width: 18px;
-    opacity: 0.3;
-  }
-
-  @keyframes loadbar {
-    0%,
-    to {
-      left: 0;
-      right: 80%;
-    }
-    25%,
-    75% {
-      left: 0;
-      right: 0;
-    }
-    50% {
-      left: 80%;
-      right: 0;
-    }
-  }
-`
-
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={<StyledLoading />} persistor={persistor}>
+    <PersistGate
+      loading={
+        <Loader
+          height="100vh"
+          scale={3.5}
+          color={colors.colors.orange}
+          text="App aan het laden..."
+        />
+      }
+      persistor={persistor}
+    >
       <ConnectedRouter history={history}>
         <ReactReduxFirebaseProvider
           firebase={fireApp}

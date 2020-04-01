@@ -55,13 +55,13 @@ const StyledDropdown = styled.div<DropdownProps>`
 
 const Dropdown: React.FC<Props> = (props: Props) => {
   return ReactDOM.createPortal(
-    <div>
+    <>
       <StyledOverlay
         onClick={(): void => props.closeDropdown(true)}
         open={props.open}
       />
       <StyledDropdown open={props.open}>{props.children}</StyledDropdown>
-    </div>,
+    </>,
     document.getElementById('portal-root') as HTMLElement,
   )
 }

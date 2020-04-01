@@ -20,7 +20,8 @@ export const sizes = {
 
 export const init = {
   margin: `calc(${headerHeight * 1.15}px + 9vw) 0 0 0`,
-  padding: `0 ${unit}px`,
+  padding: `0 ${unit}px ${unit}px`,
+  minHeight: `calc(100vh - calc(${headerHeight * 1.15}px + 9vw))`,
 }
 
 export const screenSizes = {

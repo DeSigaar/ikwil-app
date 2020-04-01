@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
 import { RootState } from 'src/redux/store'
 import { colors } from 'src/styles'
-import { Activity } from 'src/components'
+import { Activity, Loader } from 'src/components'
 
 interface Props {
   firestore: any
@@ -53,51 +53,6 @@ export interface Days {
 
 const MainContainer = styled.div``
 
-const StyledLoading = styled.div`
-  display: block;
-  box-sizing: border-box;
-  height: 4px;
-  border-radius: 4px;
-  position: relative;
-  transform: scale(var(--ggs, 1));
-  width: 18px;
-
-  &::before,
-  &::after {
-    display: block;
-    box-sizing: border-box;
-    height: 4px;
-    border-radius: 4px;
-    background: ${colors.colors.black};
-    content: '';
-    position: absolute;
-  }
-  &::before {
-    animation: loadbar 2s cubic-bezier(0, 0, 0.58, 1) infinite;
-  }
-  &::after {
-    width: 18px;
-    opacity: 0.3;
-  }
-
-  @keyframes loadbar {
-    0%,
-    to {
-      left: 0;
-      right: 80%;
-    }
-    25%,
-    75% {
-      left: 0;
-      right: 0;
-    }
-    50% {
-      left: 80%;
-      right: 0;
-    }
-  }
-`
-
 const Main: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
     props.firestore.get('activities')
@@ -112,18 +67,28 @@ const Main: React.FC<Props> = (props: Props) => {
   return (
     <MainContainer>
       {!isLoaded(props.activities) ? (
-        <StyledLoading />
+        <Loader
+          height="500px"
+          scale={2.5}
+          color={colors.colors.orange}
+          text="Activiteiten laden..."
+        />
       ) : isEmpty(props.activities) ? (
-        'Activity list is empty'
+        'Geen activiteiten gevonden.'
       ) : (
         <div>
           {props.activities.map(
             (activity: any): React.ReactNode => (
               <React.Fragment key={activity.id}>
                 {!isLoaded(props.categories) ? (
-                  <StyledLoading />
+                  <Loader
+                    height="500px"
+                    scale={2.5}
+                    color={colors.colors.orange}
+                    text="Categorieën laden..."
+                  />
                 ) : isEmpty(props.categories) ? (
-                  'Categories are empty'
+                  'Geen categorieën gevonden.'
                 ) : (
                   props.categories.map((category) => (
                     <React.Fragment key={category.id}>

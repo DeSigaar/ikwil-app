@@ -1,11 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Modal, Filter, Icon } from 'src/components'
-import SearchIcon from 'src/assets/general/icon_search_grey.svg'
 import FilterIcon from 'src/assets/general/icon_filter_grey.svg'
 import { layout, colors } from 'src/styles'
+import { IconContainer, Search as SearchIcon } from 'src/icons'
 
-const StyledContainer = styled.div`
+interface StyledProps {
+  focus: boolean
+}
+
+const StyledContainer = styled.div<StyledProps>`
   position: relative;
   height: 48px;
   width: 100%;
@@ -16,6 +20,17 @@ const StyledContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+
+  > div {
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
+    opacity: ${(props): number => (props.focus ? 0.75 : 0.25)};
+  }
+
+  > div:last-of-type {
+    padding: 24px;
+    opacity: 1;
+  }
 `
 
 const StyledInput = styled.input`
@@ -25,6 +40,7 @@ const StyledInput = styled.input`
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   flex-grow: 1;
   background: none;
   border: none;
@@ -32,19 +48,44 @@ const StyledInput = styled.input`
   outline: none;
   padding: 0 ${layout.unit * 3}px;
   font-size: 16px;
+  color: ${colors.colors.black};
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: inset ${colors.shadows.default};
+  }
+
+  &::placeholder {
+    color: ${colors.colors.black};
+    opacity: 0.5;
+  }
 `
 
 const SearchBar: React.FC = () => {
   const [modalShowing, setModalShowing] = React.useState(false)
+  const [focused, setFocused] = React.useState(false)
+
+  let inputElement: any // eslint-disable-line @typescript-eslint/no-explicit-any
 
   return (
     <>
-      <StyledContainer>
-        <Icon icon={SearchIcon} />
-        <StyledInput type="search" placeholder="Zoeken..." />
+      <StyledContainer focus={focused}>
+        <IconContainer onClick={(): void => inputElement.focus()} size={48}>
+          <SearchIcon />
+        </IconContainer>
+        <StyledInput
+          type="search"
+          placeholder="Zoeken..."
+          ref={(input): void => {
+            inputElement = input
+          }}
+          onFocus={(): void => setFocused(true)}
+          onBlur={(): void => setFocused(false)}
+        />
         <Icon
           icon={FilterIcon}
           onClick={(): void => setModalShowing(!modalShowing)}
+          cursor="pointer"
         />
       </StyledContainer>
       {modalShowing ? (
