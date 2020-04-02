@@ -31,6 +31,7 @@ export interface Organisers {
   isAvaible: boolean
   name: string
   place: string
+  id: string
 }
 export interface Activities {
   id: string
@@ -44,11 +45,12 @@ export interface Activities {
 
 export interface Days {
   name: string
-  days: Array<{
-    endTime: string
-    name: string
-    startTime: string
-  }>
+  days: Day[]
+}
+export interface Day {
+  endTime: string
+  date: string
+  startTime: string
 }
 
 const MainContainer = styled.div``
@@ -141,6 +143,7 @@ const Main: React.FC<Props> = (props: Props) => {
                           )}
                           allOrganisers={props.organisers}
                           days={activity.days}
+                          day={activity.day}
                         ></Activity>
                       )}
                     </React.Fragment>

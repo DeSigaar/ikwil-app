@@ -27,7 +27,7 @@ import {
   TimeIcon,
 } from 'src/assets/activity_details'
 
-import { Days, Organisers } from 'src/components/Main'
+import { Days, Organisers, Day } from 'src/components/Main'
 
 const ActivityContainer = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const ActivityContainer = styled.div`
 
 const ActivityItem = styled.div<ActivityStyleProps>`
   width: 75%;
-  max-height: ${({ toggle }) => (toggle ? '300px' : '60px')};
+  max-height: ${({ toggle }) => (toggle ? '350px' : '60px')};
   min-height: ${({ toggle }) => (toggle ? '200px' : '40px')};
   transition: 0.2s;
   box-shadow: ${colors.shadows.default};
@@ -111,7 +111,7 @@ const Detail = styled.li`
 
   span {
     margin-left: 10px;
-    max-width: 50%;
+    max-width: 70%;
   }
 `
 const DetailIcon = styled.img<DetailStyleProps>`
@@ -179,18 +179,20 @@ interface DetailStyleProps {
 }
 interface Props {
   name: string
-  organisers: string
+  organisers: string[]
   allOrganisers: Organisers[]
   repeats: boolean
   room: string
   categoryName: string
   categoryColor: string
-  days: Days[]
+  days?: Days[]
+  day?: Day[]
 }
 
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
   const [inverted, setInverted] = React.useState(false)
+
   // const [yes, setYes] = React.useState(false)
   // const [maybe, setMaybe] = React.useState(false)
   // const [no, setNo] = React.useState(false)
@@ -198,8 +200,9 @@ const Activity: React.FC<Props> = (props: Props) => {
   const activityIconSize = 36
   const detailIconSize = 17
 
+  let organiserName = ' '
   React.useEffect(() => {
-    console.log(props)
+    // console.log(props)
   })
 
   const activityIcon = (name: string, inverted: boolean) => {
@@ -284,18 +287,15 @@ const Activity: React.FC<Props> = (props: Props) => {
               </Detail>
               <Detail>
                 <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
-                <span>
-                  {/* {
-                      props.allOrganisers.map(organisers => {
-                        if (organisers.name == ) {
-
-                        }
-                        props.organisers.map(organiser => {
-
-                        })
-                      })
-                    } */}
-                </span>
+                {props.allOrganisers.map((organisers) => {
+                  props.organisers.map((organiser: string) => {
+                    if (organisers.id === organiser) {
+                      // setHasOrganiser(true)
+                      organiserName = organisers.name
+                    }
+                  })
+                })}
+                <span>{organiserName}</span>
               </Detail>
               <Detail>
                 <DetailIcon src={LocationIcon} size={detailIconSize} alt="" />
