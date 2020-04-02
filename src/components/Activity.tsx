@@ -19,7 +19,6 @@ import {
   SpiritueelInvertedIcon,
   TaalInvertedIcon,
 } from 'src/assets/activity_type'
-
 import {
   CartIcon,
   LocationIcon,
@@ -27,31 +26,31 @@ import {
   TimeIcon,
 } from 'src/assets/activity_details'
 
-import { Days, Organisers } from 'src/components/Main'
+import { Organiser, Activity as ActivityInterface } from 'src/types/database'
 
 const ActivityContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  /* padding: 10px; */
   margin-right: 10px;
   margin-top: 10px;
 `
 
 const ActivityItem = styled.div<ActivityStyleProps>`
   width: 75%;
-  max-height: ${({ toggle }) => (toggle ? '300px' : '60px')};
-  min-height: ${({ toggle }) => (toggle ? '200px' : '40px')};
+  max-height: ${({ toggle }): string => (toggle ? '300px' : '60px')};
+  min-height: ${({ toggle }): string => (toggle ? '200px' : '40px')};
   transition: 0.2s;
   box-shadow: ${colors.shadows.default};
   display: flex;
   align-items: flex-start;
   justify-items: center;
   flex-direction: column;
-  background-color: ${({ backgroundColor, inverted }) =>
+  background-color: ${({ backgroundColor, inverted }): string =>
     inverted ? backgroundColor : 'white'};
   border-radius: ${layout.borderRadius}px;
-  color: ${({ inverted }) => (inverted ? 'white' : colors.colors.darkgrey)};
+  color: ${({ inverted }): string =>
+    inverted ? 'white' : colors.colors.darkgrey};
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: ${fonts.size.normal};
@@ -83,7 +82,7 @@ const Toggle = styled.button<ToggleStyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: ${({ toggle }) => toggle && 'rotate(180deg)'};
+  transform: ${({ toggle }): any => toggle && 'rotate(180deg)'};
   transition: 0.3s;
 
   &:focus {
@@ -149,10 +148,10 @@ const ActivityButton = styled.button<ActiveStyleProps>`
   padding: 3px 9px;
   min-width: 60px;
   height: 25px;
-  color: ${({ backgroundColor }) => backgroundColor};
+  color: ${({ backgroundColor }): string => backgroundColor};
   background: unset;
   background-color: white;
-  /* background-color: ${({ backgroundColor }) => backgroundColor}; */
+  /* background-color: ${({ backgroundColor }): string => backgroundColor}; */
   font-weight: ${fonts.fontWeights.bold};
   border-radius: ${layout.borderRadiusBig}px;
 `
@@ -175,15 +174,11 @@ interface ActivityStyleProps {
 interface DetailStyleProps {
   size: number
 }
-interface Props {
-  name: string
-  organisers: string
-  allOrganisers: Organisers[]
-  repeats: boolean
-  room: string
+interface Props extends ActivityInterface {
+  organisers: string[]
+  allOrganisers: Organiser[]
   categoryName: string
   categoryColor: string
-  days: Days[]
 }
 
 const Activity: React.FC<Props> = (props: Props) => {
@@ -196,10 +191,6 @@ const Activity: React.FC<Props> = (props: Props) => {
   const activityIconSize = 36
   const detailIconSize = 17
 
-  React.useEffect(() => {
-    console.log(props)
-  })
-
   const activityIcon = (name: string, inverted: boolean) => {
     switch (name) {
       case 'Taal':
@@ -208,46 +199,39 @@ const Activity: React.FC<Props> = (props: Props) => {
         ) : (
           <Icon icon={TaalInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Spiritueel':
         return !inverted ? (
           <Icon icon={SpiritueelIcon} size={activityIconSize} />
         ) : (
           <Icon icon={SpiritueelInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Beweging':
         return !inverted ? (
           <Icon icon={BewegingIcon} size={activityIconSize} />
         ) : (
           <Icon icon={BewegingInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Kinderen':
         return !inverted ? (
           <Icon icon={KinderenIcon} size={activityIconSize} />
         ) : (
           <Icon icon={KinderenInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Sociaal':
         return !inverted ? (
           <Icon icon={SociaalIcon} size={activityIconSize} />
         ) : (
           <Icon icon={SociaalInvertedIcon} size={activityIconSize} />
         )
-        break
       case 'Creatief':
         return !inverted ? (
           <Icon icon={CreatiefIcon} size={activityIconSize} />
         ) : (
           <Icon icon={CreatiefInvertedIcon} size={activityIconSize} />
         )
-        break
 
       default:
         return <span>none</span>
-        break
     }
   }
 
