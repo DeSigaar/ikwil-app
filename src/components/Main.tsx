@@ -2,13 +2,12 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { withFirestore, isLoaded, isEmpty } from 'react-redux-firebase'
+import { isLoaded, isEmpty, firestoreConnect } from 'react-redux-firebase'
 import { RootState } from 'src/redux/store'
 import { colors } from 'src/styles'
 import { Activity } from 'src/components'
 
 interface Props {
-  firestore: any
   activities: Activities[]
   categories: Categories[]
   organisers: Organisers[]
@@ -102,9 +101,7 @@ const StyledLoading = styled.div`
 
 const Main: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
-    props.firestore.get('activities')
-    props.firestore.get('categories')
-    props.firestore.get('organisers')
+    console.log(props)
   }, [])
 
   const getSecondPart = (str: string, divider: string): string => {
@@ -168,11 +165,15 @@ const mapStateToProps = (state: RootState, ownProps: any): any => {
   }
 }
 
-const mapDispatchToProps = (dispatch: any, __ownProps: any): any => {
-  return {}
-}
+// const mapDispatchToProps = (dispatch: any, __ownProps: any): any => {
+//   return {}
+// }
 
 export default compose(
-  withFirestore,
-  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect(() => [
+    { collection: 'activities', where: [['__deleted', '==', false]] },
+    { collection: 'categories', where: [['__deleted', '==', false]] },
+    { collection: 'organisers', where: [['__deleted', '==', false]] },
+  ]),
+  connect(mapStateToProps, null),
 )(Main) as React.ComponentType
