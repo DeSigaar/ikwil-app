@@ -192,6 +192,7 @@ interface Props {
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
   const [inverted, setInverted] = React.useState(false)
+  const [aanmeldingen] = React.useState([])
 
   // const [yes, setYes] = React.useState(false)
   // const [maybe, setMaybe] = React.useState(false)
@@ -202,7 +203,7 @@ const Activity: React.FC<Props> = (props: Props) => {
 
   let organiserName = ' '
   React.useEffect(() => {
-    // console.log(props)
+    console.log(props)
   })
 
   const activityIcon = (name: string, inverted: boolean) => {
@@ -307,7 +308,7 @@ const Activity: React.FC<Props> = (props: Props) => {
                   size={detailIconSize}
                   alt=""
                 />
-                <span>{props.room} </span>
+                <span>{aanmeldingen.length} </span>
               </Detail>
             </Details>
             <Line />
