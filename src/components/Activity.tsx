@@ -201,7 +201,7 @@ const Activity: React.FC<Props> = (props: Props) => {
   const activityIconSize = 36
   const detailIconSize = 17
 
-  let organiserName = ' '
+  let organiserName = ''
   React.useEffect(() => {
     console.log(props)
   })
@@ -284,7 +284,7 @@ const Activity: React.FC<Props> = (props: Props) => {
             <Details>
               <Detail>
                 <DetailIcon src={TimeIcon} size={detailIconSize} alt="" />{' '}
-                <span> {props.room}</span>
+                {/* <span> {props.room}</span> */}
               </Detail>
               <Detail>
                 <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
