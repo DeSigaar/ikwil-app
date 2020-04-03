@@ -12,9 +12,21 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Header title="Inloggen"/>
-      <div style={{height: "auto", width: "60vw", margin: "auto", paddingTop: "3vh"}}><img src={Logo}/></div>
-      <h3 style={{textAlign: "center", padding: "3vh"}}>Welkom bij Stichting ik wil</h3>
+      <Header title="Inloggen" />
+      <div
+        style={{
+          height: 'auto',
+          width: '60vw',
+          maxWidth: '220px',
+          margin: 'auto',
+          paddingTop: '3vh',
+        }}
+      >
+        <img src={Logo} />
+      </div>
+      <h3 style={{ textAlign: 'center', padding: '3vh' }}>
+        Welkom bij Stichting ik wil
+      </h3>
       <div id="firebase-auth-container"></div>
     </>
   )
