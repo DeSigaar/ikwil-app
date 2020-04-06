@@ -174,7 +174,6 @@ const StyledBottomLabel = styled.div`
 
 const Settings: React.FC = () => {
   const [focused, setFocused] = React.useState(false)
-  let inputElement: any // eslint-disable-line @typescript-eslint/no-explicit-any
 
   return (
     <>
@@ -182,69 +181,37 @@ const Settings: React.FC = () => {
       <StyledWrapper>
         <StyledTitle>Account</StyledTitle>
         <StyledContainer focus={focused}>
-          <Icon
-            icon={NameIcon}
-            onClick={(): void => inputElement.focus()}
-            size={24}
-            cursor="pointer"
-          />
+          <Icon icon={NameIcon} size={24} cursor="pointer" />
           <StyledInput
             type="text"
             placeholder="Voornaam"
-            ref={(input): void => {
-              inputElement = input
-            }}
             onFocus={(): void => setFocused(true)}
             onBlur={(): void => setFocused(false)}
           />
         </StyledContainer>
         <StyledContainer focus={focused}>
-          <Icon
-            icon={NameIcon}
-            onClick={(): void => inputElement.focus()}
-            size={24}
-            cursor="pointer"
-          />
+          <Icon icon={NameIcon} size={24} cursor="pointer" />
           <StyledInput
             type="text"
             placeholder="Achternaam"
-            ref={(input): void => {
-              inputElement = input
-            }}
             onFocus={(): void => setFocused(true)}
             onBlur={(): void => setFocused(false)}
           />
         </StyledContainer>
         <StyledContainer focus={focused}>
-          <Icon
-            icon={MailIcon}
-            onClick={(): void => inputElement.focus()}
-            size={24}
-            cursor="pointer"
-          />
+          <Icon icon={MailIcon} size={24} cursor="pointer" />
           <StyledInput
             type="email"
             placeholder="Emailadres"
-            ref={(input): void => {
-              inputElement = input
-            }}
             onFocus={(): void => setFocused(true)}
             onBlur={(): void => setFocused(false)}
           />
         </StyledContainer>
         <StyledContainer focus={focused}>
-          <Icon
-            icon={PhoneIcon}
-            onClick={(): void => inputElement.focus()}
-            size={24}
-            cursor="pointer"
-          />
+          <Icon icon={PhoneIcon} size={24} cursor="pointer" />
           <StyledInput
             type="tel"
             placeholder="Phone"
-            ref={(input): void => {
-              inputElement = input
-            }}
             onFocus={(): void => setFocused(true)}
             onBlur={(): void => setFocused(false)}
           />
