@@ -188,6 +188,8 @@ interface Props extends ActivityInterface {
   allOrganisers: Organiser[]
   categoryName: string
   categoryColor: string
+  startDateTime: Date
+  endDateTime: Date
 }
 
 const Activity: React.FC<Props> = (props: Props) => {
@@ -284,8 +286,15 @@ const Activity: React.FC<Props> = (props: Props) => {
           <>
             <Details>
               <Detail>
-                <DetailIcon src={TimeIcon} size={detailIconSize} alt="" />{' '}
-                {/* <span> {props.room}</span> */}
+                <DetailIcon src={TimeIcon} size={detailIconSize} alt="" />
+                <span>
+                  {`${props.startDateTime.getHours()}`}:
+                  {props.startDateTime.getMinutes() <= 9 && '0'}
+                  {`${props.startDateTime.getMinutes()}`}-
+                  {`${props.endDateTime.getHours()}`}:
+                  {props.endDateTime.getMinutes() <= 9 && '0'}
+                  {`${props.endDateTime.getMinutes()}`}
+                </span>
               </Detail>
               <Detail>
                 <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
