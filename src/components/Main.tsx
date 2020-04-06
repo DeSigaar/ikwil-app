@@ -97,7 +97,6 @@ const Main: React.FC<Props> = (props: Props) => {
                           name={activity.name}
                           categoryName={category.name}
                           categoryColor={category.color}
-                          repeats={activity.repeats}
                           room={activity.room}
                           organisers={activity.organisers.map(
                             (organiser: string) =>

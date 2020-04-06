@@ -181,7 +181,6 @@ interface Props {
   name: string
   organisers: string[]
   allOrganisers: Organisers[]
-  repeats: boolean
   room: string
   categoryName: string
   categoryColor: string
@@ -290,10 +289,9 @@ const Activity: React.FC<Props> = (props: Props) => {
                 <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
                 {props.allOrganisers.map((organisers) => {
                   props.organisers.map((organiser: string) => {
-                    if (organisers.id === organiser) {
-                      // setHasOrganiser(true)
-                      organiserName = organisers.name
-                    }
+                    organisers.id === organiser
+                      ? (organiserName = organisers.name)
+                      : (organiserName = '-')
                   })
                 })}
                 <span>{organiserName}</span>
