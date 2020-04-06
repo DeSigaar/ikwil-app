@@ -40,7 +40,7 @@ const ActivityContainer = styled.div`
 
 const ActivityItem = styled.div<ActivityStyleProps>`
   width: 75%;
-  max-height: ${({ toggle }) => (toggle ? '350px' : '60px')};
+  max-height: ${({ toggle }) => (toggle ? '350px' : '85px')};
   min-height: ${({ toggle }) => (toggle ? '200px' : '40px')};
   transition: 0.2s;
   box-shadow: ${colors.shadows.default};
@@ -70,7 +70,9 @@ const LogoAndTitle = styled.div`
   align-items: center;
   max-width: 80%;
   span {
-    margin-left: 10px;
+    margin-left: ${layout.isSmallScreen ? '5' : '10'}px;
+    max-width: 75%;
+    padding: 5px;
   }
 `
 const Toggle = styled.button<ToggleStyleProps>`
@@ -134,8 +136,12 @@ const Meedoen = styled.div`
   align-items: center;
   width: 100%;
   flex-direction: column;
-  font-size: ${fonts.size.small + 3}px;
+  font-size: ${fonts.size.normal}px;
   font-weight: ${fonts.fontWeights.normal};
+
+  span {
+    text-align: center;
+  }
 `
 const Buttons = styled.div`
   display: flex;
@@ -157,6 +163,7 @@ const ActivityButton = styled.button<ActiveStyleProps>`
   /* background-color: ${({ backgroundColor }) => backgroundColor}; */
   font-weight: ${fonts.fontWeights.bold};
   border-radius: ${layout.borderRadiusBig}px;
+  font-size: ${layout.isSmallScreen ? fonts.size.small : fonts.size.normal}px;
 `
 
 interface ToggleStyleProps {
