@@ -41,20 +41,18 @@ export const ActivityItem = styled.div<ActivityItemProps>`
   width: 75vw;
   margin: ${({ first }): string =>
     first ? `0 0 ${layout.unit * 0.5}px 0` : `${layout.unit * 0.5}px 0`};
-  max-height: ${({ toggle }): string => (toggle ? '350px' : '85px')};
-  min-height: ${({ toggle }): string => (toggle ? '200px' : '40px')};
+  height: ${({ toggle }): string =>
+    toggle ? (layout.isSmallScreen ? '260px' : '240px') : '50px'};
+  overflow: hidden;
   transition: 0.3s;
   box-shadow: ${colors.shadows.default};
   display: flex;
-  align-items: flex-start;
-  justify-items: center;
   flex-direction: column;
   background-color: ${({ backgroundColor, inverted }): string =>
     inverted ? backgroundColor : colors.colors.white};
   border-radius: ${layout.borderRadius}px;
   color: ${({ inverted }): string =>
     inverted ? colors.colors.white : colors.colors.darkgrey};
-  font-size: ${fonts.size.normal};
   font-weight: ${fonts.fontWeights.bold};
   padding: 5px;
 `
@@ -69,11 +67,19 @@ export const LogoAndTitle = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  max-width: 80%;
+  max-width: 85%;
+
+  > div {
+    min-width: 40px;
+  }
+
   span {
     margin-left: ${layout.isSmallScreen ? '5' : '10'}px;
-    max-width: 75%;
     padding: 5px;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `
 export const Toggle = styled.button<ToggleStyleProps>`
@@ -86,7 +92,7 @@ export const Toggle = styled.button<ToggleStyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: ${({ toggle }): any => toggle && 'rotate(180deg)'};
+  transform: ${({ toggle }): string => (toggle ? 'rotate(180deg)' : '')};
   transition: 0.2s;
 
   &:focus {
@@ -103,6 +109,7 @@ export const Details = styled.ul`
   justify-content: flex-start;
   width: 100%;
   padding-left: 35px;
+  margin-top: 2px;
 `
 export const Detail = styled.li`
   display: flex;
