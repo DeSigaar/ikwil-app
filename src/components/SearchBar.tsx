@@ -14,7 +14,7 @@ const StyledContainer = styled.div<StyledProps>`
   height: 48px;
   width: 100%;
   border-radius: 99999px;
-  box-shadow: ${colors.shadows.xs};
+  box-shadow: ${colors.shadows.input};
   background: ${colors.colors.white};
   display: flex;
   justify-content: space-between;
