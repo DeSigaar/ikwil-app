@@ -8,13 +8,19 @@ export default styled.div`
   width: 22px;
   height: 22px;
 
-  &::after,
-  &::before {
+  &::before,
+  &::after {
     content: '';
     display: block;
     box-sizing: border-box;
     position: absolute;
     left: 3px;
+  }
+  &::before {
+    width: 16px;
+    height: 2px;
+    bottom: 10px;
+    background: currentColor;
   }
   &::after {
     width: 8px;
@@ -23,11 +29,5 @@ export default styled.div`
     border-left: 2px solid;
     transform: rotate(45deg);
     bottom: 7px;
-  }
-  &::before {
-    width: 16px;
-    height: 2px;
-    bottom: 10px;
-    background: currentColor;
   }
 `

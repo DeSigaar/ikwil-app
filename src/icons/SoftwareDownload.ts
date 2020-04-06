@@ -13,6 +13,18 @@ export default styled.div`
   border-bottom-right-radius: 2px;
   margin-top: 8px;
 
+  &::before {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 2px;
+    height: 10px;
+    background: currentColor;
+    left: 5px;
+    bottom: 5px;
+  }
   &::after {
     content: '';
     display: block;
@@ -25,17 +37,5 @@ export default styled.div`
     transform: rotate(-45deg);
     left: 2px;
     bottom: 4px;
-  }
-  &::before {
-    content: '';
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    border-radius: 3px;
-    width: 2px;
-    height: 10px;
-    background: currentColor;
-    left: 5px;
-    bottom: 5px;
   }
 `

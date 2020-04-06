@@ -9,8 +9,8 @@ export default styled.div`
   height: 2px;
   box-shadow: -3px 4px 0 0, 3px -4px 0 0;
 
-  &::after,
-  &::before {
+  &::before,
+  &::after {
     content: '';
     display: block;
     box-sizing: border-box;

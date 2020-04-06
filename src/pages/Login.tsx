@@ -12,7 +12,6 @@ const Login: React.FC = () => {
   return (
     <>
       <Header title="Inloggen" />
-
       <div id="firebase-auth-container"></div>
     </>
   )

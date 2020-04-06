@@ -1,63 +1,101 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Modal, Filter } from 'src/components'
-import SearchIcon from 'src/assets/general/icon_search_grey.svg'
+import { Modal, Filter, Icon } from 'src/components'
 import FilterIcon from 'src/assets/general/icon_filter_grey.svg'
+import { layout, colors } from 'src/styles'
+import { IconContainer, Search as SearchIcon } from 'src/icons'
 
-const StyledInput = styled.input`
-  height: 37px;
-  width: 100%;
-  border: 1px solid #e0e1e3;
-  border-radius: 20px;
-  font-size: 16px;
-  color: #bec4cb;
-  padding: 0px 40px;
-`
-
-interface BackgroundProps {
-  readonly background: string
+interface StyledProps {
+  focus: boolean
 }
 
-const StyledSearchIcon = styled.label<BackgroundProps>`
-  position: absolute;
-  margin: 10px 0px 0px 13px;
-  width: 18px;
-  height: 18px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(${(props): string => props.background});
+const StyledContainer = styled.div<StyledProps>`
+  position: relative;
+  height: 48px;
+  width: 100%;
+  border-radius: 99999px;
+  box-shadow: ${colors.shadows.xs};
+  background: ${colors.colors.white};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+
+  > div {
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
+    opacity: ${(props): number => (props.focus ? 0.75 : 0.25)};
+  }
+
+  > div:last-of-type {
+    padding: 24px;
+    opacity: 1;
+  }
 `
 
-const StyledFilterIcon = styled.label<BackgroundProps>`
+const StyledInput = styled.input`
   position: absolute;
-  margin: 11px 27px 0px 0px;
+  top: 0;
   right: 0;
-  width: 18px;
-  height: 18px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(${(props): string => props.background});
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  background: none;
+  border: none;
+  border-radius: 99999px;
+  outline: none;
+  padding: 0 ${layout.unit * 3}px;
+  font-size: 16px;
+  color: ${colors.colors.black};
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    box-shadow: inset ${colors.shadows.default};
+  }
+
+  &::placeholder {
+    color: ${colors.colors.black};
+    opacity: 0.5;
+  }
 `
 
 const SearchBar: React.FC = () => {
   const [modalShowing, setModalShowing] = React.useState(false)
+  const [focused, setFocused] = React.useState(false)
+
+  let inputElement: any // eslint-disable-line @typescript-eslint/no-explicit-any
 
   return (
-    <div>
-      <StyledSearchIcon background={SearchIcon} />
-      <StyledInput type="search" placeholder="Zoeken..." />
-      <StyledFilterIcon
-        background={FilterIcon}
-        onClick={(): void => setModalShowing(!modalShowing)}
-      />
+    <>
+      <StyledContainer focus={focused}>
+        <IconContainer onClick={(): void => inputElement.focus()} size={48}>
+          <SearchIcon />
+        </IconContainer>
+        <StyledInput
+          type="search"
+          placeholder="Zoeken..."
+          ref={(input): void => {
+            inputElement = input
+          }}
+          onFocus={(): void => setFocused(true)}
+          onBlur={(): void => setFocused(false)}
+        />
+        <Icon
+          icon={FilterIcon}
+          onClick={(): void => setModalShowing(!modalShowing)}
+          cursor="pointer"
+        />
+      </StyledContainer>
       {modalShowing ? (
-        <Modal title={'Filters'} closeModal={setModalShowing}>
+        <Modal title="Filters" closeModal={setModalShowing}>
           <Filter />
         </Modal>
       ) : (
         <></>
       )}
-    </div>
+    </>
   )
 }
 
