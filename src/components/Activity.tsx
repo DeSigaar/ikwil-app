@@ -19,7 +19,6 @@ import {
   SpiritueelInvertedIcon,
   TaalInvertedIcon,
 } from 'src/assets/activity_type'
-
 import {
   CartIcon,
   LocationIcon,
@@ -27,13 +26,12 @@ import {
   TimeIcon,
 } from 'src/assets/activity_details'
 
-import { Days, Organisers, Day } from 'src/components/Main'
+import { Organiser, Activity as ActivityInterface } from 'src/types/database'
 
 const ActivityContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  /* padding: 10px; */
   margin-right: 10px;
   margin-top: 10px;
 `
@@ -48,10 +46,11 @@ const ActivityItem = styled.div<ActivityStyleProps>`
   align-items: flex-start;
   justify-items: center;
   flex-direction: column;
-  background-color: ${({ backgroundColor, inverted }) =>
+  background-color: ${({ backgroundColor, inverted }): string =>
     inverted ? backgroundColor : 'white'};
   border-radius: ${layout.borderRadius}px;
-  color: ${({ inverted }) => (inverted ? 'white' : colors.colors.darkgrey)};
+  color: ${({ inverted }): string =>
+    inverted ? 'white' : colors.colors.darkgrey};
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: ${fonts.size.normal};
@@ -85,7 +84,7 @@ const Toggle = styled.button<ToggleStyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: ${({ toggle }) => toggle && 'rotate(180deg)'};
+  transform: ${({ toggle }): any => toggle && 'rotate(180deg)'};
   transition: 0.3s;
 
   &:focus {
@@ -157,10 +156,10 @@ const ActivityButton = styled.button<ActiveStyleProps>`
   padding: 3px 9px;
   min-width: 60px;
   height: 25px;
-  color: ${({ backgroundColor }) => backgroundColor};
+  color: ${({ backgroundColor }): string => backgroundColor};
   background: unset;
   background-color: white;
-  /* background-color: ${({ backgroundColor }) => backgroundColor}; */
+  /* background-color: ${({ backgroundColor }): string => backgroundColor}; */
   font-weight: ${fonts.fontWeights.bold};
   border-radius: ${layout.borderRadiusBig}px;
   font-size: ${layout.isSmallScreen ? fonts.size.small : fonts.size.normal}px;
@@ -184,15 +183,11 @@ interface ActivityStyleProps {
 interface DetailStyleProps {
   size: number
 }
-interface Props {
-  name: string
+interface Props extends ActivityInterface {
   organisers: string[]
-  allOrganisers: Organisers[]
-  room: string
+  allOrganisers: Organiser[]
   categoryName: string
   categoryColor: string
-  days?: Days[]
-  day?: Day[]
 }
 
 const Activity: React.FC<Props> = (props: Props) => {

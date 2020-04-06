@@ -7,6 +7,7 @@ const App: React.FC = () => {
       <Header title="Activiteiten" />
 
       <SearchBar />
+
       <Main />
     </>
   )
