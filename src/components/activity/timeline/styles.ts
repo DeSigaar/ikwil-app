@@ -92,7 +92,7 @@ export const StyledEmptyDot = styled.div`
 export const StyledYesDot = styled.div`
   width: 22px;
   height: 22px;
-  background: ${colors.colors.timelineYes};
+  background: ${colors.colors.successGreen};
   color: ${colors.colors.white};
   transform: scale(0.9);
   --ggs: 1;
@@ -126,7 +126,7 @@ export const StyledYesDot = styled.div`
 export const StyledMaybeDot = styled.div`
   width: 22px;
   height: 22px;
-  background: ${colors.colors.timelineMaybe};
+  background: ${colors.colors.warningOrange};
   color: ${colors.colors.white};
   transform: scale(0.9);
   display: flex;
@@ -137,7 +137,7 @@ export const StyledMaybeDot = styled.div`
 export const StyledNoDot = styled.div`
   width: 22px;
   height: 22px;
-  background: ${colors.colors.timelineNo};
+  background: ${colors.colors.errorRed};
   color: ${colors.colors.white};
   --ggs: 0.8;
   transform: scale(0.9);

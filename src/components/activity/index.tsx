@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { toast } from 'react-toastify'
 import ChevronGrey from 'src/assets/general/chevron_grey.svg'
 import ChevronWhite from 'src/assets/general/chevron_white.svg'
 import Icon from '../Icon'
@@ -38,9 +39,15 @@ import {
   ParticipantsIcon,
   TimeIcon,
 } from 'src/assets/activity_details'
-import { Organiser, Activity as ActivityInterface } from 'src/types/database'
+import {
+  Organiser,
+  Activity as ActivityInterface,
+  Registration,
+} from 'src/types/database'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { registerForActivity } from 'src/utils/firebase'
 
-interface Props extends ActivityInterface {
+interface Props extends ActivityInterface, RouteComponentProps {
   organisers: string[]
   allOrganisers: Organiser[]
   categoryName: string
@@ -51,17 +58,17 @@ interface Props extends ActivityInterface {
   displayMonth: boolean
   isLoggedIn: boolean
   i: number
+  registration?: Registration
 }
 
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
   const [inverted, setInverted] = React.useState(false)
   const [aanmeldingen] = React.useState([])
-  console.log(props)
 
-  // const [yes, setYes] = React.useState(false)
-  // const [maybe, setMaybe] = React.useState(false)
-  // const [no, setNo] = React.useState(false)
+  React.useEffect(() => {
+    if (props.registration) setInverted(true)
+  }, [props.registration])
 
   const activityIconSize = 36
   const detailIconSize = 17
@@ -120,7 +127,7 @@ const Activity: React.FC<Props> = (props: Props) => {
   }
 
   const toggleActivity = (): void => {
-    setInverted(!inverted)
+    if (!props.registration) setInverted(!inverted)
     setToggle(!toggle)
   }
 
@@ -132,6 +139,7 @@ const Activity: React.FC<Props> = (props: Props) => {
           displayMonth={props.displayMonth}
           startDateTime={props.startDateTime}
           first={props.i === 0}
+          status={props.registration?.status}
         />
       </ActivityTimeline>
 
@@ -195,18 +203,76 @@ const Activity: React.FC<Props> = (props: Props) => {
               <span>Meedoen met {props.name}?</span>
               {props.isLoggedIn ? (
                 <Buttons>
-                  <ActivityButton backgroundColor={props.categoryColor}>
+                  <ActivityButton
+                    categoryColor={props.categoryColor}
+                    notActive={props.registration?.status !== 'ATTENDING'}
+                    onClick={(): void => {
+                      registerForActivity(
+                        'ATTENDING',
+                        props.id,
+                        props.startDateTime,
+                      )
+                      setToggle(!toggle)
+
+                      toast.dismiss(`${props.id}${props.i}`)
+                      toast(`Je doet mee met ${props.name}!`, {
+                        type: toast.TYPE.SUCCESS,
+                        toastId: `${props.id}${props.i}`,
+                      })
+                    }}
+                  >
                     Ja
                   </ActivityButton>
-                  <ActivityButton backgroundColor={props.categoryColor}>
+                  <ActivityButton
+                    categoryColor={props.categoryColor}
+                    notActive={props.registration?.status !== 'MAYBE_ATTENDING'}
+                    onClick={(): void => {
+                      registerForActivity(
+                        'MAYBE_ATTENDING',
+                        props.id,
+                        props.startDateTime,
+                      )
+                      setToggle(!toggle)
+
+                      toast.dismiss(`${props.id}${props.i}`)
+                      toast(`Je doet misschien mee met ${props.name}!`, {
+                        type: toast.TYPE.WARNING,
+                        toastId: `${props.id}${props.i}`,
+                      })
+                    }}
+                  >
                     Misschien
                   </ActivityButton>
-                  <ActivityButton backgroundColor={props.categoryColor}>
+                  <ActivityButton
+                    categoryColor={props.categoryColor}
+                    notActive={props.registration?.status !== 'NOT_ATTENDING'}
+                    onClick={(): void => {
+                      registerForActivity(
+                        'NOT_ATTENDING',
+                        props.id,
+                        props.startDateTime,
+                      )
+                      setToggle(!toggle)
+
+                      toast.dismiss(`${props.id}${props.i}`)
+                      toast(`Je doet niet mee met ${props.name}!`, {
+                        type: toast.TYPE.ERROR,
+                        toastId: `${props.id}${props.i}`,
+                      })
+                    }}
+                  >
                     Nee
                   </ActivityButton>
                 </Buttons>
               ) : (
-                <span>ff inloggen brrur</span>
+                <Buttons>
+                  <ActivityButton
+                    categoryColor={props.categoryColor}
+                    onClick={(): void => props.history.push('/login')}
+                  >
+                    Inloggen
+                  </ActivityButton>
+                </Buttons>
               )}
             </Meedoen>
           </>
@@ -216,4 +282,4 @@ const Activity: React.FC<Props> = (props: Props) => {
   )
 }
 
-export default Activity
+export default withRouter(Activity)

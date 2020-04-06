@@ -20,36 +20,34 @@ interface Props {
   displayMonth: boolean
   startDateTime: Date
   first: boolean
+  status?: string
 }
 
 const Timeline: React.FC<Props> = (props: Props) => {
-  const { displayDay, displayMonth, startDateTime, first } = props
+  const { displayDay, displayMonth, startDateTime, first, status } = props
   const month = getShortMonthByNumber(startDateTime.getMonth())
   const day = getShortDayByNumber(startDateTime.getDay())
   let dot: React.ReactNode
 
-  // Because there is no attending state, just randomize
-  // TODO: Change this to actual value
-  switch (Math.floor(Math.random() * 4)) {
+  switch (status) {
     default:
-    case 0:
       dot = <StyledEmptyDot />
       break
-    case 1:
+    case 'ATTENDING':
       dot = (
         <StyledYesDot>
           <i className="gg-check"></i>
         </StyledYesDot>
       )
       break
-    case 2:
+    case 'MAYBE_ATTENDING':
       dot = (
         <StyledMaybeDot>
           <small>?</small>
         </StyledMaybeDot>
       )
       break
-    case 3:
+    case 'NOT_ATTENDING':
       dot = (
         <StyledNoDot>
           <i className="gg-close"></i>

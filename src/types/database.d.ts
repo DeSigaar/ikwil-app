@@ -42,3 +42,14 @@ export interface Day {
   startTime: string
   endTime: string
 }
+
+export interface Registration {
+  activity: string
+  date: RegistrationDate
+  status: string
+}
+
+export interface RegistrationDate {
+  seconds: number
+  nanoseconds: number
+}

@@ -23,23 +23,36 @@ export const ToastStyle = createGlobalStyle`
 }
 
 .Toastify__toast--success,
+.Toastify__toast--warning,
 .Toastify__toast--error,
 .Toastify__toast--info {
   color: ${colors.colors.white};
 }
 
-.Toastify__toast--warning,
+.Toastify__toast--success {
+  background: ${colors.colors.successGreen};
+}
+
+.Toastify__toast--warning {
+  background: ${colors.colors.warningOrange};
+}
+
+.Toastify__toast--error {
+  background: ${colors.colors.errorRed};
+}
+
+
 .Toastify__toast--default {
   color: ${colors.colors.black};
 }
 
 .Toastify__progress-bar--success,
+.Toastify__progress-bar--warning,
 .Toastify__progress-bar--error,
 .Toastify__progress-bar--info {
   background: ${colors.colors.white} !important;
 }
 
-.Toastify__progress-bar--warning,
 .Toastify__progress-bar--default {
   background: ${colors.colors.orange} !important;
 }

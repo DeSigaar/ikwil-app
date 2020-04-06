@@ -17,14 +17,33 @@ export interface ActivityItemProps {
   backgroundColor: string
   first: boolean
 }
+export interface ToggleStyleProps {
+  toggle: boolean
+}
+export interface ActiveStyleProps {
+  yes?: boolean
+  maybe?: boolean
+  no?: boolean
+  categoryColor: string
+  notActive?: boolean
+}
+export interface ActivityStyleProps {
+  toggle: boolean
+  inverted: boolean
+  backgroundColor: string
+}
+
+interface DetailStyleProps {
+  size: number
+}
 
 export const ActivityItem = styled.div<ActivityItemProps>`
   width: 75vw;
   margin: ${({ first }): string =>
     first ? `0 0 ${layout.unit * 0.5}px 0` : `${layout.unit * 0.5}px 0`};
-  max-height: ${({ toggle }): string => (toggle ? '300px' : '60px')};
+  max-height: ${({ toggle }): string => (toggle ? '350px' : '85px')};
   min-height: ${({ toggle }): string => (toggle ? '200px' : '40px')};
-  transition: 0.2s;
+  transition: 0.3s;
   box-shadow: ${colors.shadows.default};
   display: flex;
   align-items: flex-start;
@@ -52,15 +71,12 @@ export const LogoAndTitle = styled.div`
   align-items: center;
   max-width: 80%;
   span {
-    margin-left: 10px;
+    margin-left: ${layout.isSmallScreen ? '5' : '10'}px;
+    max-width: 75%;
+    padding: 5px;
   }
 `
-
-export interface ToggleProps {
-  toggle: boolean
-}
-
-export const Toggle = styled.button<ToggleProps>`
+export const Toggle = styled.button<ToggleStyleProps>`
   width: 40px;
   height: 40px;
   border: 0;
@@ -71,13 +87,12 @@ export const Toggle = styled.button<ToggleProps>`
   justify-content: center;
   align-items: center;
   transform: ${({ toggle }): any => toggle && 'rotate(180deg)'};
-  transition: 0.3s;
+  transition: 0.2s;
 
   &:focus {
     outline: unset;
   }
 `
-
 export const Details = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -89,29 +104,24 @@ export const Details = styled.ul`
   width: 100%;
   padding-left: 35px;
 `
-
 export const Detail = styled.li`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  margin: 3px 0;
 
   span {
     margin-left: 10px;
+    max-width: 70%;
   }
 `
-
-export interface DetailIconProps {
-  size: number
-}
-
-export const DetailIcon = styled.img<DetailIconProps>`
+export const DetailIcon = styled.img<DetailStyleProps>`
   height: ${(props): number => props.size}px;
   width: ${(props): number => props.size}px;
   margin-right: 5px;
 `
-
 export const Line = styled.hr`
   margin-top: 10px;
   margin-bottom: 10px;
@@ -122,16 +132,18 @@ export const Line = styled.hr`
   width: 90%;
   border-style: solid;
 `
-
 export const Meedoen = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   flex-direction: column;
-  font-size: ${fonts.size.small + 3}px;
+  font-size: ${fonts.size.normal}px;
   font-weight: ${fonts.fontWeights.normal};
-`
 
+  span {
+    text-align: center;
+  }
+`
 export const Buttons = styled.div`
   display: flex;
   justify-content: center;
@@ -139,23 +151,18 @@ export const Buttons = styled.div`
   width: 100%;
   margin: 10px;
 `
-
-export interface ActivityButtonProps {
-  yes?: boolean
-  maybe?: boolean
-  no?: boolean
-  backgroundColor: string
-}
-
-export const ActivityButton = styled.button<ActivityButtonProps>`
+export const ActivityButton = styled.button<ActiveStyleProps>`
   border: 0;
   margin: 0 2px;
   padding: 3px 9px;
   min-width: 60px;
   height: 25px;
-  color: ${({ backgroundColor }): string => backgroundColor};
+  color: ${({ categoryColor }): string => categoryColor};
   background: unset;
-  background-color: white;
+  background-color: ${colors.colors.white};
+  opacity: ${({ notActive }): number => (notActive ? 0.8 : 1)};
+  cursor: pointer;
   font-weight: ${fonts.fontWeights.bold};
   border-radius: ${layout.borderRadiusBig}px;
+  font-size: ${layout.isSmallScreen ? fonts.size.small : fonts.size.normal}px;
 `
