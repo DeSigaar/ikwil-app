@@ -1,11 +1,19 @@
 import * as React from 'react'
+import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { isLoaded, isEmpty, firestoreConnect } from 'react-redux-firebase'
 import { Activity, Category, Organiser } from 'src/types/database'
 import { RootState } from 'src/redux/store'
-import { colors } from 'src/styles'
+import { colors, layout } from 'src/styles'
 import { Loader, Activity as ActivityComponent } from 'src/components'
+import { getDayByString } from 'src/utils/date'
+
+const StyledTimeline = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: ${layout.unit}px;
+`
 
 interface OwnProps {}
 
@@ -77,31 +85,7 @@ const Main: React.FC<Props> = (props: Props) => {
         activity.days
           .filter((day) => day.startTime !== '' && day.endTime !== '')
           .forEach((day) => {
-            let weekday = 0
-            switch (day.name.toLowerCase()) {
-              case 'monday':
-                weekday = 1
-                break
-              case 'tuesday':
-                weekday = 2
-                break
-              case 'wednesday':
-                weekday = 3
-                break
-              case 'thursday':
-                weekday = 4
-                break
-              case 'friday':
-                weekday = 5
-                break
-              case 'saturday':
-                weekday = 6
-                break
-              case 'sunday':
-              default:
-                weekday = 0
-                break
-            }
+            const weekday = getDayByString(day.name)
 
             const amountOfDays = 14
             for (let i = 0; i < amountOfDays; i++) {
@@ -148,17 +132,43 @@ const Main: React.FC<Props> = (props: Props) => {
     })
 
     return (
-      <div className="timeline">
+      <StyledTimeline>
         {sortedActivities.map(
           (activity: SortedActivity, i): React.ReactNode => {
             const category = props.categories.find(
               (category) => category.id === activity.category.split('/')[1],
             ) || { name: '', color: '' }
+            let displayDay = true
+            let displayMonth = true
+
+            // See if activity is first of the day
+            if (
+              sortedActivities[i - 1]?.startDateTime.getFullYear() ===
+                activity.startDateTime.getFullYear() &&
+              sortedActivities[i - 1]?.startDateTime.getMonth() ===
+                activity.startDateTime.getMonth() &&
+              sortedActivities[i - 1]?.startDateTime.getDate() ===
+                activity.startDateTime.getDate()
+            ) {
+              displayDay = false
+            }
+
+            if (
+              sortedActivities[i - 1]?.startDateTime.getFullYear() ===
+                activity.startDateTime.getFullYear() &&
+              sortedActivities[i - 1]?.startDateTime.getMonth() ===
+                activity.startDateTime.getMonth()
+            ) {
+              displayMonth = false
+            }
 
             return (
               <ActivityComponent
                 key={activity.id + i}
+                i={i}
                 {...activity}
+                displayDay={displayDay}
+                displayMonth={displayMonth}
                 categoryName={category.name}
                 categoryColor={category.color}
                 organisers={activity.organisers.map(
@@ -169,7 +179,7 @@ const Main: React.FC<Props> = (props: Props) => {
             )
           },
         )}
-      </div>
+      </StyledTimeline>
     )
   }
 }
