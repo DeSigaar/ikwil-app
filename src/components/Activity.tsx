@@ -289,10 +289,10 @@ const Activity: React.FC<Props> = (props: Props) => {
                 <DetailIcon src={TimeIcon} size={detailIconSize} alt="" />
                 <span>
                   {`${props.startDateTime.getHours()}`}:
-                  {props.startDateTime.getMinutes() <= 9 && '0'}
+                  {props.startDateTime.getMinutes() < 10 && '0'}
                   {`${props.startDateTime.getMinutes()}`}-
                   {`${props.endDateTime.getHours()}`}:
-                  {props.endDateTime.getMinutes() <= 9 && '0'}
+                  {props.endDateTime.getMinutes() < 10 && '0'}
                   {`${props.endDateTime.getMinutes()}`}
                 </span>
               </Detail>
