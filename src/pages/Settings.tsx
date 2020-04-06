@@ -101,10 +101,16 @@ const StyledHorizontalRule = styled.hr`
   width: 100%;
 `
 
+const StyledToggleContainer = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`
+
 const StyledToggle = styled.label`
   position: relative;
   display: inline-block;
-  align-self: flex-start;
   width: 50px;
   height: 28px;
 
@@ -112,12 +118,12 @@ const StyledToggle = styled.label`
     position: absolute;
     cursor: pointer;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
     background-color: ${colors.colors.lightgrey};
     transition: 0.2s;
     border-radius: 34px;
+    width: 50px;
 
     &::before {
       position: absolute;
@@ -153,8 +159,7 @@ const StyledCheckbox = styled.input`
 `
 const StyledToggleLabel = styled.span`
   color: ${colors.colors.darkgrey};
-  margin: 3px 0 0 47px;
-  position: absolute;
+  margin: 3px 0 0 0px;
 `
 
 const StyledBottomLabel = styled.div`
@@ -184,7 +189,7 @@ const Settings: React.FC = () => {
             cursor="pointer"
           />
           <StyledInput
-            type="search"
+            type="text"
             placeholder="Voornaam"
             ref={(input): void => {
               inputElement = input
@@ -201,7 +206,7 @@ const Settings: React.FC = () => {
             cursor="pointer"
           />
           <StyledInput
-            type="search"
+            type="text"
             placeholder="Achternaam"
             ref={(input): void => {
               inputElement = input
@@ -218,7 +223,7 @@ const Settings: React.FC = () => {
             cursor="pointer"
           />
           <StyledInput
-            type="search"
+            type="email"
             placeholder="Emailadres"
             ref={(input): void => {
               inputElement = input
@@ -235,7 +240,7 @@ const Settings: React.FC = () => {
             cursor="pointer"
           />
           <StyledInput
-            type="search"
+            type="tel"
             placeholder="Phone"
             ref={(input): void => {
               inputElement = input
@@ -247,11 +252,13 @@ const Settings: React.FC = () => {
         <StyledButton>Wijzigingen opslaan</StyledButton>
         <StyledHorizontalRule />
         <StyledTitle>App-instellingen</StyledTitle>
-        <StyledToggle>
-          <StyledCheckbox type="checkbox"></StyledCheckbox>
-          <span className="slider"></span>
+        <StyledToggleContainer>
           <StyledToggleLabel>Notificaties</StyledToggleLabel>
-        </StyledToggle>
+          <StyledToggle>
+            <StyledCheckbox type="checkbox"></StyledCheckbox>
+            <span className="slider"></span>
+          </StyledToggle>
+        </StyledToggleContainer>
         <StyledHorizontalRule />
         <StyledBottomLabel>
           <Icon icon={HelpIcon} size={20} />
