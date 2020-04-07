@@ -9,10 +9,27 @@ import HelpIcon from 'src/assets/general/icon_settings_help.svg'
 import GlobeIcon from 'src/assets/general/icon_settings_globe.svg'
 import PrivacyIcon from 'src/assets/general/icon_settings_privacy.svg'
 import { layout, colors } from 'src/styles'
+import { connect } from 'react-redux'
+import { RootState } from 'src/redux/store'
 
 interface StyledProps {
   focus: boolean
 }
+
+
+
+interface OwnProps {}
+
+interface StateProps {
+  profile: any
+}
+
+
+
+
+type Props = OwnProps & StateProps
+
+
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -184,14 +201,20 @@ const StyledBottomLabel = styled.div`
   }
 `
 
-const Settings: React.FC = () => {
+
+
+const Settings: React.FC<Props> = (props: Props) => {
   const [focused1, setFocused1] = React.useState(false)
   const [focused2, setFocused2] = React.useState(false)
   const [focused3, setFocused3] = React.useState(false)
 
+
+
   let inputElement1: any // eslint-disable-line @typescript-eslint/no-explicit-any
   let inputElement2: any
   let inputElement3: any
+
+
 
   return (
     <>
@@ -283,4 +306,11 @@ const Settings: React.FC = () => {
   )
 }
 
-export default Settings
+const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
+  return {
+    ...ownProps,
+    profile: state.firebase.profile,
+  }
+}
+
+export default connect(mapStateToProps, null)(Settings);
