@@ -6,6 +6,7 @@ import MailIcon from 'src/assets/general/icon_settings_mail.svg'
 import PhoneIcon from 'src/assets/general/icon_settings_phone.svg'
 import HelpIcon from 'src/assets/general/icon_settings_help.svg'
 import GlobeIcon from 'src/assets/general/icon_settings_globe.svg'
+import PrivacyIcon from 'src/assets/general/icon_settings_privacy.svg'
 import { layout, colors } from 'src/styles'
 
 interface StyledProps {
@@ -176,12 +177,10 @@ const Settings: React.FC = () => {
   const [focused1, setFocused1] = React.useState(false)
   const [focused2, setFocused2] = React.useState(false)
   const [focused3, setFocused3] = React.useState(false)
-  const [focused4, setFocused4] = React.useState(false)
 
   let inputElement1: any // eslint-disable-line @typescript-eslint/no-explicit-any
   let inputElement2: any
   let inputElement3: any
-  let inputElement4: any
 
   return (
     <>
@@ -197,7 +196,7 @@ const Settings: React.FC = () => {
           />
           <StyledInput
             type="text"
-            placeholder="Voornaam"
+            placeholder="Naam"
             ref={(input): void => {
               inputElement1 = input
             }}
@@ -207,14 +206,14 @@ const Settings: React.FC = () => {
         </StyledContainer>
         <StyledContainer focus={focused2}>
           <Icon
-            icon={NameIcon}
+            icon={MailIcon}
             onClick={(): void => inputElement2.focus()}
             size={24}
             cursor="pointer"
           />
           <StyledInput
-            type="text"
-            placeholder="Achternaam"
+            type="email"
+            placeholder="Emailadres"
             ref={(input): void => {
               inputElement2 = input
             }}
@@ -224,25 +223,8 @@ const Settings: React.FC = () => {
         </StyledContainer>
         <StyledContainer focus={focused3}>
           <Icon
-            icon={MailIcon}
-            onClick={(): void => inputElement3.focus()}
-            size={24}
-            cursor="pointer"
-          />
-          <StyledInput
-            type="email"
-            placeholder="Emailadres"
-            ref={(input): void => {
-              inputElement3 = input
-            }}
-            onFocus={(): void => setFocused3(true)}
-            onBlur={(): void => setFocused3(false)}
-          />
-        </StyledContainer>
-        <StyledContainer focus={focused4}>
-          <Icon
             icon={PhoneIcon}
-            onClick={(): void => inputElement4.focus()}
+            onClick={(): void => inputElement3.focus()}
             size={24}
             cursor="pointer"
           />
@@ -250,10 +232,10 @@ const Settings: React.FC = () => {
             type="tel"
             placeholder="Phone"
             ref={(input): void => {
-              inputElement4 = input
+              inputElement3 = input
             }}
-            onFocus={(): void => setFocused4(true)}
-            onBlur={(): void => setFocused4(false)}
+            onFocus={(): void => setFocused3(true)}
+            onBlur={(): void => setFocused3(false)}
           />
         </StyledContainer>
         <StyledButton>Wijzigingen opslaan</StyledButton>
@@ -273,7 +255,11 @@ const Settings: React.FC = () => {
         </StyledBottomLabel>
         <StyledBottomLabel>
           <Icon icon={GlobeIcon} size={20} />
-          <p>Algemene voorwaarden & Privacy</p>
+          <p>Algemene voorwaarden</p>
+        </StyledBottomLabel>
+        <StyledBottomLabel>
+          <Icon icon={PrivacyIcon} size={20} />
+          <p>Privacy</p>
         </StyledBottomLabel>
       </StyledWrapper>
     </>
