@@ -216,7 +216,8 @@ const Settings: React.FC<Props> = (props: Props) => {
 
 
 
-  return (
+
+    return (
     <>
       <Header title="Instellingen" />
       <StyledWrapper>
@@ -230,6 +231,7 @@ const Settings: React.FC<Props> = (props: Props) => {
           />
           <StyledInput
             type="text"
+            defaultValue={props.profile.displayName}
             placeholder="Naam"
             ref={(input): void => {
               inputElement1 = input
@@ -247,6 +249,7 @@ const Settings: React.FC<Props> = (props: Props) => {
           />
           <StyledInput
             type="email"
+            defaultValue={props.profile.email}
             placeholder="Emailadres"
             ref={(input): void => {
               inputElement2 = input
@@ -264,6 +267,7 @@ const Settings: React.FC<Props> = (props: Props) => {
           />
           <StyledInput
             type="tel"
+            defaultValue={props.profile.phone}
             placeholder="Phone"
             ref={(input): void => {
               inputElement3 = input
