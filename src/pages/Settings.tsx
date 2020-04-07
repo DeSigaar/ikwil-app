@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Header, Icon } from 'src/components'
+import { Link } from 'react-router-dom'
 import NameIcon from 'src/assets/general/icon_settings_name.svg'
 import MailIcon from 'src/assets/general/icon_settings_mail.svg'
 import PhoneIcon from 'src/assets/general/icon_settings_phone.svg'
@@ -19,6 +20,12 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   margin-top: 10px;
   padding: 0px 15px;
+  max-width: 400px;
+  margin: auto;
+
+  a {
+    text-decoration: none;
+  }
 `
 
 const StyledTitle = styled.h2`
@@ -161,6 +168,10 @@ const StyledCheckbox = styled.input`
 const StyledToggleLabel = styled.span`
   color: ${colors.colors.darkgrey};
   margin: 3px 0 0 0px;
+
+  a {
+    text-decoration: none;
+  }
 `
 
 const StyledBottomLabel = styled.div`
@@ -249,18 +260,24 @@ const Settings: React.FC = () => {
           </StyledToggle>
         </StyledToggleContainer>
         <StyledHorizontalRule />
-        <StyledBottomLabel>
-          <Icon icon={HelpIcon} size={20} />
-          <p>Help & ondersteuning</p>
-        </StyledBottomLabel>
-        <StyledBottomLabel>
-          <Icon icon={GlobeIcon} size={20} />
-          <p>Algemene voorwaarden</p>
-        </StyledBottomLabel>
-        <StyledBottomLabel>
-          <Icon icon={PrivacyIcon} size={20} />
-          <p>Privacy</p>
-        </StyledBottomLabel>
+        <Link to="/help">
+          <StyledBottomLabel>
+            <Icon icon={HelpIcon} size={20} />
+            <p>Help & ondersteuning</p>
+          </StyledBottomLabel>
+        </Link>
+        <Link to="/terms-of-service">
+          <StyledBottomLabel>
+            <Icon icon={GlobeIcon} size={20} />
+            <p>Terms of Service</p>
+          </StyledBottomLabel>
+        </Link>
+        <Link to="/login">
+          <StyledBottomLabel>
+            <Icon icon={PrivacyIcon} size={20} />
+            <p>Privacy</p>
+          </StyledBottomLabel>
+        </Link>
       </StyledWrapper>
     </>
   )
