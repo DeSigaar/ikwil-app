@@ -67,8 +67,12 @@ const Activity: React.FC<Props> = (props: Props) => {
   const [aanmeldingen] = React.useState([])
 
   React.useEffect(() => {
-    if (props.registration) setInverted(true)
-  }, [props.registration])
+    !toggle
+      ? props.registration
+        ? setInverted(true)
+        : setInverted(false)
+      : setInverted(true)
+  }, [props.registration, toggle])
 
   const activityIconSize = 36
   const detailIconSize = 17
