@@ -14,9 +14,9 @@ export const colors = {
   darkgrey: '#727272',
   modalOverlayBackground: 'rgba(0, 0, 0, 0.3)',
   timeline: 'rgba(0, 0, 0, 0.1)',
-  timelineYes: '#32C671',
-  timelineMaybe: '#FFAA00',
-  timelineNo: '#F56565',
+  successGreen: '#32C671',
+  warningOrange: '#FFAA00',
+  errorRed: '#F56565',
 }
 
 export const shadows = {

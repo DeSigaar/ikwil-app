@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { isLoaded, isEmpty, firestoreConnect } from 'react-redux-firebase'
-import { Activity, Category, Organiser } from 'src/types/database'
+import { Activity, Category, Organiser, Registration } from 'src/types/database'
 import { RootState } from 'src/redux/store'
 import { colors, layout } from 'src/styles'
 import { Loader, Activity as ActivityComponent } from 'src/components'
@@ -18,11 +18,13 @@ const StyledTimeline = styled.div`
 interface OwnProps {}
 
 interface StateProps {
+  uid: string
   isLoggedIn: boolean
   isInstallPromptSet: boolean
   activities: Activity[]
   categories: Category[]
   organisers: Organiser[]
+  registrations: Registration[]
 }
 
 type Props = OwnProps & StateProps
@@ -47,9 +49,26 @@ const Main: React.FC<Props> = (props: Props) => {
         text="Categorieën laden..."
       />
     )
-  else if (isEmpty(props.categories)) return <p>Geen categorieën gevonden.</p>
+  else if (!isLoaded(props.organisers))
+    return (
+      <Loader
+        height="500px"
+        scale={2.5}
+        color={colors.colors.orange}
+        text="Organisatoren laden..."
+      />
+    )
+  else if (!isLoaded(props.registrations))
+    return (
+      <Loader
+        height="500px"
+        scale={2.5}
+        color={colors.colors.orange}
+        text="Aanmeldingen laden..."
+      />
+    )
   else {
-    const { activities } = props
+    const { activities, registrations } = props
 
     interface SortedActivity extends Activity {
       startDateTime: Date
@@ -149,18 +168,23 @@ const Main: React.FC<Props> = (props: Props) => {
                 activity.startDateTime.getMonth() &&
               sortedActivities[i - 1]?.startDateTime.getDate() ===
                 activity.startDateTime.getDate()
-            ) {
+            )
               displayDay = false
-            }
 
             if (
               sortedActivities[i - 1]?.startDateTime.getFullYear() ===
                 activity.startDateTime.getFullYear() &&
               sortedActivities[i - 1]?.startDateTime.getMonth() ===
                 activity.startDateTime.getMonth()
-            ) {
+            )
               displayMonth = false
-            }
+
+            const registration = registrations.find(
+              (_registration) =>
+                _registration.activity.split('/')[1] === activity.id &&
+                new Date(_registration.date.seconds * 1000).toISOString() ===
+                  activity.startDateTime.toISOString(),
+            )
 
             return (
               <ActivityComponent
@@ -175,6 +199,8 @@ const Main: React.FC<Props> = (props: Props) => {
                   (organiser) => organiser.split('/')[1],
                 )}
                 allOrganisers={props.organisers}
+                isLoggedIn={props.isLoggedIn}
+                registration={registration}
               ></ActivityComponent>
             )
           },
@@ -187,19 +213,27 @@ const Main: React.FC<Props> = (props: Props) => {
 const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   return {
     ...ownProps,
+    uid: state.firebase.auth.uid || 'noUID',
     isLoggedIn: !state.firebase.auth.isEmpty,
     isInstallPromptSet: !!state.app.installPrompt,
     activities: state.firestore.ordered.activities,
     categories: state.firestore.ordered.categories,
     organisers: state.firestore.ordered.organisers,
+    registrations: state.firestore.ordered.registrations,
   }
 }
 
 export default compose(
-  firestoreConnect(() => [
+  connect(mapStateToProps, null),
+  firestoreConnect((props: any) => [
     { collection: 'activities', where: [['__deleted', '==', false]] },
     { collection: 'categories', where: [['__deleted', '==', false]] },
     { collection: 'organisers', where: [['__deleted', '==', false]] },
+    {
+      collection: 'users',
+      doc: props.uid,
+      storeAs: 'registrations',
+      subcollections: [{ collection: 'registrations' }],
+    },
   ]),
-  connect(mapStateToProps, null),
 )(Main) as React.ComponentType
