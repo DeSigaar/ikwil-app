@@ -173,18 +173,25 @@ const StyledBottomLabel = styled.div`
 `
 
 const Settings: React.FC = () => {
-  const [focused, setFocused] = React.useState(false)
-  let inputElement: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  const [focused1, setFocused1] = React.useState(false)
+  const [focused2, setFocused2] = React.useState(false)
+  const [focused3, setFocused3] = React.useState(false)
+  const [focused4, setFocused4] = React.useState(false)
+
+  let inputElement1: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  let inputElement2: any
+  let inputElement3: any
+  let inputElement4: any
 
   return (
     <>
       <Header title="Instellingen" />
       <StyledWrapper>
         <StyledTitle>Account</StyledTitle>
-        <StyledContainer focus={focused}>
+        <StyledContainer focus={focused1}>
           <Icon
             icon={NameIcon}
-            onClick={(): void => inputElement.focus()}
+            onClick={(): void => inputElement1.focus()}
             size={24}
             cursor="pointer"
           />
@@ -192,16 +199,16 @@ const Settings: React.FC = () => {
             type="text"
             placeholder="Voornaam"
             ref={(input): void => {
-              inputElement = input
+              inputElement1 = input
             }}
-            onFocus={(): void => setFocused(true)}
-            onBlur={(): void => setFocused(false)}
+            onFocus={(): void => setFocused1(true)}
+            onBlur={(): void => setFocused1(false)}
           />
         </StyledContainer>
-        <StyledContainer focus={focused}>
+        <StyledContainer focus={focused2}>
           <Icon
             icon={NameIcon}
-            onClick={(): void => inputElement.focus()}
+            onClick={(): void => inputElement2.focus()}
             size={24}
             cursor="pointer"
           />
@@ -209,16 +216,16 @@ const Settings: React.FC = () => {
             type="text"
             placeholder="Achternaam"
             ref={(input): void => {
-              inputElement = input
+              inputElement2 = input
             }}
-            onFocus={(): void => setFocused(true)}
-            onBlur={(): void => setFocused(false)}
+            onFocus={(): void => setFocused2(true)}
+            onBlur={(): void => setFocused2(false)}
           />
         </StyledContainer>
-        <StyledContainer focus={focused}>
+        <StyledContainer focus={focused3}>
           <Icon
             icon={MailIcon}
-            onClick={(): void => inputElement.focus()}
+            onClick={(): void => inputElement3.focus()}
             size={24}
             cursor="pointer"
           />
@@ -226,16 +233,16 @@ const Settings: React.FC = () => {
             type="email"
             placeholder="Emailadres"
             ref={(input): void => {
-              inputElement = input
+              inputElement3 = input
             }}
-            onFocus={(): void => setFocused(true)}
-            onBlur={(): void => setFocused(false)}
+            onFocus={(): void => setFocused3(true)}
+            onBlur={(): void => setFocused3(false)}
           />
         </StyledContainer>
-        <StyledContainer focus={focused}>
+        <StyledContainer focus={focused4}>
           <Icon
             icon={PhoneIcon}
-            onClick={(): void => inputElement.focus()}
+            onClick={(): void => inputElement4.focus()}
             size={24}
             cursor="pointer"
           />
@@ -243,10 +250,10 @@ const Settings: React.FC = () => {
             type="tel"
             placeholder="Phone"
             ref={(input): void => {
-              inputElement = input
+              inputElement4 = input
             }}
-            onFocus={(): void => setFocused(true)}
-            onBlur={(): void => setFocused(false)}
+            onFocus={(): void => setFocused4(true)}
+            onBlur={(): void => setFocused4(false)}
           />
         </StyledContainer>
         <StyledButton>Wijzigingen opslaan</StyledButton>
