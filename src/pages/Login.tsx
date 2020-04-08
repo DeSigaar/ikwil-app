@@ -7,7 +7,6 @@ import Logo from 'src/assets/general/logo-stichting-ik-wil.svg'
 import { colors } from 'src/styles/colors'
 import styled from 'styled-components'
 
-
 const StyledLogo = styled.div`
   height: auto;
   width: 60vw;
@@ -18,9 +17,8 @@ const StyledLogo = styled.div`
 const StyledTitle = styled.h3`
   text-align: center;
   padding: 3vh;
-  color : ${colors.darkgrey};
+  color: ${colors.darkgrey};
 `
-
 
 const Login: React.FC = () => {
   React.useEffect(() => {
@@ -31,12 +29,10 @@ const Login: React.FC = () => {
     <>
       <Header title="Inloggen" />
       <StyledLogo>
-        <img src={Logo} alt="Ik_wil_logo"/>
+        <img src={Logo} alt="Ik_wil_logo" />
       </StyledLogo>
-     
-      <StyledTitle>
-        Welkom bij Stichting ik wil
-      </StyledTitle>
+
+      <StyledTitle>Welkom bij Stichting Ik Wil</StyledTitle>
       <div id="firebase-auth-container"></div>
     </>
   )
