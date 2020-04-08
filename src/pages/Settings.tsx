@@ -208,11 +208,11 @@ const Settings: React.FC<Props> = (props: Props) => {
     else if (event.target.name === 'email') setEmail(event.target.value)
     else if (event.target.name === 'phone') setPhone(event.target.value)
   }
-  const saveSettings = (): void => {
 
+  const saveSettings = (): void => {
     // Save naar firebase
-      displayName: name,
     fireStore.collection('users').doc(props.profile.id).update({
+      displayName: name,
       email,
       phone,
     })
