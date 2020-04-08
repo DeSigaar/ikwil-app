@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Header, Icon } from 'src/components'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import NameIcon from 'src/assets/general/icon_settings_name.svg'
 import MailIcon from 'src/assets/general/icon_settings_mail.svg'
 import PhoneIcon from 'src/assets/general/icon_settings_phone.svg'
@@ -20,11 +20,11 @@ interface StyledProps {
 interface OwnProps {}
 
 interface StateProps {
+  isLoggedIn: boolean
   profile: any
 }
 
-type Props = OwnProps & StateProps
-
+type Props = OwnProps & StateProps & RouteComponentProps
 const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -208,11 +208,11 @@ const Settings: React.FC<Props> = (props: Props) => {
     else if (event.target.name === 'email') setEmail(event.target.value)
     else if (event.target.name === 'phone') setPhone(event.target.value)
   }
-
   const saveSettings = (): void => {
+
     // Save naar firebase
-    fireStore.collection('users').doc(props.profile.id).update({
       displayName: name,
+    fireStore.collection('users').doc(props.profile.id).update({
       email,
       phone,
     })
@@ -221,6 +221,10 @@ const Settings: React.FC<Props> = (props: Props) => {
   let inputElement1: any
   let inputElement2: any
   let inputElement3: any
+
+  React.useEffect(() => {
+    if (!props.isLoggedIn) props.history.push('/login')
+  }, [props.isLoggedIn, props.history])
 
   return (
     <>
@@ -325,6 +329,7 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   return {
     ...ownProps,
     profile: state.firebase.profile,
+    isLoggedIn: !state.firebase.auth.isEmpty,
   }
 }
 

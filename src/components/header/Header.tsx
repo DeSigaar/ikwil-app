@@ -220,14 +220,16 @@ const Header: React.FC<Props> = (props: Props) => {
                 </IconContainer>
               </StyledDropdownItem>
             )}
-            <StyledDropdownItem
-              onClick={(): void => props.history.push('/instellingen')}
-            >
-              Instellingen
-              <IconContainer>
-                <OptionsIcon />
-              </IconContainer>
-            </StyledDropdownItem>
+            {props.isLoggedIn && (
+              <StyledDropdownItem
+                onClick={(): void => props.history.push('/instellingen')}
+              >
+                Instellingen
+                <IconContainer>
+                  <OptionsIcon />
+                </IconContainer>
+              </StyledDropdownItem>
+            )}
             <StyledDropdownItem
               onClick={(): void => {
                 props.isLoggedIn
