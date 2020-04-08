@@ -2,7 +2,7 @@ import * as React from 'react'
 import 'firebaseui/dist/firebaseui.css'
 import { fireUI } from 'src/utils/firebase'
 import configFirebaseUI from 'src/config/firebaseUI'
-import { Header } from 'src/components'
+import { Header, BackgroundLogo } from 'src/components'
 import Logo from 'src/assets/general/logo-stichting-ik-wil.svg'
 import { colors } from 'src/styles/colors'
 import styled from 'styled-components'
@@ -28,6 +28,7 @@ const Login: React.FC = () => {
   return (
     <>
       <Header title="Inloggen" />
+      <BackgroundLogo />
       <StyledLogo>
         <img src={Logo} alt="Ik_wil_logo" />
       </StyledLogo>
