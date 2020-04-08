@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Header, Icon } from 'src/components'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import NameIcon from 'src/assets/general/icon_settings_name.svg'
 import MailIcon from 'src/assets/general/icon_settings_mail.svg'
 import PhoneIcon from 'src/assets/general/icon_settings_phone.svg'
@@ -16,20 +16,14 @@ interface StyledProps {
   focus: boolean
 }
 
-
-
 interface OwnProps {}
 
 interface StateProps {
+  isLoggedIn: boolean
   profile: any
 }
 
-
-
-
-type Props = OwnProps & StateProps
-
-
+type Props = OwnProps & StateProps & RouteComponentProps
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -201,20 +195,18 @@ const StyledBottomLabel = styled.div`
   }
 `
 
-
-
 const Settings: React.FC<Props> = (props: Props) => {
   const [focused1, setFocused1] = React.useState(false)
   const [focused2, setFocused2] = React.useState(false)
   const [focused3, setFocused3] = React.useState(false)
 
-
-
   let inputElement1: any // eslint-disable-line @typescript-eslint/no-explicit-any
   let inputElement2: any
   let inputElement3: any
 
-
+  React.useEffect(() => {
+    if (!props.isLoggedIn) props.history.push('/login')
+  }, [props.isLoggedIn, props.history])
 
   return (
     <>
@@ -310,7 +302,8 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   return {
     ...ownProps,
     profile: state.firebase.profile,
+    isLoggedIn: !state.firebase.auth.isEmpty,
   }
 }
 
-export default connect(mapStateToProps, null)(Settings);
+export default connect(mapStateToProps, null)(Settings)
