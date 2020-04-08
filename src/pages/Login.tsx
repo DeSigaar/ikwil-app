@@ -2,7 +2,7 @@ import * as React from 'react'
 import 'firebaseui/dist/firebaseui.css'
 import { fireUI } from 'src/utils/firebase'
 import configFirebaseUI from 'src/config/firebaseUI'
-import { Header } from 'src/components'
+import { Header, BackgroundLogo } from 'src/components'
 
 const Login: React.FC = () => {
   React.useEffect(() => {
@@ -12,6 +12,7 @@ const Login: React.FC = () => {
   return (
     <>
       <Header title="Inloggen" />
+      <BackgroundLogo />
       <div id="firebase-auth-container"></div>
     </>
   )

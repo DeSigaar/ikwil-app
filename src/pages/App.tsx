@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Header, SearchBar, Main } from 'src/components'
+import { Header, SearchBar, BackgroundLogo, Main } from 'src/components'
 
 const App: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const App: React.FC = () => {
       <Header title="Activiteiten" />
 
       <SearchBar />
-
+      <BackgroundLogo />
       <Main />
     </>
   )

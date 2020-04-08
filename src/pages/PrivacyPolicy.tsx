@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Header } from 'src/components'
+import { Header, BackgroundLogo } from 'src/components'
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <>
       <Header title="Privacy Policy" />
-
+      <BackgroundLogo />
       <div>
         <div>
           <small>Version 1.0.0</small>
