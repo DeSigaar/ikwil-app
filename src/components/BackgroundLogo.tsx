@@ -13,10 +13,10 @@ const StyledLogo = styled.div<BackgroundProps>`
   width: 500px;
   height: 500px;
   position: fixed;
-  right: 0;
-  margin-right: -220px;
+  right: -220px;
   opacity: 0.15;
   z-index: -9999;
+  bottom: 10vh;
 `
 
 const BackgroundLogo: React.FC = () => {
