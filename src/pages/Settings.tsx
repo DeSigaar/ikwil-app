@@ -314,10 +314,10 @@ const Settings: React.FC<Props> = (props: Props) => {
             <p>Terms of Service</p>
           </StyledBottomLabel>
         </Link>
-        <Link to="/login">
+        <Link to="/privacy">
           <StyledBottomLabel>
             <Icon icon={PrivacyIcon} size={20} />
-            <p>Privacy</p>
+            <p>Privacy Policy</p>
           </StyledBottomLabel>
         </Link>
       </StyledWrapper>
