@@ -11,12 +11,11 @@ import PrivacyIcon from 'src/assets/general/icon_settings_privacy.svg'
 import { layout, colors } from 'src/styles'
 import { connect } from 'react-redux'
 import { RootState } from 'src/redux/store'
+import { fireStore } from 'src/utils/firebase'
 
 interface StyledProps {
   focus: boolean
 }
-
-
 
 interface OwnProps {}
 
@@ -24,12 +23,7 @@ interface StateProps {
   profile: any
 }
 
-
-
-
 type Props = OwnProps & StateProps
-
-
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -201,23 +195,34 @@ const StyledBottomLabel = styled.div`
   }
 `
 
-
-
 const Settings: React.FC<Props> = (props: Props) => {
   const [focused1, setFocused1] = React.useState(false)
   const [focused2, setFocused2] = React.useState(false)
   const [focused3, setFocused3] = React.useState(false)
+  const [name, setName] = React.useState(props.profile.displayName)
+  const [email, setEmail] = React.useState(props.profile.email)
+  const [phone, setPhone] = React.useState(props.profile.phone)
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.name === 'name') setName(event.target.value)
+    else if (event.target.name === 'email') setEmail(event.target.value)
+    else if (event.target.name === 'phone') setPhone(event.target.value)
+  }
 
+  const saveSettings = (): void => {
+    // Save naar firebase
+    fireStore.collection('users').doc(props.profile.id).update({
+      displayName: name,
+      email,
+      phone,
+    })
+  }
 
-  let inputElement1: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  let inputElement1: any
   let inputElement2: any
   let inputElement3: any
 
-
-
-
-    return (
+  return (
     <>
       <Header title="Instellingen" />
       <StyledWrapper>
@@ -231,13 +236,15 @@ const Settings: React.FC<Props> = (props: Props) => {
           />
           <StyledInput
             type="text"
-            defaultValue={props.profile.displayName}
+            name="name"
             placeholder="Naam"
+            value={name}
             ref={(input): void => {
               inputElement1 = input
             }}
             onFocus={(): void => setFocused1(true)}
             onBlur={(): void => setFocused1(false)}
+            onChange={handleChange}
           />
         </StyledContainer>
         <StyledContainer focus={focused2}>
@@ -249,13 +256,15 @@ const Settings: React.FC<Props> = (props: Props) => {
           />
           <StyledInput
             type="email"
-            defaultValue={props.profile.email}
+            name="email"
             placeholder="Emailadres"
             ref={(input): void => {
               inputElement2 = input
             }}
             onFocus={(): void => setFocused2(true)}
             onBlur={(): void => setFocused2(false)}
+            value={email}
+            onChange={handleChange}
           />
         </StyledContainer>
         <StyledContainer focus={focused3}>
@@ -267,16 +276,18 @@ const Settings: React.FC<Props> = (props: Props) => {
           />
           <StyledInput
             type="tel"
-            defaultValue={props.profile.phone}
+            name="phone"
+            value={phone}
             placeholder="Phone"
             ref={(input): void => {
               inputElement3 = input
             }}
             onFocus={(): void => setFocused3(true)}
             onBlur={(): void => setFocused3(false)}
+            onChange={handleChange}
           />
         </StyledContainer>
-        <StyledButton>Wijzigingen opslaan</StyledButton>
+        <StyledButton onClick={saveSettings}>Wijzigingen opslaan</StyledButton>
         <StyledHorizontalRule />
         <StyledTitle>App-instellingen</StyledTitle>
         <StyledToggleContainer>
@@ -317,4 +328,4 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   }
 }
 
-export default connect(mapStateToProps, null)(Settings);
+export default connect(mapStateToProps, null)(Settings)
