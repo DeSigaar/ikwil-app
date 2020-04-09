@@ -1,6 +1,25 @@
 import * as React from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Header } from 'src/components'
+import { colors } from 'src/styles'
+
+const StyledVersion = styled.div`
+  padding: 15px 0;
+`
+
+const StyledParagraph = styled.p`
+  padding: 0 0 20px;
+`
+
+const StyledHeading = styled.h3`
+  padding: 20px 0 5px;
+  color: ${colors.colors.orange};
+`
+
+const StyledList = styled.ul`
+  padding: 0 0 20px 20px;
+`
 
 const TermsOfService: React.FC = () => {
   return (
@@ -8,11 +27,11 @@ const TermsOfService: React.FC = () => {
       <Header title="Terms of Service" />
 
       <div>
-        <div>
+        <StyledVersion>
           <small>Version 1.0.0</small>
-        </div>
+        </StyledVersion>
 
-        <p>
+        <StyledParagraph>
           The Ik Wil App website located at{' '}
           <Link to=";https://ikwil-app.web.app/">
             https://ikwil-app.web.app/
@@ -21,14 +40,14 @@ const TermsOfService: React.FC = () => {
           Ik Wil App may be subject to additional guidelines, terms, or rules,
           which will be posted on the Ik Wil App in connection with such
           features.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           All such additional terms, guidelines, and rules are incorporated by
           reference into these Terms.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           These Terms of Service described the legally binding terms and
           conditions that oversee your use of the Ik Wil App.BY LOGGING INTO THE
           SITE, YOU ARE BEING COMPLIANT THAT THESE TERMS and you represent that
@@ -36,23 +55,23 @@ const TermsOfService: React.FC = () => {
           SHOULD BE AT LEAST 18 YEARS OF AGE TO ACCESS THE SITE. IF YOU DISAGREE
           WITH ALL OF THE PROVISION OF THESE TERMS, DO NOT LOG INTO AND/OR USE
           THE SITE.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           These terms require the use of arbitration Section 10.2 on an
           individual basis to resolve disputes and also limit the remedies
           available to you in the event of a dispute.
-        </p>
+        </StyledParagraph>
 
-        <h2>Access to the Ik Wil App</h2>
+        <StyledHeading>Access to the Ik Wil App</StyledHeading>
 
-        <p>
+        <StyledParagraph>
           <strong>Subject to these Terms.</strong> Ik Wil App grants you a
           non-transferable, non-exclusive, revocable, limited license to access
           the Ik Wil App solely for your own personal, noncommercial use.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Certain Restrictions.</strong> The rights approved to you in
           these Terms are subject to the following restrictions: (a) you shall
           not sell, rent, lease, transfer, assign, distribute, host, or
@@ -67,22 +86,22 @@ const TermsOfService: React.FC = () => {
           functionality of the Ik Wil App shall be subject to these Terms. All
           copyright and other proprietary notices on the Ik Wil App must be
           retained on all copies thereof.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           Ik Wil App reserves the right to change, suspend, or cease the Ik Wil
           App with or without notice to you. You approved that Ik Wil App will
           not be held liable to you or any third-party for any change,
           interruption, or termination of the Ik Wil App or any part.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>No Support or Maintenance.</strong> You agree that Ik Wil App
           will have no obligation to provide you with any support in connection
           with the Ik Wil App.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           Excluding any Servicer Content that you may provide, you are aware
           that all the intellectual property rights, including copyrights,
           patents, trademarks, and trade secrets, in the Ik Wil App and its
@@ -91,11 +110,11 @@ const TermsOfService: React.FC = () => {
           title or interest in or to any intellectual property rights, except
           for the limited access rights expressed in Section 2.1. Ik Wil App and
           its suppliers reserve all rights not granted in these Terms.
-        </p>
+        </StyledParagraph>
 
-        <h2>Third-Party Links & Ads; Other Servicers</h2>
+        <StyledHeading>Third-Party Links & Ads; Other Servicers</StyledHeading>
 
-        <p>
+        <StyledParagraph>
           <strong>Third-Party Links & Ads.</strong> The Ik Wil App may contain
           links to third-party websites and services, and/or display
           advertisements for third-parties. Such Third-Party Links & Ads are not
@@ -109,9 +128,9 @@ const TermsOfService: React.FC = () => {
           the Third-Party Links & Ads, the applicable third party’s terms and
           policies apply, including the third party’s privacy and data gathering
           practices.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Other Servicers.</strong> Each Ik Wil App user is solely
           responsible for any and all of its own Servicer Content. Because we do
           not control Servicer Content, you acknowledge and agree that we are
@@ -120,9 +139,9 @@ const TermsOfService: React.FC = () => {
           loss or damage incurred as the result of any such interactions. If
           there is a dispute between you and any Ik Wil App user, we are under
           no obligation to become involved.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           You hereby release and forever discharge the Ik Wil App and our
           officers, employees, agents, successors, and assigns from, and hereby
           waive and relinquish, each and every past, present and future dispute,
@@ -135,11 +154,11 @@ const TermsOfService: React.FC = () => {
           the creditor does not know or suspect to exist in his or her favor at
           the time of executing the release, which if known by him or her must
           have materially affected his or her settlement with the debtor.&apos;
-        </p>
+        </StyledParagraph>
 
-        <h2>Disclaimers</h2>
+        <StyledHeading>Disclaimers</StyledHeading>
 
-        <p>
+        <StyledParagraph>
           The site is provided on an &apos;as-is&apos; and &apos;as
           available&apos; basis, and company and our suppliers expressly
           disclaim any and all warranties and conditions of any kind, whether
@@ -152,18 +171,18 @@ const TermsOfService: React.FC = () => {
           complete, legal, or safe. If applicable law requires any warranties
           with respect to the site, all such warranties are limited in duration
           to ninety (90) days from the date of first use.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           Some jurisdictions do not allow the exclusion of implied warranties,
           so the above exclusion may not apply to you. Some jurisdictions do not
           allow limitations on how long an implied warranty lasts, so the above
           limitation may not apply to you.
-        </p>
+        </StyledParagraph>
 
-        <h2>Limitation on Liability</h2>
+        <StyledHeading>Limitation on Liability</StyledHeading>
 
-        <p>
+        <StyledParagraph>
           To the maximum extent permitted by law, in no event shall company or
           our suppliers be liable to you or any third-party for any lost
           profits, lost data, costs of procurement of substitute products, or
@@ -174,9 +193,9 @@ const TermsOfService: React.FC = () => {
           at your own discretion and risk, and you will be solely responsible
           for any damage to your device or computer system, or loss of data
           resulting therefrom.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           To the maximum extent permitted by law, notwithstanding anything to
           the contrary contained herein, our liability to you for any damages
           arising from or related to this agreement, will at all times be
@@ -184,15 +203,15 @@ const TermsOfService: React.FC = () => {
           of more than one claim will not enlarge this limit. You agree that our
           suppliers will have no liability of any kind arising from or relating
           to this agreement.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           Some jurisdictions do not allow the limitation or exclusion of
           liability for incidental or consequential damages, so the above
           limitation or exclusion may not apply to you.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Term and Termination.</strong> Subject to this Section, these
           Terms will remain in full force and effect while you use the Ik Wil
           App. We may suspend or terminate your rights to use the Ik Wil App at
@@ -207,11 +226,11 @@ const TermsOfService: React.FC = () => {
           Terms are terminated, the following provisions of these Terms will
           remain in effect: Sections 2 through 2.5, Section 3 and Sections 4
           through 10.
-        </p>
+        </StyledParagraph>
 
-        <h2>Copyright Policy.</h2>
+        <StyledHeading>Copyright Policy.</StyledHeading>
 
-        <p>
+        <StyledParagraph>
           Ik Wil App respects the intellectual property of others and asks that
           users of our Ik Wil App do the same. In connection with our Ik Wil
           App, we have adopted and implemented a policy respecting copyright law
@@ -223,9 +242,9 @@ const TermsOfService: React.FC = () => {
           have the allegedly infringing material removed, the following
           information in the form of a written notification (pursuant to 17
           U.S.C. § 512(c)) must be provided to our designated Copyright Agent:
-        </p>
+        </StyledParagraph>
 
-        <ul>
+        <StyledList>
           <li>your physical or electronic signature;</li>
           <li>
             identification of the copyrighted work(s) that you claim to have
@@ -248,19 +267,19 @@ const TermsOfService: React.FC = () => {
             copyright that has allegedly been infringed or that you are
             authorized to act on behalf of the copyright owner.
           </li>
-        </ul>
+        </StyledList>
 
-        <p>
+        <StyledParagraph>
           Please note that, pursuant to 17 U.S.C. § 512(f), any
           misrepresentation of material fact in a written notification
           automatically subjects the complaining party to liability for any
           damages, costs and attorney’s fees incurred by us in connection with
           the written notification and allegation of copyright infringement.
-        </p>
+        </StyledParagraph>
 
-        <h2>General</h2>
+        <StyledHeading>General</StyledHeading>
 
-        <p>
+        <StyledParagraph>
           These Terms are subject to occasional revision, and if we make any
           substantial changes, we may notify you by sending you an e-mail to the
           last e-mail address you provided to us and/or by prominently posting
@@ -280,9 +299,9 @@ const TermsOfService: React.FC = () => {
           Arbitration Agreement carefully. It is part of your contract with Ik
           Wil App and affects your rights. It contains procedures for MANDATORY
           BINDING ARBITRATION AND A CLASS ACTION WAIVER.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Applicability of Arbitration Agreement.</strong> All claims
           and disputes in connection with the Terms or the use of any product or
           service provided by the Ik Wil App that cannot be resolved informally
@@ -294,9 +313,9 @@ const TermsOfService: React.FC = () => {
           predecessors in interest, successors, and assigns, as well as all
           authorized or unauthorized users or beneficiaries of services or goods
           provided under the Terms.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Notice Requirement and Informal Dispute Resolution.</strong>{' '}
           Before either party may seek arbitration, the party must first send to
           the other party a written Notice of Dispute describing the nature and
@@ -309,9 +328,9 @@ const TermsOfService: React.FC = () => {
           proceeding. The amount of any settlement offer made by any party may
           not be disclosed to the arbitrator until after the arbitrator has
           determined the amount of the award to which either party is entitled.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Arbitration Rules.</strong> Arbitration shall be initiated
           through the American Arbitration Association, an established
           alternative dispute resolution provider that offers arbitration as set
@@ -340,9 +359,9 @@ const TermsOfService: React.FC = () => {
           the award or $2,500.00. Each party shall bear its own costs and
           disbursements arising out of the arbitration and shall pay an equal
           share of the fees and costs of the ADR Provider.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>
             Additional Rules for Non-Appearance Based Arbitration.
           </strong>{' '}
@@ -352,16 +371,16 @@ const TermsOfService: React.FC = () => {
           initiating the arbitration. The arbitration shall not involve any
           personal appearance by the parties or witnesses unless otherwise
           agreed by the parties.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Time Limits.</strong> If you or the Ik Wil App pursues
           arbitration, the arbitration action must be initiated and/or demanded
           within the statute of limitations and within any deadline imposed
           under the AAA Rules for the pertinent claim.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Authority of Arbitrator.</strong> If arbitration is initiated,
           the arbitrator will decide the rights and liabilities of you and the
           Ik Wil App, and the dispute will not be consolidated with any other
@@ -376,9 +395,9 @@ const TermsOfService: React.FC = () => {
           relief on an individual basis that a judge in a court of law would
           have. The award of the arbitrator is final and binding upon you and
           the Ik Wil App.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Waiver of Jury Trial.</strong> THE PARTIES HEREBY WAIVE THEIR
           CONSTITUTIONAL AND STATUTORY RIGHTS TO GO TO COURT AND HAVE A TRIAL IN
           FRONT OF A JUDGE OR A JURY, instead electing that all claims and
@@ -390,94 +409,94 @@ const TermsOfService: React.FC = () => {
           court in a suit to vacate or enforce an arbitration award or
           otherwise, YOU AND THE COMPANY WAIVE ALL RIGHTS TO A JURY TRIAL,
           instead electing that the dispute be resolved by a judge.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Waiver of Class or Consolidated Actions.</strong> All claims
           and disputes within the scope of this arbitration agreement must be
           arbitrated or litigated on an individual basis and not on a class
           basis, and claims of more than one customer or user cannot be
           arbitrated or litigated jointly or consolidated with those of any
           other customer or user.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Confidentiality.</strong> All aspects of the arbitration
           proceeding shall be strictly confidential. The parties agree to
           maintain confidentiality unless otherwise required by law. This
           paragraph shall not prevent a party from submitting to a court of law
           any information necessary to enforce this Agreement, to enforce an
           arbitration award, or to seek injunctive or equitable relief.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Severability.</strong> If any part or parts of this
           Arbitration Agreement are found under the law to be invalid or
           unenforceable by a court of competent jurisdiction, then such specific
           part or parts shall be of no force and effect and shall be severed and
           the remainder of the Agreement shall continue in full force and
           effect.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Right to Waive.</strong> Any or all of the rights and
           limitations set forth in this Arbitration Agreement may be waived by
           the party against whom the claim is asserted. Such waiver shall not
           waive or affect any other portion of this Arbitration Agreement.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Survival of Agreement.</strong> This Arbitration Agreement
           will survive the termination of your relationship with Ik Wil App.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Small Claims Court.</strong> Nonetheless the foregoing, either
           you or the Ik Wil App may bring an individual action in small claims
           court.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Emergency Equitable Relief.</strong> Anyhow the foregoing,
           either party may seek emergency equitable relief before a state or
           federal court in order to maintain the status quo pending arbitration.
           A request for interim measures shall not be deemed a waiver of any
           other rights or obligations under this Arbitration Agreement.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Claims Not Subject to Arbitration.</strong> Notwithstanding
           the foregoing, claims of defamation, violation of the Computer Fraud
           and Abuse Act, and infringement or misappropriation of the other
           party’s patent, copyright, trademark or trade secrets shall not be
           subject to this Arbitration Agreement.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           In any circumstances where the foregoing Arbitration Agreement permits
           the parties to litigate in court, the parties hereby agree to submit
           to the personal jurisdiction of the courts located within Netherlands
           County, California, for such purposes.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           The Ik Wil App may be subject to U.S. export control laws and may be
           subject to export or import regulations in other countries. You agree
           not to export, re-export, or transfer, directly or indirectly, any
           U.S. technical data acquired from Ik Wil App, or any products
           utilizing such data, in violation of the United States export laws or
           regulations.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           Ik Wil App is located at the address in Section 10.8. If you are a
           California resident, you may report complaints to the Complaint
           Assistance Unit of the Division of Consumer Product of the California
           Department of Consumer Affairs by contacting them in writing at 400 R
           Street, Sacramento, CA 95814, or by telephone at (800) 952-5210.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Electronic Communications.</strong> The communications between
           you and Ik Wil App use electronic means, whether you use the Ik Wil
           App or send us emails, or whether Ik Wil App posts notices on the Ik
@@ -488,9 +507,9 @@ const TermsOfService: React.FC = () => {
           App provides to you electronically satisfy any legal obligation that
           such communications would satisfy if it were be in a hard copy
           writing.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Entire Terms.</strong> These Terms constitute the entire
           agreement between you and us regarding the use of the Ik Wil App. Our
           failure to exercise or enforce any right or provision of these Terms
@@ -510,25 +529,27 @@ const TermsOfService: React.FC = () => {
           transfer in violation of the foregoing will be null and void. Ik Wil
           App may freely assign these Terms. The terms and conditions set forth
           in these Terms shall be binding upon assignees.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Your Privacy.</strong> Please read{' '}
           <Link to="/privacy-policy">our Privacy Policy</Link>.
-        </p>
+        </StyledParagraph>
 
-        <p>
+        <StyledParagraph>
           <strong>Copyright/Trademark Information.</strong> Copyright ©. All
           rights reserved. All trademarks, logos and service marks displayed on
           the Ik Wil App are our property or the property of other
           third-parties. You are not permitted to use these Marks without our
           prior written consent or the consent of such third party which may own
           the Marks.
-        </p>
+        </StyledParagraph>
 
-        <h2>Contact Information</h2>
-        <p>Address: Kronehoefstraat 30A, 5622 AC Eindhoven</p>
-        <p>Email: info@desigaar.com</p>
+        <StyledHeading>Contact Information</StyledHeading>
+        <StyledParagraph>
+          Address: Kronehoefstraat 30A, 5622 AC Eindhoven
+        </StyledParagraph>
+        <StyledParagraph>Email: info@desigaar.com</StyledParagraph>
       </div>
     </>
   )
