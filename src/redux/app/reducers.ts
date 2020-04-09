@@ -5,6 +5,7 @@ import {
   CACHE_CHANGED,
   INSTALL_CHANGED,
   SET_INSTALL_PROMPT,
+  CHANGE_SEARCH,
 } from './types'
 
 export const initialState: AppState = {
@@ -12,6 +13,7 @@ export const initialState: AppState = {
   cacheStatus: 'UNKNOWN',
   installStatus: 'UNKNOWN',
   installPrompt: undefined,
+  search: '',
 }
 
 export const appReducer = (
@@ -39,6 +41,11 @@ export const appReducer = (
         ...state,
         installStatus: 'PROMPT_SET',
         installPrompt: action.installPrompt,
+      }
+    case CHANGE_SEARCH:
+      return {
+        ...state,
+        search: action.search,
       }
     default:
       return state

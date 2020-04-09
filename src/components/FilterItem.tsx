@@ -33,11 +33,15 @@ const StyledIcon = styled.div<BackgroundProps>`
   margin-right: 15px;
 `
 
-const StyledName = styled.h3`
+interface ColorProps {
+  color: string
+}
+
+const StyledName = styled.h3<ColorProps>`
   display: inline-block;
   margin-top: 2px;
   font-size: 16px;
-  color: ${(props) => props.color};
+  color: ${(props): string => props.color};
 `
 
 const StyledCheckbox = styled.div<StyledProps>`
@@ -45,8 +49,8 @@ const StyledCheckbox = styled.div<StyledProps>`
   width: 24px;
   height: 24px;
   margin-right: 15px;
-  border: ${({ checked }) => (checked ? 'none' : '2px solid #d3d3d3')};
-  background-color: ${({ checked }) => (checked ? 'orange' : 'white')};
+  border: ${({ checked }): string => (checked ? 'none' : '2px solid #d3d3d3')};
+  background-color: ${({ checked }): string => (checked ? 'orange' : 'white')};
   background-image: url(${(props): string => props.background});
   background-position: center;
   background-repeat: no-repeat;

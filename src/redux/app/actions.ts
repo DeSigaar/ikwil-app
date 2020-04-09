@@ -8,6 +8,7 @@ import {
   INSTALL_CHANGED,
   SET_INSTALL_PROMPT,
   AppActionsTypes,
+  CHANGE_SEARCH,
 } from './types'
 import { store } from 'src/redux/store'
 
@@ -113,5 +114,12 @@ export const askForInstall = (): AppActionsTypes => {
   return {
     type: INSTALL_CHANGED,
     installStatus: 'PROMPTED',
+  }
+}
+
+export const changeSearch = (search: string): AppActionsTypes => {
+  return {
+    type: CHANGE_SEARCH,
+    search,
   }
 }

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { toast } from 'react-toastify'
+import { withRouter } from 'react-router-dom'
 import ChevronGrey from 'src/assets/general/chevron_grey.svg'
 import ChevronWhite from 'src/assets/general/chevron_white.svg'
 import Icon from '../Icon'
@@ -39,27 +40,9 @@ import {
   ParticipantsIcon,
   TimeIcon,
 } from 'src/assets/activity_details'
-import {
-  Organiser,
-  Activity as ActivityInterface,
-  Registration,
-} from 'src/types/database'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { Organiser } from 'src/types/database'
 import { registerForActivity } from 'src/utils/firebase'
-
-interface Props extends ActivityInterface, RouteComponentProps {
-  organisers: string[]
-  allOrganisers: Organiser[]
-  categoryName: string
-  categoryColor: string
-  startDateTime: Date
-  endDateTime: Date
-  displayDay: boolean
-  displayMonth: boolean
-  isLoggedIn: boolean
-  i: number
-  registration?: Registration
-}
+import { Props } from './types'
 
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)

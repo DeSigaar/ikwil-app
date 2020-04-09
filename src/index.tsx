@@ -52,6 +52,7 @@ body {
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate
+      persistor={persistor}
       loading={
         <Loader
           height="100vh"
@@ -60,7 +61,6 @@ ReactDOM.render(
           text="App aan het laden..."
         />
       }
-      persistor={persistor}
     >
       <ConnectedRouter history={history}>
         <ReactReduxFirebaseProvider
