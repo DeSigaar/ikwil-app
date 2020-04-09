@@ -302,12 +302,6 @@ const Settings: React.FC<Props> = (props: Props) => {
           </StyledToggle>
         </StyledToggleContainer>
         <StyledHorizontalRule />
-        <Link to="/help">
-          <StyledBottomLabel>
-            <Icon icon={HelpIcon} size={20} />
-            <p>Help & ondersteuning</p>
-          </StyledBottomLabel>
-        </Link>
         <Link to="/terms-of-service">
           <StyledBottomLabel>
             <Icon icon={GlobeIcon} size={20} />
