@@ -1,11 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import TickIcon from '../assets/general/icon_tick_white.svg'
+import { FilterActionsTypes, changeFilter } from 'src/redux/filter'
 
 interface Props {
   name: string
   icon?: string
   color: string
+  filterName: string
+  checked: boolean
+  handleClick: typeof changeFilter
 }
 
 interface BackgroundProps {
@@ -58,14 +62,14 @@ const StyledCheckbox = styled.div<StyledProps>`
 `
 
 const FilterItem: React.FC<Props> = (props: Props) => {
-  const [checked, setChecked] = React.useState(false)
-
   return (
     <StyledContainer>
       <StyledCheckbox
         background={TickIcon}
-        onClick={(): void => setChecked(!checked)}
-        checked={checked}
+        onClick={(): FilterActionsTypes =>
+          props.handleClick(props.filterName, !props.checked)
+        }
+        checked={props.checked}
       />
 
       {props.icon && <StyledIcon background={props.icon} />}

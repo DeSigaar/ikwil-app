@@ -5,6 +5,7 @@ import {
   firebaseReducer,
   FirebaseReducer,
   UserProfile,
+  FirestoreReducer,
 } from 'react-redux-firebase'
 import { firestoreReducer } from 'redux-firestore'
 import { persistReducer } from 'redux-persist'
@@ -12,6 +13,7 @@ import hardSet from 'redux-persist/es/stateReconciler/hardSet'
 import history from 'src/utils/history'
 import { localForage as configLocalForage } from 'src/config'
 import { LocationState } from 'history'
+// import { DatabaseSchema } from 'src/types/database'
 
 // Import all reducers
 import { appReducer, AppState } from 'src/redux/app'
@@ -23,7 +25,7 @@ export const persistedAppReducer = persistReducer(
   {
     key: 'ikwil-app_app',
     storage: localForage,
-    blacklist: ['installPrompt', 'search'],
+    blacklist: ['installPrompt'],
   },
   appReducer,
 )
@@ -53,5 +55,5 @@ export type RootState = {
   filter: FilterState
   router: RouterState<LocationState>
   firebase: FirebaseReducer.Reducer<UserProfile, any>
-  firestore: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  firestore: FirestoreReducer.Reducer
 }

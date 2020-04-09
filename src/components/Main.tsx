@@ -8,6 +8,7 @@ import { RootState } from 'src/redux/store'
 import { colors, layout } from 'src/styles'
 import { Loader, Activity as ActivityComponent } from 'src/components'
 import { getDayByString } from 'src/utils/date'
+import { FilterState } from 'src/redux/filter'
 
 const StyledTimeline = styled.div`
   display: flex;
@@ -15,7 +16,6 @@ const StyledTimeline = styled.div`
   margin-top: ${layout.unit}px;
 `
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface OwnProps {}
 
 interface StateProps {
@@ -26,6 +26,7 @@ interface StateProps {
   categories: Category[]
   organisers: Organiser[]
   registrations: Registration[]
+  filters: FilterState
 }
 
 type Props = OwnProps & StateProps
@@ -75,7 +76,7 @@ const Main: React.FC<Props> = (props: Props) => {
       startDateTime: Date
       endDateTime: Date
     }
-    const sortedActivities: SortedActivity[] = []
+    let sortedActivities: SortedActivity[] = []
 
     activities.forEach((activity) => {
       if (activity.day) {
@@ -151,6 +152,29 @@ const Main: React.FC<Props> = (props: Props) => {
       else return 0
     })
 
+    // Additional filters defined
+    if (
+      props.filters.beweging ||
+      props.filters.creatief ||
+      props.filters.kinderen ||
+      props.filters.sociaal ||
+      props.filters.spiritueel ||
+      props.filters.taal
+    )
+      sortedActivities = sortedActivities.filter((_activity) => {
+        console.dir(_activity)
+        return true
+      })
+    if (props.filters.mijn)
+      sortedActivities = sortedActivities.filter((__activity) => {
+        return true
+      })
+    if (props.filters.speciaal)
+      sortedActivities = sortedActivities.filter((_activity) => {
+        if (_activity.day) return true
+        else return false
+      })
+
     return (
       <StyledTimeline>
         {sortedActivities.map(
@@ -221,6 +245,17 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
     categories: state.firestore.ordered.categories,
     organisers: state.firestore.ordered.organisers,
     registrations: state.firestore.ordered.registrations,
+    filters: {
+      search: state.filter.search,
+      beweging: state.filter.beweging,
+      creatief: state.filter.creatief,
+      kinderen: state.filter.kinderen,
+      sociaal: state.filter.sociaal,
+      spiritueel: state.filter.spiritueel,
+      taal: state.filter.taal,
+      mijn: state.filter.mijn,
+      speciaal: state.filter.speciaal,
+    },
   }
 }
 

@@ -1,7 +1,20 @@
-import { FilterState, FilterActionsTypes, CHANGE_SEARCH } from './types'
+import {
+  FilterState,
+  FilterActionsTypes,
+  CHANGE_SEARCH,
+  CHANGE_FILTER,
+} from './types'
 
 export const initialState: FilterState = {
   search: '',
+  beweging: false,
+  creatief: false,
+  kinderen: false,
+  sociaal: false,
+  spiritueel: false,
+  taal: false,
+  mijn: false,
+  speciaal: false,
 }
 
 export const filterReducer = (
@@ -13,6 +26,11 @@ export const filterReducer = (
       return {
         ...state,
         search: action.search,
+      }
+    case CHANGE_FILTER:
+      return {
+        ...state,
+        [action.filterName]: action.value,
       }
     default:
       return state

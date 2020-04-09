@@ -1,21 +1,9 @@
-export interface DatabaseSchema {
-  activities: Activity
-  categories: Category
-  meals: Meal
-  news: Article
-  organisers: Organiser
-  rules: Rule
-  users: User
-}
-
 export interface Database {
   activities: Activity[]
   categories: Category[]
   meals: Meal[]
   news: Article[]
   organisers: Organiser[]
-  rules: Rule[]
-  users: User[]
 }
 
 export interface Activity {
@@ -32,18 +20,6 @@ export interface Activity {
   room: string
   day?: Day
   days?: RepeatDay[]
-}
-
-export interface RepeatDay {
-  name: string
-  startTime: string
-  endTime: string
-}
-
-export interface Day {
-  date: string
-  startTime: string
-  endTime: string
 }
 
 export interface Category {
@@ -100,24 +76,16 @@ export interface Availability {
   sunday: boolean
 }
 
-export interface Rule {
-  __deleted: boolean
-  id: string
-  createdBy: string
-  creatorID: string
+export interface RepeatDay {
   name: string
-  rule: string
+  startTime: string
+  endTime: string
 }
 
-export interface User {
-  __deleted: boolean
-  id: string
-  description?: string
-  displayName: string
-  email: string
-  img: string
-  phone?: string
-  pushToken?: string
+export interface Day {
+  date: string
+  startTime: string
+  endTime: string
 }
 
 export interface Registration {
