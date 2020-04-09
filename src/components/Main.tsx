@@ -15,6 +15,7 @@ const StyledTimeline = styled.div`
   margin-top: ${layout.unit}px;
 `
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface OwnProps {}
 
 interface StateProps {
@@ -223,9 +224,13 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   }
 }
 
+interface FirestoreConnectProps {
+  uid: string
+}
+
 export default compose(
   connect(mapStateToProps, null),
-  firestoreConnect((props: any) => [
+  firestoreConnect((props: FirestoreConnectProps) => [
     { collection: 'activities', where: [['__deleted', '==', false]] },
     { collection: 'categories', where: [['__deleted', '==', false]] },
     { collection: 'organisers', where: [['__deleted', '==', false]] },

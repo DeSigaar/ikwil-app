@@ -11,12 +11,6 @@ self.addEventListener('activate', (e) => {
   console.log('Service Worker: Activate', e)
 })
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting()
-  }
-})
-
 self.addEventListener('fetch', (e) => {
   console.log('Service Worker: Fetch', e)
 })
@@ -27,6 +21,12 @@ self.addEventListener('sync', (e) => {
 
 self.addEventListener('push', (e) => {
   console.log('Service Worker: Push', e)
+})
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting()
+  }
 })
 
 workbox.core.clientsClaim()
