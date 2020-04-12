@@ -181,9 +181,7 @@ const Main: React.FC<Props> = (props: Props) => {
 
             const registration = registrations.find(
               (_registration) =>
-                _registration.activity.split('/')[1] === activity.id &&
-                new Date(_registration.date.seconds * 1000).toISOString() ===
-                  activity.startDateTime.toISOString(),
+                _registration.activity.split('/')[1] === activity.id,
             )
 
             return (
