@@ -1,6 +1,6 @@
 import * as React from 'react'
+import * as firebase from 'firebase'
 import { toast } from 'react-toastify'
-import { withRouter } from 'react-router-dom'
 import ChevronGrey from 'src/assets/general/chevron_grey.svg'
 import ChevronWhite from 'src/assets/general/chevron_white.svg'
 import Icon from '../Icon'
@@ -40,9 +40,27 @@ import {
   ParticipantsIcon,
   TimeIcon,
 } from 'src/assets/activity_details'
-import { Organiser } from 'src/types/database'
-import { fireStore, fireAuth } from 'src/utils/firebase'
-import { Props } from './types'
+import {
+  Organiser,
+  Activity as ActivityInterface,
+  Registration,
+} from 'src/types/database'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { fireAuth, fireStore } from 'src/utils/firebase'
+
+interface Props extends ActivityInterface, RouteComponentProps {
+  organisers: string[]
+  allOrganisers: Organiser[]
+  categoryName: string
+  categoryColor: string
+  startDateTime: Date
+  endDateTime: Date
+  displayDay: boolean
+  displayMonth: boolean
+  isLoggedIn: boolean
+  i: number
+  registration?: Registration
+}
 
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
@@ -120,7 +138,14 @@ const Activity: React.FC<Props> = (props: Props) => {
     setToggle(!toggle)
   }
 
-  const registerForActivity = (status: string, activityID: string): void => {
+  const registerForActivity = (
+    status: string,
+    activityID: string,
+    activityStartDateTime: Date,
+  ): void => {
+    const timestamp = firebase.firestore.Timestamp.fromDate(
+      activityStartDateTime,
+    )
     const activityRef = `activities/${activityID}`
 
     fireStore
@@ -128,6 +153,7 @@ const Activity: React.FC<Props> = (props: Props) => {
       .doc(fireAuth.currentUser?.uid)
       .collection('registrations')
       .where('activity', '==', activityRef)
+      .where('date', '==', timestamp)
       .get()
       .then((_doc) => {
         if (_doc.docs[0]?.data()) {
@@ -145,6 +171,7 @@ const Activity: React.FC<Props> = (props: Props) => {
             .doc(fireAuth.currentUser?.uid)
             .collection('registrations')
             .add({
+              date: timestamp,
               activity: activityRef,
               status,
             })
@@ -222,7 +249,11 @@ const Activity: React.FC<Props> = (props: Props) => {
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'ATTENDING'}
                 onClick={(): void => {
-                  registerForActivity('ATTENDING', props.id)
+                  registerForActivity(
+                    'ATTENDING',
+                    props.id,
+                    props.startDateTime,
+                  )
                   setToggle(!toggle)
 
                   toast.dismiss(`${props.id}${props.i}`)
@@ -238,7 +269,11 @@ const Activity: React.FC<Props> = (props: Props) => {
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'MAYBE_ATTENDING'}
                 onClick={(): void => {
-                  registerForActivity('MAYBE_ATTENDING', props.id)
+                  registerForActivity(
+                    'MAYBE_ATTENDING',
+                    props.id,
+                    props.startDateTime,
+                  )
                   setToggle(!toggle)
 
                   toast.dismiss(`${props.id}${props.i}`)
@@ -254,7 +289,11 @@ const Activity: React.FC<Props> = (props: Props) => {
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'NOT_ATTENDING'}
                 onClick={(): void => {
-                  registerForActivity('NOT_ATTENDING', props.id)
+                  registerForActivity(
+                    'NOT_ATTENDING',
+                    props.id,
+                    props.startDateTime,
+                  )
                   setToggle(!toggle)
 
                   toast.dismiss(`${props.id}${props.i}`)
