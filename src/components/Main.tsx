@@ -157,18 +157,71 @@ const Main: React.FC<Props> = (props: Props) => {
       props.filters.beweging ||
       props.filters.creatief ||
       props.filters.kinderen ||
-      props.filters.sociaal ||
+      props.filters.taal ||
       props.filters.spiritueel ||
-      props.filters.taal
-    )
-      sortedActivities = sortedActivities.filter((_activity) => {
-        console.dir(_activity)
-        return true
-      })
+      props.filters.sociaal
+    ) {
+      // we waren hier
+    }
+    if (props.filters.beweging)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'beweging' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+
+    if (props.filters.creatief)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'creatief' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.kinderen)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'kinderen' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.sociaal)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'sociaal' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.spiritueel)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'spiritueel' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.taal)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'taal' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+
     if (props.filters.mijn)
-      sortedActivities = sortedActivities.filter((__activity) => {
-        return true
-      })
+      sortedActivities = sortedActivities.filter((_activity) =>
+        registrations.find(
+          (_registration) =>
+            _registration.activity.split('/')[1] === _activity.id &&
+            _registration.status !== 'NOT_ATTENDING',
+        ),
+      )
+
     if (props.filters.speciaal)
       sortedActivities = sortedActivities.filter((_activity) => {
         if (_activity.day) return true
@@ -178,7 +231,7 @@ const Main: React.FC<Props> = (props: Props) => {
     return (
       <StyledTimeline>
         {sortedActivities.map(
-          (activity: SortedActivity, i): React.ReactNode => {
+          (activity: SortedActivity, i: any): React.ReactNode => {
             const category = props.categories.find(
               (category) => category.id === activity.category.split('/')[1],
             ) || { name: '', color: '' }
@@ -206,9 +259,7 @@ const Main: React.FC<Props> = (props: Props) => {
 
             const registration = registrations.find(
               (_registration) =>
-                _registration.activity.split('/')[1] === activity.id &&
-                new Date(_registration.date.seconds * 1000).toISOString() ===
-                  activity.startDateTime.toISOString(),
+                _registration.activity.split('/')[1] === activity.id,
             )
 
             return (
