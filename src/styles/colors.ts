@@ -13,6 +13,10 @@ export const colors = {
   lightgrey: '#A0AEC0',
   darkgrey: '#727272',
   modalOverlayBackground: 'rgba(0, 0, 0, 0.3)',
+  timeline: 'rgba(0, 0, 0, 0.1)',
+  successGreen: '#32C671',
+  warningOrange: '#FFAA00',
+  errorRed: '#F56565',
 }
 
 export const shadows = {
@@ -26,5 +30,6 @@ export const shadows = {
   xxl: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
   inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
   outline: '0 0 0 3px rgba(66, 153, 225, 0.5)',
+  input: '0 0 0 1px rgba(0, 0, 0, 0.13)',
   none: 'none',
 }

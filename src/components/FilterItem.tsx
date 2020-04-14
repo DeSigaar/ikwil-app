@@ -1,11 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import TickIcon from '../assets/general/icon_tick_white.svg'
+import { FilterActionsTypes, changeFilter } from 'src/redux/filter'
 
 interface Props {
   name: string
   icon?: string
   color: string
+  filterName: string
+  checked: boolean
+  handleClick: typeof changeFilter
 }
 
 interface BackgroundProps {
@@ -33,11 +37,15 @@ const StyledIcon = styled.div<BackgroundProps>`
   margin-right: 15px;
 `
 
-const StyledName = styled.h3`
+interface ColorProps {
+  color: string
+}
+
+const StyledName = styled.h3<ColorProps>`
   display: inline-block;
   margin-top: 2px;
   font-size: 16px;
-  color: ${(props) => props.color};
+  color: ${(props): string => props.color};
 `
 
 const StyledCheckbox = styled.div<StyledProps>`
@@ -45,8 +53,8 @@ const StyledCheckbox = styled.div<StyledProps>`
   width: 24px;
   height: 24px;
   margin-right: 15px;
-  border: ${({ checked }) => (checked ? 'none' : '2px solid #d3d3d3')};
-  background-color: ${({ checked }) => (checked ? 'orange' : 'white')};
+  border: ${({ checked }): string => (checked ? 'none' : '2px solid #d3d3d3')};
+  background-color: ${({ checked }): string => (checked ? 'orange' : 'white')};
   background-image: url(${(props): string => props.background});
   background-position: center;
   background-repeat: no-repeat;
@@ -54,14 +62,14 @@ const StyledCheckbox = styled.div<StyledProps>`
 `
 
 const FilterItem: React.FC<Props> = (props: Props) => {
-  const [checked, setChecked] = React.useState(false)
-
   return (
     <StyledContainer>
       <StyledCheckbox
         background={TickIcon}
-        onClick={(): void => setChecked(!checked)}
-        checked={checked}
+        onClick={(): FilterActionsTypes =>
+          props.handleClick(props.filterName, !props.checked)
+        }
+        checked={props.checked}
       />
 
       {props.icon && <StyledIcon background={props.icon} />}

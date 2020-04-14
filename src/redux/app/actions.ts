@@ -8,6 +8,7 @@ import {
   INSTALL_CHANGED,
   SET_INSTALL_PROMPT,
   AppActionsTypes,
+  CHANGE_SEARCH,
 } from './types'
 import { store } from 'src/redux/store'
 
@@ -50,6 +51,7 @@ export const changeCache = (cacheStatus: CACHE_STATUS): AppActionsTypes => {
       toast('App kan nu offline gebruikt worden.', {
         type: toast.TYPE.INFO,
         toastId: 'CACHED',
+        delay: 1000,
       })
       break
     case 'CACHING':
@@ -112,5 +114,12 @@ export const askForInstall = (): AppActionsTypes => {
   return {
     type: INSTALL_CHANGED,
     installStatus: 'PROMPTED',
+  }
+}
+
+export const changeSearch = (search: string): AppActionsTypes => {
+  return {
+    type: CHANGE_SEARCH,
+    search,
   }
 }

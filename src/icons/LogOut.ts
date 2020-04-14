@@ -13,12 +13,20 @@ export default styled.div`
   border-bottom-left-radius: 2px;
   margin-left: -10px;
 
-  &::after,
-  &::before {
+  &::before,
+  &::after {
     content: '';
     display: block;
     box-sizing: border-box;
     position: absolute;
+  }
+  &::before {
+    border-radius: 3px;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    left: 5px;
+    bottom: 5px;
   }
   &::after {
     border-top: 2px solid;
@@ -28,13 +36,5 @@ export default styled.div`
     height: 8px;
     left: 4px;
     bottom: 2px;
-  }
-  &::before {
-    border-radius: 3px;
-    width: 10px;
-    height: 2px;
-    background: currentColor;
-    left: 5px;
-    bottom: 5px;
   }
 `

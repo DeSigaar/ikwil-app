@@ -10,8 +10,8 @@ export default styled.div`
   border: 2px solid transparent;
   border-radius: 40px;
 
-  &::after,
-  &::before {
+  &::before,
+  &::after {
     content: '';
     display: block;
     box-sizing: border-box;
