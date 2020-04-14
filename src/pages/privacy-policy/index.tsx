@@ -1,31 +1,19 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Header, BackgroundLogo } from 'src/components'
-import { colors } from 'src/styles'
-
-const StyledVersion = styled.div`
-  padding: 15px 0;
-`
-
-const StyledParagraph = styled.p`
-  padding: 0 0 20px;
-`
-
-const StyledHeading = styled.h3`
-  padding: 20px 0 5px;
-  color: ${colors.colors.orange};
-`
-
-const StyledList = styled.ul`
-  padding: 0 0 20px 20px;
-`
+import {
+  StyledVersion,
+  StyledParagraph,
+  StyledHeading,
+  StyledList,
+} from './styles'
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <>
       <Header title="Privacy Policy" />
       <BackgroundLogo />
+
       <div>
         <StyledVersion>
           <small>Version 1.0.0</small>

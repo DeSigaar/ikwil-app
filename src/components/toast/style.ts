@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { layout, colors } from 'src/styles'
+import { layout, colors, fonts } from 'src/styles'
 
 export const ToastStyle = createGlobalStyle`
 .Toastify__toast-container {
@@ -14,6 +14,8 @@ export const ToastStyle = createGlobalStyle`
   align-items: center;
   box-shadow: ${colors.shadows.md};
   color: ${colors.colors.black};
+  font-family: ${fonts.font.fontFamily};
+  font-size: ${fonts.font.fontSize}px;
 }
 
 @media only screen and (max-width: 480px){
@@ -26,24 +28,23 @@ export const ToastStyle = createGlobalStyle`
 .Toastify__toast--warning,
 .Toastify__toast--error,
 .Toastify__toast--info {
-  color: ${colors.colors.white};
+  color: ${colors.colors.white} !important;
 }
 
 .Toastify__toast--success {
-  background: ${colors.colors.successGreen};
+  background: ${colors.colors.successGreen} !important;
 }
 
 .Toastify__toast--warning {
-  background: ${colors.colors.warningOrange};
+  background: ${colors.colors.warningOrange} !important;
 }
 
 .Toastify__toast--error {
-  background: ${colors.colors.errorRed};
+  background: ${colors.colors.errorRed} !important;
 }
 
-
 .Toastify__toast--default {
-  color: ${colors.colors.black};
+  color: ${colors.colors.black} !important;
 }
 
 .Toastify__progress-bar--success,
@@ -56,5 +57,4 @@ export const ToastStyle = createGlobalStyle`
 .Toastify__progress-bar--default {
   background: ${colors.colors.orange} !important;
 }
-
 `

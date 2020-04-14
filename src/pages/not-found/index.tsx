@@ -8,6 +8,10 @@ const NotFound: React.FC = () => {
       <BackgroundLogo />
 
       <h1>Niks gevonden!</h1>
+      <p>
+        Check even of je de URL goed hebt geschreven, anders ga terug naar het
+        startscherm.
+      </p>
     </>
   )
 }

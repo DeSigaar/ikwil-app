@@ -1,13 +1,14 @@
 import * as React from 'react'
-import { Header, SearchBar, BackgroundLogo, Main } from 'src/components'
+import { Header, BackgroundLogo, SearchBar, Main } from 'src/components'
 
 const App: React.FC = () => {
   return (
     <>
       <Header title="Activiteiten" />
+      <BackgroundLogo />
 
       <SearchBar />
-      <BackgroundLogo />
+
       <Main />
     </>
   )

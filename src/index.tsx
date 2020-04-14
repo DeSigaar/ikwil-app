@@ -12,7 +12,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 import {
   App,
-  Login,
+  LogIn,
   Settings,
   PrivacyPolicy,
   TermsOfService,
@@ -86,8 +86,9 @@ ReactDOM.render(
             {/* App */}
             <Route exact path="/" component={App} />
 
-            {/* Login */}
-            <Route exact path="/login" component={Login} />
+            {/* Log In */}
+            <Route exact path="/login" component={LogIn} />
+            <Redirect from="/log-in" to="/login" />
             <Redirect from="/inlog" to="/login" />
             <Redirect from="/inloggen" to="/login" />
             <Redirect from="/register" to="/login" />

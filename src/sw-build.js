@@ -1,16 +1,6 @@
-/* eslint-disable */
-const fs = require('fs')
-const workboxBuild = require('workbox-build')
+const workbox = require('workbox-build') // eslint-disable-line @typescript-eslint/no-var-requires
 
-fs.copyFile(
-  'src/firebase-messaging-sw.js',
-  'build/firebase-messaging-sw.js',
-  (err) => {
-    if (err) throw err
-  },
-)
-
-workboxBuild
+workbox
   .injectManifest({
     swSrc: 'src/sw.js',
     swDest: 'build/sw.js',
@@ -18,7 +8,7 @@ workboxBuild
     globPatterns: ['**/*.{js,css,html,png,svg,ico,json}'],
   })
   .then(({ count, size, warnings }) => {
-    warnings.forEach(console.warn)
-    console.log(`${count} files will be precached, totaling ${size} bytes.`)
+    warnings.forEach(console.warn) // eslint-disable-line no-console
+    console.log(`${count} files will be precached, totaling ${size} bytes.`) // eslint-disable-line no-console
   })
-  .catch((err) => console.error(err))
+  .catch(console.error) // eslint-disable-line no-console

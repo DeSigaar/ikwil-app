@@ -1,15 +1,7 @@
-import * as React from 'react'
 import styled from 'styled-components'
-import ReactDOM from 'react-dom'
-import { layout, colors } from 'src/styles'
+import { colors, layout } from 'src/styles'
 
-interface Props {
-  title: string
-  children: React.ReactNode
-  closeModal: Function
-}
-
-const StyledOverlay = styled.div`
+export const StyledOverlay = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -22,7 +14,7 @@ const StyledOverlay = styled.div`
   z-index: ${layout.modalZindex - 1};
 `
 
-const StyledModal = styled.div`
+export const StyledModal = styled.div`
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
@@ -40,7 +32,7 @@ const StyledModal = styled.div`
   max-width: 400px;
 `
 
-const StyledHeader = styled.div`
+export const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,12 +44,12 @@ const StyledHeader = styled.div`
   border-top-left-radius: ${layout.borderRadius}px;
 `
 
-const StyledTitle = styled.h2`
+export const StyledTitle = styled.h2`
   font-size: 24px;
   color: ${colors.colors.white};
 `
 
-const StyledIconContainer = styled.div`
+export const StyledIconContainer = styled.div`
   width: auto;
   height: auto;
   background: ${colors.colors.white};
@@ -75,7 +67,7 @@ const StyledIconContainer = styled.div`
   }
 `
 
-const StyledCloseIcon = styled.div`
+export const StyledCloseIcon = styled.div`
   box-sizing: border-box;
   position: relative;
   display: block;
@@ -104,32 +96,10 @@ const StyledCloseIcon = styled.div`
   }
 `
 
-const StyledContent = styled.div`
+export const StyledContent = styled.div`
   width: 100%;
   height: auto;
   padding: ${layout.unit}px;
   border-bottom-right-radius: ${layout.borderRadius}px;
   border-bottom-left-radius: ${layout.borderRadius}px;
 `
-
-const Modal: React.FC<Props> = (props: Props) => {
-  return ReactDOM.createPortal(
-    <>
-      <StyledOverlay onClick={(): void => props.closeModal(false)} />
-      <StyledModal>
-        <StyledHeader>
-          <StyledTitle>{props.title}</StyledTitle>
-
-          <StyledIconContainer onClick={(): void => props.closeModal(false)}>
-            <StyledCloseIcon></StyledCloseIcon>
-          </StyledIconContainer>
-        </StyledHeader>
-
-        <StyledContent>{props.children}</StyledContent>
-      </StyledModal>
-    </>,
-    document.getElementById('portal-root') as HTMLElement,
-  )
-}
-
-export default Modal

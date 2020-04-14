@@ -1,28 +1,31 @@
 import styled from 'styled-components'
 import { colors, layout, fonts } from 'src/styles'
 import {
-  StyledActivityItemProps,
-  StyledToggleStyleProps,
-  StyledDetailStyleProps,
-  StyledActiveStyleProps,
+  StyledItemProps,
+  StyledToggleProps,
+  StyledDetailProps,
+  StyledActiveProps,
 } from './types'
 
-export const ActivityContainer = styled.div`
+export const StyledContainer = styled.div`
   display: flex;
   align-items: stretch;
   justify-content: space-between;
 `
 
-export const ActivityTimeline = styled.div`
+export const StyledTimeline = styled.div`
   width: 15vw;
 `
 
-export const ActivityItem = styled.div<StyledActivityItemProps>`
+export const StyledItem = styled.div<StyledItemProps>`
+  cursor: ${({ toggle }): string => (toggle ? 'auto' : 'pointer')};
   width: 75vw;
   margin: ${({ first }): string =>
     first ? `0 0 ${layout.unit * 0.5}px 0` : `${layout.unit * 0.5}px 0`};
-  height: ${({ toggle }): string =>
-    toggle ? (layout.isSmallScreen ? '260px' : '240px') : '50px'};
+  max-height: ${({ toggle }): string =>
+    toggle ? (layout.isSmallScreen ? '250px' : '230px') : '50px'};
+  min-height: ${({ toggle }): string =>
+    toggle ? (layout.isSmallScreen ? '230px' : '230px') : '50px'};
   overflow: hidden;
   transition: 0.3s;
   box-shadow: ${colors.shadows.default};
@@ -37,13 +40,13 @@ export const ActivityItem = styled.div<StyledActivityItemProps>`
   padding: 5px;
 `
 
-export const ActivityBar = styled.div`
+export const StyledBar = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `
 
-export const LogoAndTitle = styled.div`
+export const StyledLogoTitle = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -62,7 +65,8 @@ export const LogoAndTitle = styled.div`
     text-overflow: ellipsis;
   }
 `
-export const Toggle = styled.button<StyledToggleStyleProps>`
+
+export const StyledToggle = styled.button<StyledToggleProps>`
   width: 40px;
   height: 40px;
   border: 0;
@@ -79,7 +83,8 @@ export const Toggle = styled.button<StyledToggleStyleProps>`
     outline: unset;
   }
 `
-export const Details = styled.ul`
+
+export const StyledDetails = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style: unset;
@@ -88,10 +93,11 @@ export const Details = styled.ul`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding-left: 35px;
+  padding-left: ${layout.isSmallScreen ? '25' : '35'}px;
   margin-top: 2px;
 `
-export const Detail = styled.li`
+
+export const StyledDetail = styled.li`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -99,17 +105,23 @@ export const Detail = styled.li`
   width: 100%;
   margin: 3px 0;
 
-  span {
-    margin-left: 10px;
+  div {
     max-width: 70%;
+    display: flex;
+    flex-direction: column;
+  }
+  span {
+    margin-left: 7px;
   }
 `
-export const DetailIcon = styled.img<StyledDetailStyleProps>`
+
+export const StyledDetailIcon = styled.img<StyledDetailProps>`
   height: ${(props): number => props.size}px;
   width: ${(props): number => props.size}px;
   margin-right: 5px;
 `
-export const Line = styled.hr`
+
+export const StyledLine = styled.hr`
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: auto;
@@ -119,7 +131,8 @@ export const Line = styled.hr`
   width: 90%;
   border-style: solid;
 `
-export const Meedoen = styled.div`
+
+export const StyledMeedoen = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
@@ -131,14 +144,17 @@ export const Meedoen = styled.div`
     text-align: center;
   }
 `
-export const Buttons = styled.div`
+
+export const StyledButtons = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
   width: 100%;
   margin: 10px;
 `
-export const ActivityButton = styled.button<StyledActiveStyleProps>`
+
+export const StyledButton = styled.button<StyledActiveProps>`
+  cursor: pointer;
   border: 0;
   margin: 0 2px;
   padding: 3px 9px;
@@ -148,7 +164,6 @@ export const ActivityButton = styled.button<StyledActiveStyleProps>`
   background: unset;
   background-color: ${colors.colors.white};
   opacity: ${({ notActive }): number => (notActive ? 0.8 : 1)};
-  cursor: pointer;
   font-weight: ${fonts.fontWeights.bold};
   border-radius: ${layout.borderRadiusBig}px;
   font-size: ${layout.isSmallScreen ? fonts.size.small : fonts.size.normal}px;

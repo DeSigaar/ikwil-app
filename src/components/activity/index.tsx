@@ -1,24 +1,25 @@
 import * as React from 'react'
-import * as firebase from 'firebase'
 import { toast } from 'react-toastify'
+import { withRouter } from 'react-router-dom'
 import ChevronGrey from 'src/assets/general/chevron_grey.svg'
 import ChevronWhite from 'src/assets/general/chevron_white.svg'
 import Icon from '../Icon'
 import {
-  ActivityContainer,
-  ActivityTimeline,
-  ActivityItem,
-  ActivityBar,
-  LogoAndTitle,
-  Toggle,
-  Details,
-  Detail,
-  DetailIcon,
-  Line,
-  Meedoen,
-  Buttons,
-  ActivityButton,
+  StyledContainer,
+  StyledTimeline,
+  StyledItem,
+  StyledBar,
+  StyledLogoTitle,
+  StyledToggle,
+  StyledDetails,
+  StyledDetail,
+  StyledDetailIcon,
+  StyledLine,
+  StyledMeedoen,
+  StyledButtons,
+  StyledButton,
 } from './styles'
+import { Props } from './types'
 import Timeline from './timeline'
 import {
   BewegingIcon,
@@ -37,44 +38,24 @@ import {
 import {
   CartIcon,
   LocationIcon,
-  ParticipantsIcon,
+  // ParticipantsIcon,
   TimeIcon,
 } from 'src/assets/activity_details'
-import {
-  Organiser,
-  Activity as ActivityInterface,
-  Registration,
-} from 'src/types/database'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { Organiser } from 'src/types/firestore'
 import { fireAuth, fireStore } from 'src/utils/firebase'
 
-interface Props extends ActivityInterface, RouteComponentProps {
-  organisers: string[]
-  allOrganisers: Organiser[]
-  categoryName: string
-  categoryColor: string
-  startDateTime: Date
-  endDateTime: Date
-  displayDay: boolean
-  displayMonth: boolean
-  isLoggedIn: boolean
-  i: number
-  registration?: Registration
-}
-
 const Activity: React.FC<Props> = (props: Props) => {
-  const [toggle, setToggle] = React.useState(false)
-  const [inverted, setInverted] = React.useState(false)
-  const [aanmeldingen] = React.useState([])
+  const [toggle, setToggle] = React.useState(false) // state if activity is toggled open or not
+  const [inverted, setInverted] = React.useState(false) // state if the colors of the activity are inverted or not
 
   React.useEffect(() => {
-    !toggle
-      ? props.registration
-        ? props.registration?.status !== 'NOT_ATTENDING'
-          ? setInverted(true)
-          : setInverted(false)
-        : setInverted(false)
-      : setInverted(true)
+    !toggle // check if not toggled
+      ? props.registration // check if registered to activity
+        ? props.registration?.status !== 'NOT_ATTENDING' // check if registration status is 'not attending'
+          ? setInverted(true) // if registration status not is 'NOT_ATTENDING' set inverted to true
+          : setInverted(false) // if registration status is 'NOT_ATTENDING' set inverted to false
+        : setInverted(false) // if not registered to activity setInverted to false
+      : setInverted(true) // if activity is toggled set inverted to true
   }, [props.registration, toggle])
 
   const activityIconSize = 36
@@ -82,6 +63,7 @@ const Activity: React.FC<Props> = (props: Props) => {
 
   const organiserObjects: Organiser[] = []
 
+  // find the correct organiser for the activity and push the organiser to the organiserObjects array
   props.organisers.forEach((_organiser: string) => {
     const correctOrganiser = props.allOrganisers.find(
       (_dbOrganiser) => _dbOrganiser.id === _organiser,
@@ -89,6 +71,7 @@ const Activity: React.FC<Props> = (props: Props) => {
     if (correctOrganiser) organiserObjects.push(correctOrganiser)
   })
 
+  // display icon or inverted icon if activity colors are inverted
   const activityIcon = (name: string, inverted: boolean): React.ReactNode => {
     switch (name) {
       case 'Taal':
@@ -133,19 +116,13 @@ const Activity: React.FC<Props> = (props: Props) => {
     }
   }
 
+  // if activity is clicked toggle the toggle and inverted states
   const toggleActivity = (): void => {
     if (!props.registration) setInverted(!inverted)
     setToggle(!toggle)
   }
 
-  const registerForActivity = (
-    status: string,
-    activityID: string,
-    activityStartDateTime: Date,
-  ): void => {
-    const timestamp = firebase.firestore.Timestamp.fromDate(
-      activityStartDateTime,
-    )
+  const registerForActivity = (status: string, activityID: string): void => {
     const activityRef = `activities/${activityID}`
 
     fireStore
@@ -153,7 +130,6 @@ const Activity: React.FC<Props> = (props: Props) => {
       .doc(fireAuth.currentUser?.uid)
       .collection('registrations')
       .where('activity', '==', activityRef)
-      .where('date', '==', timestamp)
       .get()
       .then((_doc) => {
         if (_doc.docs[0]?.data()) {
@@ -171,7 +147,6 @@ const Activity: React.FC<Props> = (props: Props) => {
             .doc(fireAuth.currentUser?.uid)
             .collection('registrations')
             .add({
-              date: timestamp,
               activity: activityRef,
               status,
             })
@@ -180,8 +155,8 @@ const Activity: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <ActivityContainer>
-      <ActivityTimeline>
+    <StyledContainer>
+      <StyledTimeline>
         <Timeline
           displayDay={props.displayDay}
           displayMonth={props.displayMonth}
@@ -189,74 +164,83 @@ const Activity: React.FC<Props> = (props: Props) => {
           first={props.i === 0}
           status={props.registration?.status}
         />
-      </ActivityTimeline>
+      </StyledTimeline>
 
-      <ActivityItem
+      <StyledItem
         toggle={toggle}
         backgroundColor={props.categoryColor}
         inverted={inverted}
         first={props.i === 0}
       >
-        <ActivityBar>
-          <LogoAndTitle>
+        <StyledBar onClick={(): void => toggleActivity()}>
+          <StyledLogoTitle>
             {activityIcon(props.categoryName, inverted)}
             <span>{props.name}</span>
-          </LogoAndTitle>
+          </StyledLogoTitle>
 
-          <Toggle toggle={toggle} onClick={(): void => toggleActivity()}>
+          <StyledToggle toggle={toggle}>
             <img
               width="20px"
               height="20px"
               src={inverted ? ChevronWhite : ChevronGrey}
-              alt=""
+              alt={`Arrow ${inverted ? 'up' : 'down'}`}
             />
-          </Toggle>
-        </ActivityBar>
+          </StyledToggle>
+        </StyledBar>
 
-        <Details>
-          <Detail>
-            <DetailIcon src={TimeIcon} size={detailIconSize} alt="" />
-            <span>
-              {`${props.startDateTime.getHours()}`}:
-              {props.startDateTime.getMinutes() < 10 && '0'}
-              {`${props.startDateTime.getMinutes()}`}-
-              {`${props.endDateTime.getHours()}`}:
-              {props.endDateTime.getMinutes() < 10 && '0'}
-              {`${props.endDateTime.getMinutes()}`}
-            </span>
-          </Detail>
-          <Detail>
-            <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
-            {organiserObjects.map((_organiser, i) => (
-              <span key={i}>{_organiser.name}</span>
-            ))}
-          </Detail>
-          <Detail>
-            <DetailIcon src={LocationIcon} size={detailIconSize} alt="" />
-            <span>{props.room} </span>
-          </Detail>
-          <Detail>
-            <DetailIcon src={ParticipantsIcon} size={detailIconSize} alt="" />
-            <span>{aanmeldingen.length} </span>
-          </Detail>
-        </Details>
-        <Line />
-        <Meedoen>
+        <StyledDetails>
+          <StyledDetail>
+            <StyledDetailIcon src={TimeIcon} size={detailIconSize} alt="" />
+            <div>
+              <span>
+                {/* display hour */}
+                {`${props.startDateTime.getHours()}`}:
+                {props.startDateTime.getMinutes() < 10 && '0'}
+                {`${props.startDateTime.getMinutes()}`}-{/* display minutues */}
+                {`${props.endDateTime.getHours()}`}:
+                {props.endDateTime.getMinutes() < 10 && '0'}
+                {`${props.endDateTime.getMinutes()}`}
+              </span>
+            </div>
+          </StyledDetail>
+          <StyledDetail>
+            <StyledDetailIcon src={CartIcon} size={detailIconSize} alt="" />
+            <div>
+              {/* display 'geen' als er geen organisers zijn anders display the organisers  */}
+              {organiserObjects.length < 1 ? (
+                <span>geen</span>
+              ) : (
+                organiserObjects.map((_organiser, i) => (
+                  <span key={i}>{_organiser.name}</span>
+                ))
+              )}
+            </div>
+          </StyledDetail>
+          <StyledDetail>
+            <StyledDetailIcon src={LocationIcon} size={detailIconSize} alt="" />
+            <div>
+              <span>{props.room} </span>
+            </div>
+          </StyledDetail>
+        </StyledDetails>
+
+        <StyledLine />
+
+        <StyledMeedoen>
           <span>Meedoen met {props.name}?</span>
           {props.isLoggedIn ? (
-            <Buttons>
-              <ActivityButton
+            <StyledButtons>
+              <StyledButton
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'ATTENDING'}
                 onClick={(): void => {
-                  registerForActivity(
-                    'ATTENDING',
-                    props.id,
-                    props.startDateTime,
-                  )
+                  // register for the activity with status ATTENDING
+                  registerForActivity('ATTENDING', props.id)
+                  // toggle activity
                   setToggle(!toggle)
-
+                  // remove the toast if it's already there
                   toast.dismiss(`${props.id}${props.i}`)
+                  // show a toast
                   toast(`Je doet mee met ${props.name}!`, {
                     type: toast.TYPE.SUCCESS,
                     toastId: `${props.id}${props.i}`,
@@ -264,19 +248,18 @@ const Activity: React.FC<Props> = (props: Props) => {
                 }}
               >
                 Ja
-              </ActivityButton>
-              <ActivityButton
+              </StyledButton>
+              <StyledButton
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'MAYBE_ATTENDING'}
                 onClick={(): void => {
-                  registerForActivity(
-                    'MAYBE_ATTENDING',
-                    props.id,
-                    props.startDateTime,
-                  )
+                  // register for the activity with status MAYBE_ATTENDING
+                  registerForActivity('MAYBE_ATTENDING', props.id)
+                  // toggle activity
                   setToggle(!toggle)
-
+                  // remove the toast if it's already there
                   toast.dismiss(`${props.id}${props.i}`)
+                  // show a toast
                   toast(`Je doet misschien mee met ${props.name}!`, {
                     type: toast.TYPE.WARNING,
                     toastId: `${props.id}${props.i}`,
@@ -284,19 +267,18 @@ const Activity: React.FC<Props> = (props: Props) => {
                 }}
               >
                 Misschien
-              </ActivityButton>
-              <ActivityButton
+              </StyledButton>
+              <StyledButton
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'NOT_ATTENDING'}
                 onClick={(): void => {
-                  registerForActivity(
-                    'NOT_ATTENDING',
-                    props.id,
-                    props.startDateTime,
-                  )
+                  // register for the activity with status NOT_ATTENDING
+                  registerForActivity('NOT_ATTENDING', props.id)
+                  // toggle activity
                   setToggle(!toggle)
-
+                  // remove the toast if it's already there
                   toast.dismiss(`${props.id}${props.i}`)
+                  // show a toast
                   toast(`Je doet niet mee met ${props.name}!`, {
                     type: toast.TYPE.ERROR,
                     toastId: `${props.id}${props.i}`,
@@ -304,21 +286,21 @@ const Activity: React.FC<Props> = (props: Props) => {
                 }}
               >
                 Nee
-              </ActivityButton>
-            </Buttons>
+              </StyledButton>
+            </StyledButtons>
           ) : (
-            <Buttons>
-              <ActivityButton
+            <StyledButtons>
+              <StyledButton
                 categoryColor={props.categoryColor}
                 onClick={(): void => props.history.push('/login')}
               >
                 Inloggen
-              </ActivityButton>
-            </Buttons>
+              </StyledButton>
+            </StyledButtons>
           )}
-        </Meedoen>
-      </ActivityItem>
-    </ActivityContainer>
+        </StyledMeedoen>
+      </StyledItem>
+    </StyledContainer>
   )
 }
 

@@ -1,19 +1,8 @@
-import * as React from 'react'
 import styled from 'styled-components'
-import ReactDOM from 'react-dom'
 import { layout, colors } from 'src/styles'
+import { StyledDropdownProps } from './types'
 
-interface Props {
-  closeDropdown: Function
-  children: React.ReactNode
-  open: boolean
-}
-
-interface DropdownProps {
-  open: boolean
-}
-
-const StyledOverlay = styled.div<DropdownProps>`
+export const StyledOverlay = styled.div<StyledDropdownProps>`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -26,7 +15,7 @@ const StyledOverlay = styled.div<DropdownProps>`
   pointer-events: ${(props): string => (props.open ? 'all' : 'none')};
 `
 
-const StyledDropdown = styled.div<DropdownProps>`
+export const StyledDropdown = styled.div<StyledDropdownProps>`
   cursor: auto;
   position: fixed;
   right: 7.5px;
@@ -52,18 +41,3 @@ const StyledDropdown = styled.div<DropdownProps>`
     transform: rotate(45deg);
   }
 `
-
-const Dropdown: React.FC<Props> = (props: Props) => {
-  return ReactDOM.createPortal(
-    <>
-      <StyledOverlay
-        onClick={(): void => props.closeDropdown(true)}
-        open={props.open}
-      />
-      <StyledDropdown open={props.open}>{props.children}</StyledDropdown>
-    </>,
-    document.getElementById('portal-root') as HTMLElement,
-  )
-}
-
-export default Dropdown

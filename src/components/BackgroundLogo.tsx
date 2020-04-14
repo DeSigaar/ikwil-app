@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import StichtingIcon from 'src/assets/general/logo-ik-wil.svg'
 
 interface BackgroundProps {
-  background: any
+  background: string
 }
 
 const StyledLogo = styled.div<BackgroundProps>`

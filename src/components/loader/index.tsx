@@ -1,5 +1,4 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import { colors } from 'src/styles'
 import {
   IconContainer,
@@ -8,42 +7,8 @@ import {
   Spinner as SpinnerIcon,
   SpinnerAlt as SpinnerAltIcon,
 } from 'src/icons'
-
-export interface Props {
-  height?: string
-  width?: string
-  scale?: number
-  color?: string
-  text?: string
-  type?: string
-  fontSize?: string
-}
-
-export interface StyledProps {
-  readonly height: string
-  readonly width: string
-  readonly scale: number
-  readonly color: string
-  readonly fontSize: string
-}
-
-const StyledLoader = styled.div<StyledProps>`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: ${(props): string => props.height};
-  width: ${(props): string => props.width};
-  --ggs: ${(props): number => props.scale};
-  color: ${(props): string => props.color};
-
-  > p {
-    margin-top: 8px;
-    font-size: ${(props): string => props.fontSize};
-    font-family: 'Verdana', sans-serif;
-    font-weight: 800;
-  }
-`
+import { StyledLoader } from './styles'
+import { Props } from './types'
 
 const Loader: React.FC<Props> = ({
   height = '100px',

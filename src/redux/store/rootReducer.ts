@@ -13,7 +13,6 @@ import hardSet from 'redux-persist/es/stateReconciler/hardSet'
 import history from 'src/utils/history'
 import { localForage as configLocalForage } from 'src/config'
 import { LocationState } from 'history'
-// import { DatabaseSchema } from 'src/types/database'
 
 // Import all reducers
 import { appReducer, AppState } from 'src/redux/app'
@@ -54,6 +53,6 @@ export type RootState = {
   app: AppState
   filter: FilterState
   router: RouterState<LocationState>
-  firebase: FirebaseReducer.Reducer<UserProfile, any>
+  firebase: FirebaseReducer.Reducer<UserProfile>
   firestore: FirestoreReducer.Reducer
 }
