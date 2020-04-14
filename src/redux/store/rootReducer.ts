@@ -53,6 +53,6 @@ export type RootState = {
   app: AppState
   filter: FilterState
   router: RouterState<LocationState>
-  firebase: FirebaseReducer.Reducer<UserProfile, any> // eslint-disable-line @typescript-eslint/no-explicit-any
+  firebase: FirebaseReducer.Reducer<UserProfile>
   firestore: FirestoreReducer.Reducer
 }
