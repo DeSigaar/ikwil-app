@@ -216,26 +216,34 @@ const Activity: React.FC<Props> = (props: Props) => {
         <Details>
           <Detail>
             <DetailIcon src={TimeIcon} size={detailIconSize} alt="" />
-            <span>
-              {`${props.startDateTime.getHours()}`}:
-              {props.startDateTime.getMinutes() < 10 && '0'}
-              {`${props.startDateTime.getMinutes()}`}-
-              {`${props.endDateTime.getHours()}`}:
-              {props.endDateTime.getMinutes() < 10 && '0'}
-              {`${props.endDateTime.getMinutes()}`}
-            </span>
+            <div>
+              <span>
+                {`${props.startDateTime.getHours()}`}:
+                {props.startDateTime.getMinutes() < 10 && '0'}
+                {`${props.startDateTime.getMinutes()}`}-
+                {`${props.endDateTime.getHours()}`}:
+                {props.endDateTime.getMinutes() < 10 && '0'}
+                {`${props.endDateTime.getMinutes()}`}
+              </span>
+            </div>
           </Detail>
           <Detail>
             <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
             <div>
-              {organiserObjects.map((_organiser, i) => (
-                <span key={i}>{_organiser.name}</span>
-              ))}
+              {organiserObjects.length < 1 ? (
+                <span>geen</span>
+              ) : (
+                organiserObjects.map((_organiser, i) => (
+                  <span key={i}>{_organiser.name}</span>
+                ))
+              )}
             </div>
           </Detail>
           <Detail>
             <DetailIcon src={LocationIcon} size={detailIconSize} alt="" />
-            <span>{props.room} </span>
+            <div>
+              <span>{props.room} </span>
+            </div>
           </Detail>
           {/* <Detail>
             <DetailIcon src={ParticipantsIcon} size={detailIconSize} alt="" />

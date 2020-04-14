@@ -21,8 +21,10 @@ export const ActivityItem = styled.div<StyledActivityItemProps>`
   width: 75vw;
   margin: ${({ first }): string =>
     first ? `0 0 ${layout.unit * 0.5}px 0` : `${layout.unit * 0.5}px 0`};
-  height: ${({ toggle }): string =>
-    toggle ? (layout.isSmallScreen ? '260px' : '260px') : '50px'};
+  max-height: ${({ toggle }): string =>
+    toggle ? (layout.isSmallScreen ? '250px' : '230px') : '50px'};
+  min-height: ${({ toggle }): string =>
+    toggle ? (layout.isSmallScreen ? '230px' : '230px') : '50px'};
   overflow: hidden;
   transition: 0.3s;
   box-shadow: ${colors.shadows.default};

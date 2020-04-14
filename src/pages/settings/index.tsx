@@ -12,6 +12,7 @@ import { layout, colors } from 'src/styles'
 import { connect } from 'react-redux'
 import { RootState } from 'src/redux/store'
 import { fireStore } from 'src/utils/firebase'
+import { Profile } from 'src/types/react-redux-firebase'
 
 interface StyledProps {
   focus: boolean
@@ -21,10 +22,11 @@ interface OwnProps {}
 
 interface StateProps {
   isLoggedIn: boolean
-  profile: any
+  profile: Profile
 }
 
 type Props = OwnProps & StateProps & RouteComponentProps
+
 const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -201,7 +203,7 @@ const Settings: React.FC<Props> = (props: Props) => {
   const [focused3, setFocused3] = React.useState(false)
   const [name, setName] = React.useState(props.profile.displayName)
   const [email, setEmail] = React.useState(props.profile.email)
-  const [phone, setPhone] = React.useState(props.profile.phone)
+  const [phone, setPhone] = React.useState(props.profile.phoneNumber)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === 'name') setName(event.target.value)
@@ -211,7 +213,7 @@ const Settings: React.FC<Props> = (props: Props) => {
 
   const saveSettings = (): void => {
     // Save naar firebase
-    fireStore.collection('users').doc(props.profile.id).update({
+    fireStore.collection('users').doc(props.profile.uid).update({
       displayName: name,
       email,
       phone,
@@ -334,4 +336,4 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   }
 }
 
-export default connect(mapStateToProps, null)(Settings)
+export default connect(mapStateToProps)(Settings)

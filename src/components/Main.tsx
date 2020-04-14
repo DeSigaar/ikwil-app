@@ -241,7 +241,7 @@ const Main: React.FC<Props> = (props: Props) => {
     return (
       <StyledTimeline>
         {sortedActivities.map(
-          (activity: SortedActivity, i: any): React.ReactNode => {
+          (activity: SortedActivity, i: number): React.ReactNode => {
             const category = props.categories.find(
               (category) => category.id === activity.category.split('/')[1],
             ) || { name: '', color: '' }
