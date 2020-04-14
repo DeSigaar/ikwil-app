@@ -17,7 +17,7 @@ const LogIn: React.FC<Props> = (props: Props) => {
         const token = await fireMessaging.getToken()
         fireStore.collection('users').doc(uid).update({ pushToken: token })
       })
-      .catch((error) => console.error(error)) // eslint-disable-line no-console
+      .catch(console.error) // eslint-disable-line no-console
   }
 
   React.useEffect(() => {

@@ -3,25 +3,25 @@ importScripts(
   'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js',
 )
 
-self.addEventListener('install', (e) => {
-  console.log('Service Worker: Install', e)
-})
+// self.addEventListener('install', (e) => {
+//   console.log('Service Worker: Install', e)
+// })
 
-self.addEventListener('activate', (e) => {
-  console.log('Service Worker: Activate', e)
-})
+// self.addEventListener('activate', (e) => {
+//   console.log('Service Worker: Activate', e)
+// })
 
-self.addEventListener('fetch', (e) => {
-  console.log('Service Worker: Fetch', e)
-})
+// self.addEventListener('fetch', (e) => {
+//   console.log('Service Worker: Fetch', e)
+// })
 
-self.addEventListener('sync', (e) => {
-  console.log('Service Worker: Sync', e)
-})
+// self.addEventListener('sync', (e) => {
+//   console.log('Service Worker: Sync', e)
+// })
 
-self.addEventListener('push', (e) => {
-  console.log('Service Worker: Push', e)
-})
+// self.addEventListener('push', (e) => {
+//   console.log('Service Worker: Push', e)
+// })
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {

@@ -64,9 +64,7 @@ const registerValidServiceWorker = (swUrl: string, config?: Config): void => {
         }
       }
     })
-    .catch((error) => {
-      console.error('Service Worker:', error)
-    })
+    .catch(console.error)
 }
 
 const checkValidServiceWorker = (swUrl: string, config?: Config): void => {
@@ -92,12 +90,7 @@ const checkValidServiceWorker = (swUrl: string, config?: Config): void => {
         registerValidServiceWorker(swUrl, config)
       }
     })
-    .catch(() => {
-      console.error(
-        'Service Worker:',
-        'No internet connection found. App is running in offline mode.',
-      )
-    })
+    .catch(console.error)
 }
 
 export const register = (config?: Config): void => {
@@ -144,8 +137,6 @@ export const unregister = (): void => {
         registration.unregister()
         console.log('Service Worker:', 'Unregistered')
       })
-      .catch((error) => {
-        console.error('Service Worker:', error.message)
-      })
+      .catch(console.error)
   }
 }
