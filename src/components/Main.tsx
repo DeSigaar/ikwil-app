@@ -162,6 +162,23 @@ const Main: React.FC<Props> = (props: Props) => {
       (_activity) => _activity.endDateTime >= new Date(),
     )
 
+    if (props.filters.search)
+      sortedActivities = sortedActivities.filter(
+        (_activity) =>
+          _activity.name
+            .toLowerCase()
+            .includes(props.filters.search.toLowerCase()) ||
+          _activity.room
+            .toLowerCase()
+            .includes(props.filters.search.toLowerCase()) ||
+          _activity.description
+            .toLowerCase()
+            .includes(props.filters.search.toLowerCase()) ||
+          _activity.createdBy
+            .toLowerCase()
+            .includes(props.filters.search.toLowerCase()),
+      )
+
     // Additional filters defined
     if (
       props.filters.beweging ||
