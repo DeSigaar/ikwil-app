@@ -3,7 +3,12 @@ import styled from 'styled-components'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { isLoaded, isEmpty, firestoreConnect } from 'react-redux-firebase'
-import { Activity, Category, Organiser, Registration } from 'src/types/database'
+import {
+  Activity,
+  Category,
+  Organiser,
+  Registration,
+} from 'src/types/firestore'
 import { RootState } from 'src/redux/store'
 import { colors, layout } from 'src/styles'
 import { Loader, Activity as ActivityComponent } from 'src/components'
@@ -152,6 +157,10 @@ const Main: React.FC<Props> = (props: Props) => {
       if (a.startDateTime > b.startDateTime) return 1
       else return 0
     })
+
+    sortedActivities = sortedActivities.filter(
+      (_activity) => _activity.endDateTime >= new Date(),
+    )
 
     // Additional filters defined
     if (

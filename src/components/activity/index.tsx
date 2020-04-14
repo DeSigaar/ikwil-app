@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as firebase from 'firebase'
+import * as firebase from 'firebase/app'
 import { toast } from 'react-toastify'
 import ChevronGrey from 'src/assets/general/chevron_grey.svg'
 import ChevronWhite from 'src/assets/general/chevron_white.svg'
@@ -37,14 +37,14 @@ import {
 import {
   CartIcon,
   LocationIcon,
-  ParticipantsIcon,
+  // ParticipantsIcon,
   TimeIcon,
 } from 'src/assets/activity_details'
 import {
   Organiser,
   Activity as ActivityInterface,
   Registration,
-} from 'src/types/database'
+} from 'src/types/firestore'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { fireAuth, fireStore } from 'src/utils/firebase'
 
@@ -65,7 +65,7 @@ interface Props extends ActivityInterface, RouteComponentProps {
 const Activity: React.FC<Props> = (props: Props) => {
   const [toggle, setToggle] = React.useState(false)
   const [inverted, setInverted] = React.useState(false)
-  const [aanmeldingen] = React.useState([])
+  // const [aanmeldingen] = React.useState([])
 
   React.useEffect(() => {
     !toggle
@@ -197,13 +197,13 @@ const Activity: React.FC<Props> = (props: Props) => {
         inverted={inverted}
         first={props.i === 0}
       >
-        <ActivityBar>
+        <ActivityBar onClick={(): void => toggleActivity()}>
           <LogoAndTitle>
             {activityIcon(props.categoryName, inverted)}
             <span>{props.name}</span>
           </LogoAndTitle>
 
-          <Toggle toggle={toggle} onClick={(): void => toggleActivity()}>
+          <Toggle toggle={toggle}>
             <img
               width="20px"
               height="20px"
@@ -227,18 +227,20 @@ const Activity: React.FC<Props> = (props: Props) => {
           </Detail>
           <Detail>
             <DetailIcon src={CartIcon} size={detailIconSize} alt="" />
-            {organiserObjects.map((_organiser, i) => (
-              <span key={i}>{_organiser.name}</span>
-            ))}
+            <div>
+              {organiserObjects.map((_organiser, i) => (
+                <span key={i}>{_organiser.name}</span>
+              ))}
+            </div>
           </Detail>
           <Detail>
             <DetailIcon src={LocationIcon} size={detailIconSize} alt="" />
             <span>{props.room} </span>
           </Detail>
-          <Detail>
+          {/* <Detail>
             <DetailIcon src={ParticipantsIcon} size={detailIconSize} alt="" />
             <span>{aanmeldingen.length} </span>
-          </Detail>
+          </Detail> */}
         </Details>
         <Line />
         <Meedoen>

@@ -1,5 +1,5 @@
 import { RouteComponentProps } from 'react-router-dom'
-import { Organiser, Activity, Registration } from 'src/types/database'
+import { Organiser, Activity, Registration } from 'src/types/firestore'
 
 export interface StyledActivityItemProps {
   toggle: boolean

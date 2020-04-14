@@ -22,7 +22,7 @@ export const ActivityItem = styled.div<StyledActivityItemProps>`
   margin: ${({ first }): string =>
     first ? `0 0 ${layout.unit * 0.5}px 0` : `${layout.unit * 0.5}px 0`};
   height: ${({ toggle }): string =>
-    toggle ? (layout.isSmallScreen ? '260px' : '240px') : '50px'};
+    toggle ? (layout.isSmallScreen ? '260px' : '260px') : '50px'};
   overflow: hidden;
   transition: 0.3s;
   box-shadow: ${colors.shadows.default};
@@ -88,7 +88,7 @@ export const Details = styled.ul`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding-left: 35px;
+  padding-left: ${layout.isSmallScreen ? '25' : '35'}px;
   margin-top: 2px;
 `
 export const Detail = styled.li`
@@ -99,9 +99,13 @@ export const Detail = styled.li`
   width: 100%;
   margin: 3px 0;
 
-  span {
-    margin-left: 10px;
+  div {
     max-width: 70%;
+    display: flex;
+    flex-direction: column;
+  }
+  span {
+    margin-left: 7px;
   }
 `
 export const DetailIcon = styled.img<StyledDetailStyleProps>`
