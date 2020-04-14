@@ -3,11 +3,12 @@ import 'firebaseui/dist/firebaseui.css'
 import { fireUI, fireStore, fireMessaging } from 'src/utils/firebase'
 import configFirebaseUI from 'src/config/firebaseUI'
 import { connect } from 'react-redux'
-import { RootState } from 'src/redux/store'
+import { RootState, store } from 'src/redux/store'
 import { Header, BackgroundLogo } from 'src/components'
 import Logo from 'src/assets/general/logo-stichting-ik-wil.svg'
 import { StyledLogo, StyledTitle } from './styles'
 import { Props, OwnProps, StateProps } from './types'
+import { askForInstall } from 'src/redux/app'
 
 const LogIn: React.FC<Props> = (props: Props) => {
   const askForPermission = async (uid: string): Promise<void> => {
@@ -28,6 +29,7 @@ const LogIn: React.FC<Props> = (props: Props) => {
       callbacks: {
         signInSuccessWithAuthResult: (authResult): boolean => {
           askForPermission(authResult.user.uid)
+          store.dispatch(askForInstall())
           return false
         },
       },

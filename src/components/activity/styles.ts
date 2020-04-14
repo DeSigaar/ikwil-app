@@ -129,7 +129,7 @@ export const StyledLine = styled.hr`
   border-width: 1px;
   opacity: 0.6;
   width: 90%;
-  border-style: solid;
+  border-style: solid white;
 `
 
 export const StyledMeedoen = styled.div`
