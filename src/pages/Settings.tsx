@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Header, Icon } from 'src/components'
+import { Header, BackgroundLogo, Icon } from 'src/components'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import NameIcon from 'src/assets/general/icon_settings_name.svg'
 import MailIcon from 'src/assets/general/icon_settings_mail.svg'
@@ -228,6 +228,7 @@ const Settings: React.FC<Props> = (props: Props) => {
   return (
     <>
       <Header title="Instellingen" />
+      <BackgroundLogo />
       <StyledWrapper>
         <StyledTitle>Account</StyledTitle>
         <StyledContainer focus={focused1}>

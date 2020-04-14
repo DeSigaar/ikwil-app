@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Header } from 'src/components'
+import { Header, BackgroundLogo } from 'src/components'
 import { colors } from 'src/styles'
 
 const StyledVersion = styled.div`
@@ -25,7 +25,7 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <>
       <Header title="Privacy Policy" />
-
+      <BackgroundLogo />
       <div>
         <StyledVersion>
           <small>Version 1.0.0</small>
