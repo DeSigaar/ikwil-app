@@ -5,6 +5,7 @@ import { Link, RouteComponentProps } from 'react-router-dom'
 import NameIcon from 'src/assets/general/icon_settings_name.svg'
 import MailIcon from 'src/assets/general/icon_settings_mail.svg'
 import PhoneIcon from 'src/assets/general/icon_settings_phone.svg'
+import HelpIcon from 'src/assets/general/icon_settings_help.svg'
 import GlobeIcon from 'src/assets/general/icon_settings_globe.svg'
 import PrivacyIcon from 'src/assets/general/icon_settings_privacy.svg'
 import { layout, colors } from 'src/styles'
@@ -302,6 +303,12 @@ const Settings: React.FC<Props> = (props: Props) => {
           </StyledToggle>
         </StyledToggleContainer>
         <StyledHorizontalRule />
+        <Link to="/help">
+          <StyledBottomLabel>
+            <Icon icon={HelpIcon} size={20} />
+            <p>Help & ondersteuning</p>
+          </StyledBottomLabel>
+        </Link>
         <Link to="/terms-of-service">
           <StyledBottomLabel>
             <Icon icon={GlobeIcon} size={20} />

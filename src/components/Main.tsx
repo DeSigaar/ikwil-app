@@ -8,6 +8,7 @@ import { RootState } from 'src/redux/store'
 import { colors, layout } from 'src/styles'
 import { Loader, Activity as ActivityComponent } from 'src/components'
 import { getDayByString } from 'src/utils/date'
+import { FilterState } from 'src/redux/filter'
 
 const StyledTimeline = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ interface StateProps {
   categories: Category[]
   organisers: Organiser[]
   registrations: Registration[]
+  filters: FilterState
 }
 
 type Props = OwnProps & StateProps
@@ -75,7 +77,7 @@ const Main: React.FC<Props> = (props: Props) => {
       startDateTime: Date
       endDateTime: Date
     }
-    const sortedActivities: SortedActivity[] = []
+    let sortedActivities: SortedActivity[] = []
 
     activities.forEach((activity) => {
       if (activity.day) {
@@ -151,10 +153,86 @@ const Main: React.FC<Props> = (props: Props) => {
       else return 0
     })
 
+    // Additional filters defined
+    if (
+      props.filters.beweging ||
+      props.filters.creatief ||
+      props.filters.kinderen ||
+      props.filters.taal ||
+      props.filters.spiritueel ||
+      props.filters.sociaal
+    ) {
+      // we waren hier
+    }
+    if (props.filters.beweging)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'beweging' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+
+    if (props.filters.creatief)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'creatief' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.kinderen)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'kinderen' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.sociaal)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'sociaal' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.spiritueel)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'spiritueel' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+    if (props.filters.taal)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        props.categories.find(
+          (_category) =>
+            _category.filterName === 'taal' &&
+            _activity.category.split('/')[1] === _category.id,
+        ),
+      )
+
+    if (props.filters.mijn)
+      sortedActivities = sortedActivities.filter((_activity) =>
+        registrations.find(
+          (_registration) =>
+            _registration.activity.split('/')[1] === _activity.id &&
+            _registration.status !== 'NOT_ATTENDING',
+        ),
+      )
+
+    if (props.filters.speciaal)
+      sortedActivities = sortedActivities.filter((_activity) => {
+        if (_activity.day) return true
+        else return false
+      })
+
     return (
       <StyledTimeline>
         {sortedActivities.map(
-          (activity: SortedActivity, i): React.ReactNode => {
+          (activity: SortedActivity, i: any): React.ReactNode => {
             const category = props.categories.find(
               (category) => category.id === activity.category.split('/')[1],
             ) || { name: '', color: '' }
@@ -182,9 +260,7 @@ const Main: React.FC<Props> = (props: Props) => {
 
             const registration = registrations.find(
               (_registration) =>
-                _registration.activity.split('/')[1] === activity.id &&
-                new Date(_registration.date.seconds * 1000).toISOString() ===
-                  activity.startDateTime.toISOString(),
+                _registration.activity.split('/')[1] === activity.id,
             )
 
             return (
@@ -221,6 +297,17 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
     categories: state.firestore.ordered.categories,
     organisers: state.firestore.ordered.organisers,
     registrations: state.firestore.ordered.registrations,
+    filters: {
+      search: state.filter.search,
+      beweging: state.filter.beweging,
+      creatief: state.filter.creatief,
+      kinderen: state.filter.kinderen,
+      sociaal: state.filter.sociaal,
+      spiritueel: state.filter.spiritueel,
+      taal: state.filter.taal,
+      mijn: state.filter.mijn,
+      speciaal: state.filter.speciaal,
+    },
   }
 }
 

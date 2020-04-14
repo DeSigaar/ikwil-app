@@ -1,5 +1,11 @@
 import styled from 'styled-components'
 import { colors, layout, fonts } from 'src/styles'
+import {
+  StyledActivityItemProps,
+  StyledToggleStyleProps,
+  StyledDetailStyleProps,
+  StyledActiveStyleProps,
+} from './types'
 
 export const ActivityContainer = styled.div`
   display: flex;
@@ -11,33 +17,7 @@ export const ActivityTimeline = styled.div`
   width: 15vw;
 `
 
-export interface ActivityItemProps {
-  toggle: boolean
-  inverted: boolean
-  backgroundColor: string
-  first: boolean
-}
-export interface ToggleStyleProps {
-  toggle: boolean
-}
-export interface ActiveStyleProps {
-  yes?: boolean
-  maybe?: boolean
-  no?: boolean
-  categoryColor: string
-  notActive?: boolean
-}
-export interface ActivityStyleProps {
-  toggle: boolean
-  inverted: boolean
-  backgroundColor: string
-}
-
-interface DetailStyleProps {
-  size: number
-}
-
-export const ActivityItem = styled.div<ActivityItemProps>`
+export const ActivityItem = styled.div<StyledActivityItemProps>`
   width: 75vw;
   margin: ${({ first }): string =>
     first ? `0 0 ${layout.unit * 0.5}px 0` : `${layout.unit * 0.5}px 0`};
@@ -82,7 +62,7 @@ export const LogoAndTitle = styled.div`
     text-overflow: ellipsis;
   }
 `
-export const Toggle = styled.button<ToggleStyleProps>`
+export const Toggle = styled.button<StyledToggleStyleProps>`
   width: 40px;
   height: 40px;
   border: 0;
@@ -124,7 +104,7 @@ export const Detail = styled.li`
     max-width: 70%;
   }
 `
-export const DetailIcon = styled.img<DetailStyleProps>`
+export const DetailIcon = styled.img<StyledDetailStyleProps>`
   height: ${(props): number => props.size}px;
   width: ${(props): number => props.size}px;
   margin-right: 5px;
@@ -158,7 +138,7 @@ export const Buttons = styled.div`
   width: 100%;
   margin: 10px;
 `
-export const ActivityButton = styled.button<ActiveStyleProps>`
+export const ActivityButton = styled.button<StyledActiveStyleProps>`
   border: 0;
   margin: 0 2px;
   padding: 3px 9px;

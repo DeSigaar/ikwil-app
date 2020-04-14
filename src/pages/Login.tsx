@@ -23,6 +23,7 @@ const StyledLogo = styled.div`
   width: 60vw;
   max-width: 220px;
   margin: auto;
+
   padding-top: 3vh;
 `
 const StyledTitle = styled.h3`

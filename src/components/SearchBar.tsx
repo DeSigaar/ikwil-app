@@ -1,9 +1,13 @@
 import * as React from 'react'
+import * as Redux from 'redux'
 import styled from 'styled-components'
 import { Modal, Filter, Icon } from 'src/components'
 import FilterIcon from 'src/assets/general/icon_filter_grey.svg'
 import { layout, colors } from 'src/styles'
 import { IconContainer, Search as SearchIcon } from 'src/icons'
+import { connect } from 'react-redux'
+import { RootState } from 'src/redux/store'
+import { changeSearch, FilterActionsTypes } from 'src/redux/filter'
 
 interface StyledProps {
   focus: boolean
@@ -60,12 +64,29 @@ const StyledInput = styled.input`
     opacity: 0.5;
   }
 `
+interface OwnProps {}
 
-const SearchBar: React.FC = () => {
+interface StateProps {
+  search: string
+}
+
+interface DispatchProps {
+  changeSearch: (value: string) => FilterActionsTypes
+}
+
+type Props = OwnProps & StateProps & DispatchProps
+
+const SearchBar: React.FC<Props> = (props: Props) => {
   const [modalShowing, setModalShowing] = React.useState(false)
   const [focused, setFocused] = React.useState(false)
+  const [value, setValue] = React.useState(props.search)
 
-  let inputElement: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  let inputElement: HTMLInputElement
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setValue(e.target.value)
+    props.changeSearch(e.target.value)
+  }
 
   return (
     <>
@@ -76,11 +97,13 @@ const SearchBar: React.FC = () => {
         <StyledInput
           type="search"
           placeholder="Zoeken..."
-          ref={(input): void => {
+          ref={(input: HTMLInputElement): void => {
             inputElement = input
           }}
           onFocus={(): void => setFocused(true)}
           onBlur={(): void => setFocused(false)}
+          onChange={handleChange}
+          value={value}
         />
         <Icon
           icon={FilterIcon}
@@ -88,15 +111,25 @@ const SearchBar: React.FC = () => {
           cursor="pointer"
         />
       </StyledContainer>
-      {modalShowing ? (
+      {modalShowing && (
         <Modal title="Filters" closeModal={setModalShowing}>
           <Filter />
         </Modal>
-      ) : (
-        <></>
       )}
     </>
   )
 }
 
-export default SearchBar
+const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
+  return {
+    ...ownProps,
+    search: state.app.search,
+  }
+}
+
+const mapDispatchToProps = (dispatch: Redux.Dispatch): DispatchProps => ({
+  changeSearch: (value: string): FilterActionsTypes =>
+    dispatch(changeSearch(value)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)

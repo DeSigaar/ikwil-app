@@ -1,5 +1,10 @@
 import * as React from 'react'
 import {
+  isToday,
+  getShortMonthByNumber,
+  getShortDayByNumber,
+} from 'src/utils/date'
+import {
   StyledTimeline,
   StyledDate,
   StyledLine,
@@ -9,19 +14,7 @@ import {
   StyledMaybeDot,
   StyledNoDot,
 } from './styles'
-import {
-  isToday,
-  getShortMonthByNumber,
-  getShortDayByNumber,
-} from 'src/utils/date'
-
-interface Props {
-  displayDay: boolean
-  displayMonth: boolean
-  startDateTime: Date
-  first: boolean
-  status?: string
-}
+import { Props } from './types'
 
 const Timeline: React.FC<Props> = (props: Props) => {
   const { displayDay, displayMonth, startDateTime, first, status } = props
