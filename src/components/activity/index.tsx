@@ -45,18 +45,17 @@ import { Organiser } from 'src/types/firestore'
 import { fireAuth, fireStore } from 'src/utils/firebase'
 
 const Activity: React.FC<Props> = (props: Props) => {
-  const [toggle, setToggle] = React.useState(false)
-  const [inverted, setInverted] = React.useState(false)
-  // const [aanmeldingen] = React.useState([])
+  const [toggle, setToggle] = React.useState(false) // state if activity is toggled open or not
+  const [inverted, setInverted] = React.useState(false) // state if the colors of the activity are inverted or not
 
   React.useEffect(() => {
-    !toggle
-      ? props.registration
-        ? props.registration?.status !== 'NOT_ATTENDING'
-          ? setInverted(true)
-          : setInverted(false)
-        : setInverted(false)
-      : setInverted(true)
+    !toggle // check if not toggled
+      ? props.registration // check if registered to activity
+        ? props.registration?.status !== 'NOT_ATTENDING' // check if registration status is 'not attending'
+          ? setInverted(true) // if registration status not is 'NOT_ATTENDING' set inverted to true
+          : setInverted(false) // if registration status is 'NOT_ATTENDING' set inverted to false
+        : setInverted(false) // if not registered to activity setInverted to false
+      : setInverted(true) // if activity is toggled set inverted to true
   }, [props.registration, toggle])
 
   const activityIconSize = 36
@@ -64,6 +63,7 @@ const Activity: React.FC<Props> = (props: Props) => {
 
   const organiserObjects: Organiser[] = []
 
+  // find the correct organiser for the activity and push the organiser to the organiserObjects array
   props.organisers.forEach((_organiser: string) => {
     const correctOrganiser = props.allOrganisers.find(
       (_dbOrganiser) => _dbOrganiser.id === _organiser,
@@ -71,6 +71,7 @@ const Activity: React.FC<Props> = (props: Props) => {
     if (correctOrganiser) organiserObjects.push(correctOrganiser)
   })
 
+  // display icon or inverted icon if activity colors are inverted
   const activityIcon = (name: string, inverted: boolean): React.ReactNode => {
     switch (name) {
       case 'Taal':
@@ -115,6 +116,7 @@ const Activity: React.FC<Props> = (props: Props) => {
     }
   }
 
+  // if activity is clicked toggle the toggle and inverted states
   const toggleActivity = (): void => {
     if (!props.registration) setInverted(!inverted)
     setToggle(!toggle)
@@ -191,9 +193,10 @@ const Activity: React.FC<Props> = (props: Props) => {
             <StyledDetailIcon src={TimeIcon} size={detailIconSize} alt="" />
             <div>
               <span>
+                {/* display hour */}
                 {`${props.startDateTime.getHours()}`}:
                 {props.startDateTime.getMinutes() < 10 && '0'}
-                {`${props.startDateTime.getMinutes()}`}-
+                {`${props.startDateTime.getMinutes()}`}-{/* display minutues */}
                 {`${props.endDateTime.getHours()}`}:
                 {props.endDateTime.getMinutes() < 10 && '0'}
                 {`${props.endDateTime.getMinutes()}`}
@@ -203,6 +206,7 @@ const Activity: React.FC<Props> = (props: Props) => {
           <StyledDetail>
             <StyledDetailIcon src={CartIcon} size={detailIconSize} alt="" />
             <div>
+              {/* display 'geen' als er geen organisers zijn anders display the organisers  */}
               {organiserObjects.length < 1 ? (
                 <span>geen</span>
               ) : (
@@ -218,10 +222,6 @@ const Activity: React.FC<Props> = (props: Props) => {
               <span>{props.room} </span>
             </div>
           </StyledDetail>
-          {/* <Detail>
-            <DetailIcon src={ParticipantsIcon} size={detailIconSize} alt="" />
-            <span>{aanmeldingen.length} </span>
-          </Detail> */}
         </StyledDetails>
 
         <StyledLine />
@@ -234,10 +234,13 @@ const Activity: React.FC<Props> = (props: Props) => {
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'ATTENDING'}
                 onClick={(): void => {
+                  // register for the activity with status ATTENDING
                   registerForActivity('ATTENDING', props.id)
+                  // toggle activity
                   setToggle(!toggle)
-
+                  // remove the toast if it's already there
                   toast.dismiss(`${props.id}${props.i}`)
+                  // show a toast
                   toast(`Je doet mee met ${props.name}!`, {
                     type: toast.TYPE.SUCCESS,
                     toastId: `${props.id}${props.i}`,
@@ -250,10 +253,13 @@ const Activity: React.FC<Props> = (props: Props) => {
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'MAYBE_ATTENDING'}
                 onClick={(): void => {
+                  // register for the activity with status MAYBE_ATTENDING
                   registerForActivity('MAYBE_ATTENDING', props.id)
+                  // toggle activity
                   setToggle(!toggle)
-
+                  // remove the toast if it's already there
                   toast.dismiss(`${props.id}${props.i}`)
+                  // show a toast
                   toast(`Je doet misschien mee met ${props.name}!`, {
                     type: toast.TYPE.WARNING,
                     toastId: `${props.id}${props.i}`,
@@ -266,10 +272,13 @@ const Activity: React.FC<Props> = (props: Props) => {
                 categoryColor={props.categoryColor}
                 notActive={props.registration?.status !== 'NOT_ATTENDING'}
                 onClick={(): void => {
+                  // register for the activity with status NOT_ATTENDING
                   registerForActivity('NOT_ATTENDING', props.id)
+                  // toggle activity
                   setToggle(!toggle)
-
+                  // remove the toast if it's already there
                   toast.dismiss(`${props.id}${props.i}`)
+                  // show a toast
                   toast(`Je doet niet mee met ${props.name}!`, {
                     type: toast.TYPE.ERROR,
                     toastId: `${props.id}${props.i}`,
@@ -296,4 +305,3 @@ const Activity: React.FC<Props> = (props: Props) => {
 }
 
 export default withRouter(Activity)
-export * from './timeline'

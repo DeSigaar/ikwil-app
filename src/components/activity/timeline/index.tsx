@@ -22,6 +22,7 @@ const Timeline: React.FC<Props> = (props: Props) => {
   const day = getShortDayByNumber(startDateTime.getDay())
   let dot: React.ReactNode
 
+  // See which element should be used depending on the status
   switch (status) {
     default:
       dot = <StyledEmptyDot />

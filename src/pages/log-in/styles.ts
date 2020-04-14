@@ -7,6 +7,11 @@ export const StyledLogo = styled.div`
   max-width: 220px;
   margin: auto;
   padding-top: 3vh;
+
+  > img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
 `
 
 export const StyledTitle = styled.h3`

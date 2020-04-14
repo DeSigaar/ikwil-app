@@ -69,6 +69,7 @@ export const StyledDot = styled.div<StyledDotProps>`
   justify-content: center;
   align-items: center;
   user-select: none;
+  -webkit-user-drag: none;
 
   > div {
     border-radius: 50%;

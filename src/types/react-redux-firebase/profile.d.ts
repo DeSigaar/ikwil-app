@@ -1,5 +1,5 @@
 export interface Profile {
-  uid?: string
+  id?: string
   displayName?: string
   photoURL?: string
   email?: string
