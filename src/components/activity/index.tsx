@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as firebase from 'firebase'
 import { toast } from 'react-toastify'
 import ChevronGrey from 'src/assets/general/chevron_grey.svg'
 import ChevronWhite from 'src/assets/general/chevron_white.svg'
@@ -45,7 +46,7 @@ import {
   Registration,
 } from 'src/types/database'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { fireStore, fireAuth } from 'src/utils/firebase'
+import { fireAuth, fireStore } from 'src/utils/firebase'
 
 interface Props extends ActivityInterface, RouteComponentProps {
   organisers: string[]
@@ -73,6 +74,47 @@ const Activity: React.FC<Props> = (props: Props) => {
         : setInverted(false)
       : setInverted(true)
   }, [props.registration, toggle])
+
+  const registerForActivity = (
+    status: string,
+    activityID: string,
+    activityStartDateTime: Date,
+  ): void => {
+    const timestamp = firebase.firestore.Timestamp.fromDate(
+      activityStartDateTime,
+    )
+    const activityRef = `activities/${activityID}`
+
+    fireStore
+      .collection('users')
+      .doc(fireAuth.currentUser?.uid)
+      .collection('registrations')
+      .where('activity', '==', activityRef)
+      .where('date', '==', timestamp)
+      .get()
+      .then((_doc) => {
+        if (_doc.docs[0]?.data()) {
+          // Document/registration exists - Update the document
+          fireStore
+            .collection('users')
+            .doc(fireAuth.currentUser?.uid)
+            .collection('registrations')
+            .doc(_doc.docs[0].id)
+            .update({ status })
+        } else {
+          // Document/registration does not exist - Create document
+          fireStore
+            .collection('users')
+            .doc(fireAuth.currentUser?.uid)
+            .collection('registrations')
+            .add({
+              date: timestamp,
+              activity: activityRef,
+              status,
+            })
+        }
+      })
+  }
 
   const activityIconSize = 36
   const detailIconSize = 17
