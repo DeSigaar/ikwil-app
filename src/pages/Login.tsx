@@ -23,6 +23,7 @@ const StyledLogo = styled.div`
   width: 60vw;
   max-width: 220px;
   margin: auto;
+
   padding-top: 3vh;
 `
 const StyledTitle = styled.h3`
@@ -30,7 +31,6 @@ const StyledTitle = styled.h3`
   padding: 3vh;
   color: ${colors.darkgrey};
 `
-
 
 const Login: React.FC<Props> = (props: Props) => {
   const askForPermission = async (uid: string): Promise<any> => {
@@ -42,9 +42,6 @@ const Login: React.FC<Props> = (props: Props) => {
       })
       .catch((err) => console.error(err)) // eslint-disable-line no-console
   }
-
-
-
 
   React.useEffect(() => {
     if (props.isLoggedIn) props.history.push('/')

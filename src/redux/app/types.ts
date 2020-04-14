@@ -3,6 +3,7 @@ export const CACHE_CHANGED = `@APP/CACHE_CHANGED`
 export const INSTALL_CHANGED = `@APP/INSTALL_CHANGED`
 export const SET_INSTALL_PROMPT = '@APP/SET_INSTALL_PROMPT'
 export const ASK_FOR_INSTALL = '@APP/ASK_FOR_INSTALL'
+export const CHANGE_SEARCH = '@APP/CHANGE_SEARCH'
 
 export type ONLINE_STATUS = 'UNKNOWN' | 'OFFLINE' | 'ONLINE'
 export type CACHE_STATUS = 'UNKNOWN' | 'SHOULD_CACHE' | 'CACHING' | 'CACHED'
@@ -19,6 +20,7 @@ export interface AppState {
   cacheStatus: CACHE_STATUS
   installStatus: INSTALL_STATUS
   installPrompt?: BeforeInstallPromptEvent | undefined
+  search: string
 }
 
 export interface ChangeOnlineAction {
@@ -41,8 +43,14 @@ export interface SetInstallPromptAction {
   installPrompt: BeforeInstallPromptEvent
 }
 
+export interface ChangeSearchAction {
+  type: typeof CHANGE_SEARCH
+  search: string
+}
+
 export type AppActionsTypes =
   | ChangeOnlineAction
   | ChangeCacheAction
   | ChangeInstallAction
   | SetInstallPromptAction
+  | ChangeSearchAction

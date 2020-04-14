@@ -1,16 +1,12 @@
 import styled from 'styled-components'
 import { colors, layout } from 'src/styles'
+import { StyledDateProps, StyledDotProps } from './types'
 
 export const StyledTimeline = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
 `
-
-export interface StyledDateProps {
-  first: boolean
-  isToday: boolean
-}
 
 export const StyledDate = styled.div<StyledDateProps>`
   position: relative;
@@ -58,10 +54,6 @@ export const StyledLine = styled.div`
   height: 100%;
   background: ${colors.colors.timeline};
 `
-
-export interface StyledDotProps {
-  first: boolean
-}
 
 export const StyledDot = styled.div<StyledDotProps>`
   position: absolute;

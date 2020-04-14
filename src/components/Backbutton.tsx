@@ -47,4 +47,4 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps): StateProps => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(Backbutton))
+export default withRouter(connect(mapStateToProps)(Backbutton))
