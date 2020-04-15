@@ -30,6 +30,10 @@ const LogIn: React.FC<Props> = (props: Props) => {
         signInSuccessWithAuthResult: (authResult): boolean => {
           askForPermission(authResult.user.uid)
           store.dispatch(askForInstall())
+          fireStore
+            .collection('users')
+            .doc(authResult.user.uid)
+            .update({ displayName: authResult.user.displayName })
           return false
         },
       },

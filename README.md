@@ -23,7 +23,7 @@
 
 ## About
 
-This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).  
+This project was made by some students from the [Fontys Hogeschool ICT](https://fontys.nl/hbo-ict/) on behalf of ['Stichting Ik Wil'](http://www.stichtingikwil.nl/).
 A live preview can be found on our [deployed firebase app](https://ikwil-app.web.app/).
 
 ## Prerequisites
@@ -49,6 +49,20 @@ Install all needed node modules.
 
 ```
 $ npm install
+```
+
+Create an enviroment variables file named `.env` in the root of the folder with the following variables:
+
+```env
+REACT_APP_firebase_apiKey=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+REACT_APP_firebase_appId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+REACT_APP_firebase_authDomain=xxxxxxxxxx.firebaseapp.com
+REACT_APP_firebase_databaseURL=https://xxxxxxxxxx.firebaseio.com
+REACT_APP_firebase_measurementId=xxxxxxxxxxxx
+REACT_APP_firebase_messagingSenderId=xxxxxxxxxxx
+REACT_APP_firebase_projectId=xxxxxxxxxx
+REACT_APP_firebase_storageBucket=xxxxxxxxxx.appspot.com
+REACT_APP_firebase_vapid_public=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ### Running

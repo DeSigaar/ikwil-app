@@ -88,6 +88,11 @@ export const StyledButton = styled.button`
   font-weight: bold;
   margin: 15px 0px;
   cursor: pointer;
+
+  :hover,
+  :active {
+    text-decoration: underline;
+  }
 `
 
 export const StyledHorizontalRule = styled.hr`
@@ -170,5 +175,10 @@ export const StyledBottomLabel = styled.div`
 
   p {
     margin-left: 5px;
+  }
+
+  :hover p,
+  :active p {
+    text-decoration: underline;
   }
 `
