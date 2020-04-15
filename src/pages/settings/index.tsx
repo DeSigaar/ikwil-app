@@ -18,10 +18,10 @@ import {
   StyledInput,
   StyledButton,
   StyledHorizontalRule,
-  StyledToggleContainer,
-  StyledToggleLabel,
-  StyledToggle,
-  StyledCheckbox,
+  // StyledToggleContainer,
+  // StyledToggleLabel,
+  // StyledToggle,
+  // StyledCheckbox,
   StyledBottomLabel,
 } from './styles'
 
@@ -74,7 +74,7 @@ const Settings: React.FC<Props> = (props: Props) => {
           <StyledInput
             type="text"
             name="name"
-            placeholder="Naam"
+            placeholder="Volledige naam"
             value={name}
             ref={(input): void => {
               inputElement1 = input
@@ -115,7 +115,7 @@ const Settings: React.FC<Props> = (props: Props) => {
             type="tel"
             name="phone"
             value={phone}
-            placeholder="Phone"
+            placeholder="Telefoonnummer"
             ref={(input): void => {
               inputElement3 = input
             }}
@@ -126,7 +126,8 @@ const Settings: React.FC<Props> = (props: Props) => {
         </StyledContainer>
         <StyledButton onClick={saveSettings}>Wijzigingen opslaan</StyledButton>
         <StyledHorizontalRule />
-        <StyledTitle>App-instellingen</StyledTitle>
+        {/* TODO: Uncommented app settings because settings have no purpose as of now. */}
+        {/* <StyledTitle>App-instellingen</StyledTitle>
         <StyledToggleContainer>
           <StyledToggleLabel>Notificaties</StyledToggleLabel>
           <StyledToggle>
@@ -134,7 +135,8 @@ const Settings: React.FC<Props> = (props: Props) => {
             <span className="slider"></span>
           </StyledToggle>
         </StyledToggleContainer>
-        <StyledHorizontalRule />
+        <StyledHorizontalRule /> */}
+        {/* TODO: Uncommented component because of no help page. */}
         {/* <Link to="/help">
           <StyledBottomLabel>
             <Icon icon={HelpIcon} size={20} />

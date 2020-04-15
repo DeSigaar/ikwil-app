@@ -25,6 +25,7 @@ const StyledContainer = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `
 
 const StyledIcon = styled.div<BackgroundProps>`
@@ -63,14 +64,12 @@ const StyledCheckbox = styled.div<StyledProps>`
 
 const FilterItem: React.FC<Props> = (props: Props) => {
   return (
-    <StyledContainer>
-      <StyledCheckbox
-        background={TickIcon}
-        onClick={(): FilterActionsTypes =>
-          props.handleClick(props.filterName, !props.checked)
-        }
-        checked={props.checked}
-      />
+    <StyledContainer
+      onClick={(): FilterActionsTypes =>
+        props.handleClick(props.filterName, !props.checked)
+      }
+    >
+      <StyledCheckbox background={TickIcon} checked={props.checked} />
 
       {props.icon && <StyledIcon background={props.icon} />}
 
