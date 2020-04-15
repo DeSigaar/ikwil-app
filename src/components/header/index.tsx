@@ -42,7 +42,8 @@ const Header: React.FC<Props> = (props: Props) => {
 
           <Dropdown closeDropdown={setOpen} open={open}>
             {/* If install prompt is set, show install app dropdown item */}
-            {props.isInstallPromptSet && (
+            {props.isInstallPromptSet &&
+            !window.matchMedia('(display-mode: standalone)').matches ? (
               <StyledDropdownItem
                 onClick={(): AppActionsTypes => store.dispatch(askForInstall())}
               >
@@ -51,7 +52,7 @@ const Header: React.FC<Props> = (props: Props) => {
                   <SoftwareDownloadIcon />
                 </IconContainer>
               </StyledDropdownItem>
-            )}
+            ) : null}
             {/* If logged in, show the settings dropdown item */}
             {props.isLoggedIn && (
               <StyledDropdownItem
