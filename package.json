@@ -11,7 +11,6 @@
     "app",
     "ikwil-app"
   ],
-  "homepage": "./",
   "bugs": "https://github.com/de-sigaar/ikwil-app/issues",
   "repository": "github:de-sigaar/ikwil-app",
   "license": "UNLICENSED",
