@@ -16,8 +16,10 @@ const LogIn: React.FC<Props> = (props: Props) => {
       await fireMessaging
         .requestPermission()
         .then(async () => {
-          const token = await fireMessaging.getToken()
-          fireStore.collection('users').doc(uid).update({ pushToken: token })
+          if (fireMessaging) {
+            const token = await fireMessaging.getToken()
+            fireStore.collection('users').doc(uid).update({ pushToken: token })
+          }
         })
         .catch(console.error) // eslint-disable-line no-console
   }
