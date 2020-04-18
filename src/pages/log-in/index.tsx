@@ -12,13 +12,14 @@ import { askForInstall } from 'src/redux/app'
 
 const LogIn: React.FC<Props> = (props: Props) => {
   const askForPermission = async (uid: string): Promise<void> => {
-    await fireMessaging
-      .requestPermission()
-      .then(async () => {
-        const token = await fireMessaging.getToken()
-        fireStore.collection('users').doc(uid).update({ pushToken: token })
-      })
-      .catch(console.error) // eslint-disable-line no-console
+    if (fireMessaging)
+      await fireMessaging
+        .requestPermission()
+        .then(async () => {
+          const token = await fireMessaging.getToken()
+          fireStore.collection('users').doc(uid).update({ pushToken: token })
+        })
+        .catch(console.error) // eslint-disable-line no-console
   }
 
   React.useEffect(() => {
